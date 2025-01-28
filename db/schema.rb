@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_27_172213) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_28_172459) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_27_172213) do
     t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category"
     t.index ["farmer_id"], name: "index_events_on_farmer_id"
   end
 
@@ -75,7 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_27_172213) do
     t.string "last_name"
     t.string "username"
     t.string "avatar"
-    t.string "role"
+    t.string "role", default: "standard"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
