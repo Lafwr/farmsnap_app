@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  devise_for :users, controllers: { registrations: "users/registrations" }
+
   get 'events/index'
   get 'events/show'
   get 'events/edit'
@@ -6,7 +9,8 @@ Rails.application.routes.draw do
   get 'events/new'
   get 'events/create'
   get 'events/destroy'
-  devise_for :users
+
+
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -14,7 +18,7 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :farmers, only: [:index, :show, :edit, :update, :new, :create]
+  resources :farmers, exlude: [:destroy]
 
   resources :events do
     collection do
