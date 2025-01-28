@@ -42,9 +42,9 @@ class FarmersController < ApplicationController
   end
 
   def ensure_not_farmer
-    redirect_to root_path, alert: "You already have a farmer profile."
-    if
-      current_user.farmer.present?
-    end
+    # redirect_to root_path, alert: "You already have a farmer profile."
+    # if
+    #   current_user.farmer.present?
+    # end
   end
 end

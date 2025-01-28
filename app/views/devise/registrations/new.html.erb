@@ -15,6 +15,7 @@
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
+    <%= f.input :role, as: :select, collection: ["standard", "farmer"], include_blank: false %>
   </div>
 
   <div class="form-actions">
