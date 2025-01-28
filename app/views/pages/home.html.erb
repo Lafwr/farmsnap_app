@@ -1,2 +1,55 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner">
+  <img src="<%= asset_path('fieldImage.jpg') %>" alt="Banner Image">
+  <div class="banner-content">
+    <h1>Earth to Panrty Direct</h1>
+    <p> Discover Farmer's Markets and Fresh Deals Daily</p>
+    <div>
+      <a href="#" class="btn btn-light btn-lg">Explore</a>
+
+    </div>
+  </div>
+</div>
+
+<%# Categories Cards Template %>
+<div class="container categories-section">
+    <h2 class="categories-heading">Browse Market Styles</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card category-card">
+                <img src="<%= asset_path('warmFood.jpg') %>" alt="Category 1">
+                <div class="category-overlay">Warm Food</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card category-card">
+                <img src="<%= asset_path('broccoli.jpg') %>" alt="Category 2">
+                <div class="category-overlay">Fruits & Veg</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card category-card">
+                <img src="<%= asset_path('bakedGoods.jpg') %>" alt="Category 3">
+                <div class="category-overlay">Baked Goods</div>
+            </div>
+        </div>
+          <div class="col-md-4">
+            <div class="card category-card">
+                <img src="<%= asset_path('conversationFriendly.jpg') %>" alt="Category 3">
+                <div class="category-overlay">Conversation Friendly</div>
+            </div>
+        </div>
+          <div class="col-md-4">
+            <div class="card category-card">
+                <img src="<%= asset_path('dairy.jpg') %>" alt="Category 3">
+                <div class="category-overlay">Dairy</div>
+            </div>
+        </div>
+          <div class="col-md-4">
+            <div class="card category-card">
+                <img src="<%= asset_path('seafood.jpg') %>" alt="Category 3">
+                <div class="category-overlay">Seafood</div>
+            </div>
+        </div>
+    </div>
+
+</div>

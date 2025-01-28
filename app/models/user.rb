@@ -4,5 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one :farmer, dependent: :destroy
-  validates :role, presence: true
+  # validates :role, presence: true (Unless commented out, used needs a role before being able to create an account)
 end

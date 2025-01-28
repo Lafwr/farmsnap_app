@@ -1,1 +1,113 @@
 // Specific CSS for your home-page
+
+// BANNER START ---------------------
+
+.banner {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  // border-radius: 64px;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  filter: brightness(60%);
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+.banner-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.banner-content p {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.banner-content .btn {
+  margin: 0 0.5rem;
+}
+
+
+
+// BANNER END --------------------------
+
+
+// CATEGORIES CARDS START --------------
+
+.categories-heading {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.categories-section {
+  padding: 3rem 0;
+}
+
+.category-card {
+  position: relative;
+  overflow: hidden;
+  height: 280px;
+  border: none;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(70%);
+  transition: filter 0.3s ease;
+}
+
+.category-card:hover img {
+  filter: brightness(50%);
+}
+
+.category-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.category-card:hover .category-overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
+// CATEGORIES CARDS END ---------
