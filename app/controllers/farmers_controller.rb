@@ -16,7 +16,8 @@ class FarmersController < ApplicationController
 
   def create
     @farmer = current_user.build_farmer(farmer_params)
-    if farmer.save
+    if @farmer.save
+      current_user.role = "farmer"
       redirect_to @farmer, notice: "Welcome Your Farmer Profile Has Been Created."
     else
       render :new, status: unprocessable_entity, alert: "ERROR: Farmer Profile Not Created"
@@ -42,9 +43,8 @@ class FarmersController < ApplicationController
   end
 
   def ensure_not_farmer
-    redirect_to root_path, alert: "You already have a farmer profile."
-    if
-      current_user.farmer.present?
+    if current_user.farmer.present?
+      redirect_to root_path, alert: "You already have a farmer profile."
     end
   end
 end
