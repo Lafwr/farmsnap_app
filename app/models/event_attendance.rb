@@ -6,7 +6,7 @@ class EventAttendance < ApplicationRecord
   validates :event_id, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
-  validates :attendance_times_within_event_range
+  # validates :attendance_times_within_event_range
 
   private
 

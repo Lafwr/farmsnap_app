@@ -3,12 +3,16 @@
 <p><%= @farmer.bio %></p>
 <p><%= @farmer.location %></p>
 
-<h2>Upcoming Events</h2>
-<ul>
-  <% @farmer.event_attendances.each do |attendance| %>
-    <li>
-      <strong><%= link_to attendance.event.name, event_path(attendance.event) %></strong>
-      (<%= attendance.start_time.strftime("%H:%M") %> - <%= attendance.end_time.strftime("%H:%M") %>)
-    </li>
-  <% end %>
-</ul>
+<h3>Upcoming Events</h3>
+<% if @upcoming_events.any? %>
+  <ul>
+    <% @upcoming_events.each do |event| %>
+      <li>
+        <strong><%= event.name %></strong> - <%= event.start_time.strftime("%B %d, %Y %I:%M %p") %> to <%= event.end_time.strftime("%I:%M %p") %>
+        <%= button_to "Cancel Attendance", event_event_attendance_path(event, event_attendances.find_by(farmer: @farmer)), method: :delete, class: "btn btn-danger" %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no upcoming events.</p>
+<% end %>

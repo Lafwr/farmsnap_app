@@ -8,6 +8,7 @@ class FarmersController < ApplicationController
 
   def show
     @farmer = Farmer.find(params[:id])
+    @upcoming_events = @farmer.event_attendances.where("event_attendances.start_time >= ?", Time.now).order('event_attendances.start_time ASC').includes(:event).map(&:event)
     @attended_events = @farmer.events
   end
 
