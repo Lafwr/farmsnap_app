@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'products/index'
+  get 'products/new'
+  get 'products/show'
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   get 'events/index'
