@@ -1,0 +1,9 @@
+<h1>My profile</h1>
+
+<div class="profile-container">
+  <%= cl_image_tag @farmer.photo.key, height: 150, width: 150, crop: :fill %>
+  <div class="profile-paragraph">
+    <p><strong>Bio:</strong> <%= @farmer.bio %></p>
+    <p><strong>Location📍:</strong> <%= @farmer.location %></p>
+  </div>
+</div>
