@@ -23,20 +23,6 @@ Rails.application.routes.draw do
   # Crates ---------------------------
   get "/crates", to: "crates#all", as: "all_crates"
 
-  resources :crates do
-    collection do
-      get "seafood", to: "crates#seafood", as: "seafood"
-      get "dairy", to: "crates#dairy", as: "dairy"
-      get "meat", to: "crates#meat", as: "meat"
-      get "organic", to: "crates#organic", as: "organic"
-      get "halal", to: "crates#halal", as: "halal"
-      get "fruit-and-veg", to: "crates#fruitandveg", as: "fruit_and_veg"
-      get "baked-goods", to: "crates#baked_goods", as: "baked_goods"
-      get "alcohol", to: "crates#alcohol", as: "alcohol"
-    end
-  end
-
-
   # Crate Creation and Update Farmer Only
   # get "my-crates", to: "crates#my_crates", as: "my_crates"
   # get "my-crates/new", to: "crates#new", as: "new_crate"
