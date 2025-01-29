@@ -1,2 +1,39 @@
 <h1>Events#show</h1>
 <p>Find me in app/views/events/show.html.erb</p>
+
+<h1><%= @event.name %></h1>
+<p><%= @event.location %></p>
+<p><%= @event.start_time.strftime("%B %d, %Y %H:%M") %> - <%= @event.end_time.strftime("%B %d, %Y %H:%M") %></p>
+
+<% if current_user.farmer %>
+  <% attendance = current_user.farmer.event_attendances.find_by(event_id: @event.id) %>
+
+  <% if attendance %>
+    <p>You are attending from <%= attendance.start_time.strftime("%H:%M") %> to <%= attendance.end_time.strftime("%H:%M") %></p>
+    <%= button_to "Cancel Attendance", event_event_attendance_path(@event, attendance), method: :delete, class: "btn btn-danger" %>
+  <% else %>
+    <h3>Mark Your Attendance</h3>
+    <%= form_with url: event_event_attendances_path(@event), method: :post do |f| %>
+      <div>
+        <label>Start Time:</label>
+        <%= f.time_select :start_time, include_seconds: false %>
+      </div>
+      <div>
+        <label>End Time:</label>
+        <%= f.time_select :end_time, include_seconds: false %>
+      </div>
+      <%= f.submit "Confirm Attendance", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h2>Farmers Attending:</h2>
+<ul>
+  <% @event.event_attendances.each do |attendance| %>
+    <li>
+      <%= attendance.farmer.user.email %> - Attending from
+      <%= attendance.start_time.strftime("%H:%M") %> to
+      <%= attendance.end_time.strftime("%H:%M") %>
+    </li>
+  <% end %>
+</ul>

@@ -1,2 +1,14 @@
 <h1>Welcome farmer ID</h1>
-<%= @farmer.user.email %>
+<h1><%= @farmer.user.email %>'s Profile</h1>
+<p><%= @farmer.bio %></p>
+<p><%= @farmer.location %></p>
+
+<h2>Upcoming Events</h2>
+<ul>
+  <% @farmer.event_attendances.each do |attendance| %>
+    <li>
+      <strong><%= link_to attendance.event.name, event_path(attendance.event) %></strong>
+      (<%= attendance.start_time.strftime("%H:%M") %> - <%= attendance.end_time.strftime("%H:%M") %>)
+    </li>
+  <% end %>
+</ul>
