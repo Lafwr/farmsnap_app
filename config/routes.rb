@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   resources :farmers, exlude: [:destroy]
   get "my-profile", to: "farmers#myprofile", as: "profile"
 
+
   resources :events do
+    resources :event_attendances, only: [:create, :destroy]
     collection do
       get "seafood", to: "events#seafood", as: "seafood"
       get "dairy", to: "events#dairy", as: "dairy"
