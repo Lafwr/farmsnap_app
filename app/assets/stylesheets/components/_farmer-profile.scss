@@ -1,0 +1,34 @@
+.main-form-container{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+
+  .form-container{
+    width: 500px;
+    margin:auto;
+    padding:20px;
+    border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    .btn-dark{
+      border-radius: 4px;
+    }
+  }
+}
+
+.profile-container{
+  width: 500px;
+    margin-left: 0;
+    padding:20px;
+    border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    display: flex;
+    align-items: center;
+.profile-paragraph{
+margin-top: 5px;
+margin-left: 20px;
+}
+
+img{
+  border-radius: 5px;
+}
+}

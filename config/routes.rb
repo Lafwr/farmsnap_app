@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :farmers, exlude: [:destroy]
+  get "my-profile", to: "farmers#myprofile", as: "profile"
 
   resources :events do
     collection do

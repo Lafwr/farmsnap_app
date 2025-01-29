@@ -1,16 +1,6 @@
 <h1>Edit Profile</h1>
-<%= form_with model: @farmer, local: true do |f| %>
-  <div>
-    <%= form.label :farm_name %>
-    <%= form.text_field :farm_name %>
-  </div>
-  <div>
-    <%= form.label :bio %>
-    <%= form.text_area :bio %>
-  </div>
-  <div>
-    <%= form.label :location %>
-    <%= form.text_field :location %>
-  </div>
+<%= simple_form_for @farmer, local: true do |f| %>
+  <%= f.input :bio, label: "Bio:" %>
+  <%= f.input :location, label: "Location:" %>
   <%= form.submit "Save Changes" %>
 <% end %>
