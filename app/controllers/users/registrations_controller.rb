@@ -1,4 +1,4 @@
-class Users::RegistrationsController <  Devise::RegistrationsController
+class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
@@ -6,8 +6,9 @@ class Users::RegistrationsController <  Devise::RegistrationsController
     if current_user.role == "farmer"
       Farmer.new
       new_farmer_path
+    else
+      root_path
     end
-    root_path
   end
 
 end
