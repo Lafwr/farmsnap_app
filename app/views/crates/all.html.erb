@@ -1,0 +1,10 @@
+<h1>All Crates</h1>
+<hr>
+<ul>
+<% @crates.each do |crate| %>
+  <%= crate.name %>
+  <%= crate.description %>
+  <%= crate.price %>
+  <hr>
+<% end %>
+</ul>

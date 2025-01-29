@@ -1,0 +1,23 @@
+<%= form_with model: [@farmer, @crate], local: true do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+    <div>
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+  <div>
+    <%= form.label :flash_sale %>
+    <%= form.check_box :flash_sale %>
+  </div>
+
+  <div>
+    <%= form.label :price %>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.submit "Create Crate" %>
+  </div>
+<% end %>

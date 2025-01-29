@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-
+  get 'products/index'
+  get 'products/new'
+  get 'products/show'
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   get 'events/index'
@@ -18,8 +20,19 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :farmers, exlude: [:destroy]
-  get "my-profile", to: "farmers#myprofile", as: "profile"
+
+  resources :farmers, exlude: [:destroy] do
+    resources :crates
+  end
+  # Crates ---------------------------
+  get "/crates", to: "crates#all", as: "all_crates"
+
+  # Crate Creation and Update Farmer Only
+  # get "my-crates", to: "crates#my_crates", as: "my_crates"
+  # get "my-crates/new", to: "crates#new", as: "new_crate"
+  # get "my-crates/edit", to: "crates#new", as: "edit_crate"
+   get "my-profile", to: "farmers#myprofile", as: "profile"
+
 
 
   resources :events do
