@@ -7,3 +7,9 @@
     <p><strong>Location📍:</strong> <%= @farmer.location %></p>
   </div>
 </div>
+
+<div class="profile-calendar">
+  <%= month_calendar do |date| %>
+    <%= date %>
+  <% end %>
+</div>

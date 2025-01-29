@@ -44,7 +44,6 @@ class FarmersController < ApplicationController
   end
 
 
-
   private
 
   def farmer_params
