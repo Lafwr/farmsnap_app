@@ -1,10 +1,20 @@
 class EventsController < ApplicationController
   def index
+    @events = Event.all # ✅ Ensure @events is always defined first
+
     if params[:query].present?
-      @events = @events.search_by_name_and_category(params[:query])
-    else
-      @events = Event.all
+
+      search_location = Geocoder.search(params[:query]).first
+
+      if search_location
+        latitude = search_location.latitude
+        longitude = search_location.longitude
+        @events = Event.near([latitude, longitude], 10)
+      else
+        @events = @events.search_by_name_and_category(params[:query])
+      end
     end
+    
     @markers = @events.geocoded.map do |event|
       {
         lat: event.latitude,
@@ -13,6 +23,12 @@ class EventsController < ApplicationController
         marker_html: render_to_string(partial: "marker")
       }
     end
+
+    respond_to do |format|
+      format.html # Normal page load
+      format.turbo_stream # Turbo update
+    end
+
   end
 
   def show
@@ -42,41 +58,21 @@ class EventsController < ApplicationController
   def destroy
   end
 
-  def seafood
-    @events = events.where(category: “seafood”)
-  end
+  def by_category
+    category = Category.find_by(name: params[:category_name].capitalize)
 
-  def dairy
-    @events = events.where(category: “dairy”)
-  end
+    if category
+      @events = category.events
+    else
+      @events = Event.none # No events found for this category
+    end
 
-  def meat
-    @events = events.where(category: “meat”)
-  end
-
-  def organic
-    @events = events.where(category: “organic”)
-  end
-
-  def halal
-    @events = events.where(category: “halal”)
-  end
-
-  def fruit_and_veg
-    @events = events.where(category: “fruit_and_veg”)
-  end
-
-  def baked_goods
-    @events = events.where(category: “baked_goods”)
-  end
-
-  def alcohol
-    @events = events.where(category: “alcohol”)
+    render :index
   end
 
   private
 
   def event_params
-    params.require(:event).permit(:name, :location, :start_time, :end_time, :category)
+    params.require(:event).permit(:name, :location, :start_time, :end_time, category_ids: [])
   end
 end

@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   validates :location, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
+  has_and_belongs_to_many :categories
 
   # Geocoding
   geocoded_by :location
@@ -15,11 +16,11 @@ class Event < ApplicationRecord
   # OPTION 1:
   include PgSearch::Model
   pg_search_scope :search_by_name_and_category,
-    against: [ :name, :category ],
-    using: {
-      tsearch: { prefix: true } # <-- now `superman batm` will return something!
-    }
-  # OPTION 2:
-  # include PgSearch::Model
-  # multisearchable against: [:name, :category]
-end
+  against: [:name, :location],
+  associated_against: {
+    categories: :name
+  },
+  using: {
+    tsearch: { prefix: true } # Allows partial matches
+  }
+ 

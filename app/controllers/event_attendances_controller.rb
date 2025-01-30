@@ -24,6 +24,18 @@ class EventAttendancesController < ApplicationController
     end
   end
 
+  def by_category
+    category = Category.find_by(name: params[:category_name].capitalize)
+
+    if category
+      @event_attendances = category.event_attendances
+    else
+      @event_attendances = EventAttendance.none # No attendances found for this category
+    end
+
+    render :index
+  end
+
   private
 
   def set_event
@@ -35,6 +47,6 @@ class EventAttendancesController < ApplicationController
   end
 
   def event_attendance_params
-    params.require(:event_attendance).permit(:start_time, :end_time)
+    params.require(:event_attendance).permit(:start_time, :end_time, category_ids: [])
   end
 end
