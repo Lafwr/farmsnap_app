@@ -2,9 +2,12 @@
 <hr>
 <ul>
 <% @crates.each do |crate| %>
+  <%= crate.farmer.user.email %>
   <%= crate.name %>
   <%= crate.description %>
   <%= crate.price %>
   <hr>
 <% end %>
 </ul>
+<%= link_to "New Crate", new_my_crate_path %>
+<%= link_to "My Crates", my_crates_path %>

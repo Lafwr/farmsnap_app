@@ -1,0 +1,18 @@
+<h1>My Crates</h1>
+<h2>Hey <%= current_user.email.split('@').first %> 👋</h2>
+<hr>
+<%= link_to "New Crate", new_my_crate_path %>
+<hr>
+<% if @my_crates.any? %>
+  <ul>
+    <% @my_crates.each do |crate| %>
+      <li><h4><%= crate.name %></h4></li>
+      <%= link_to "Details", farmer_crate_path(crate.farmer, crate) %>
+      <%= link_to "Edit", edit_farmer_crate_path(crate.farmer, crate) %>
+      <hr>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no crates yet.</p>
+<% end %>
+<%= link_to "<< Dashboard (TODO: Create Dashboard Page)", new_my_crate_path %>

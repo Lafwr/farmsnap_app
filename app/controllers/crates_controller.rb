@@ -6,7 +6,24 @@ class CratesController < ApplicationController
     @crates = Crate.all
   end
 
-  # search params added
+  def my_crates
+    if current_user.farmer
+      @my_crates = current_user.farmer.crates
+    else
+      @my_crates = []
+      flash[:alert] = "You are not associated with a farmer account."
+    end
+  end
+
+  def new_my_crate
+    if current_user.farmer
+      @farmer = current_user.farmer
+      @crate = current_user.farmer.crates.build
+    else
+      redirect_to root_path, alert: "You must be a farmer to create a crate."
+    end
+  end
+
   def index
     @query = params[:query]
     if @query.present?
@@ -21,9 +38,11 @@ class CratesController < ApplicationController
     # @name = @farmer.user.first_name
   end
 
-  def new
-    @crate = @farmer.crates.build
-  end
+  # Not needed: This would create the redundant /farmers/1/crate/new url
+  # def new
+  #   @crate = @farmer.crates.build
+  # end
+
 
   def create
     @crate = @farmer.crates.build(crate_params)
