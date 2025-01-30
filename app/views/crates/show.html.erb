@@ -1,6 +1,14 @@
 
-<h1>Farmer ID:<%= @crate.farmer_id %></h1>
-<p><%= @crate.farmer.user.email %></p>
-<p><%= @crate.name %></p>
+<h1><%= @crate.name %></h1>
+<p>Supplier: <%= @crate.farmer.user.email.split('@').first  %></p>
 <p><%= @crate.description %></p>
 <p>Crate Price:<%= @crate.price %></p>
+
+<% if current_user.id == @crate.farmer_id %>
+    <ul>
+      <li><%= link_to "Edit Crate", edit_farmer_crate_path(@crate.farmer, @crate) %></li>
+      <li><%= link_to "Delete Crate", farmer_crate_path(@crate.farmer, @crate), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></li>
+      <li><%= link_to "New Crate", new_my_crate_path %></li>
+      <li><%= link_to "View Your Active Crates", my_crates_path %></li>
+  </ul>
+<% end %>
