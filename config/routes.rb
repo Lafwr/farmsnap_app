@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
 
   resources :farmers, exlude: [:destroy] do
-    resources :crates
+    resources :crates, exclude: [:new]
   end
   # Crates ---------------------------
   get "/crates", to: "crates#all", as: "all_crates"

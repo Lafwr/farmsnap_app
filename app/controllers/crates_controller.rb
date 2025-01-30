@@ -15,12 +15,14 @@ class CratesController < ApplicationController
     end
   end
 
-  # Come back to this if /my-create/new is necessary
   def new_my_crate
-    @farmer = current_user.farmer
-    @crate = @farmer.crates.build
+    if current_user.farmer
+      @farmer = current_user.farmer
+      @crate = current_user.farmer.crates.build
+    else
+      redirect_to root_path, alert: "You must be a farmer to create a crate."
+    end
   end
-
 
   def index
     @crates = @farmer.crates
@@ -30,9 +32,10 @@ class CratesController < ApplicationController
     # @name = @farmer.user.first_name
   end
 
-  def new
-    @crate = @farmer.crates.build
-  end
+  # Not needed: This would create the redundant /farmers/1/crate/new url
+  # def new
+  #   @crate = @farmer.crates.build
+  # end
 
 
   def create
