@@ -40,14 +40,13 @@ Rails.application.routes.draw do
   resources :events do
     resources :event_attendances, only: [:create, :destroy]
     collection do
-      get "seafood", to: "events#seafood", as: "seafood"
-      get "dairy", to: "events#dairy", as: "dairy"
-      get "meat", to: "events#meat", as: "meat"
-      get "organic", to: "events#organic", as: "organic"
-      get "halal", to: "events#halal", as: "halal"
-      get "fruit-and-veg", to: "events#fruitandveg", as: "fruit_and_veg"
-      get "baked-goods", to: "events#baked_goods", as: "baked_goods"
-      get "alcohol", to: "events#alcohol", as: "alcohol"
+      get "category/:category_name", to: "events#by_category", as: "by_category"
+    end
+  end
+
+  resources :event_attendances do
+    collection do
+      get "category/:category_name", to: "event_attendances#by_category", as: "by_category"
     end
   end
   # Defines the root path route ("/")
