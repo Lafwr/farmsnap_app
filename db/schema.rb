@@ -53,11 +53,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_29_201701) do
     t.bigint "category_id", null: false
   end
 
-  create_table "categories_event_attendances", id: false, force: :cascade do |t|
-    t.bigint "event_attendance_id", null: false
-    t.bigint "category_id", null: false
-  end
-
   create_table "categories_events", id: false, force: :cascade do |t|
     t.bigint "event_id", null: false
     t.bigint "category_id", null: false
