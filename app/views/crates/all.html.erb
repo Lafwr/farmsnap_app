@@ -2,6 +2,7 @@
 <hr>
 <ul>
 <% @crates.each do |crate| %>
+  <%= crate.farmer.user.email %>
   <%= crate.name %>
   <%= crate.description %>
   <%= crate.price %>

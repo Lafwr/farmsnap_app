@@ -6,6 +6,16 @@ class CratesController < ApplicationController
     @crates = Crate.all
   end
 
+  def my_crates
+    if current_user.farmer
+      @my_crates = current_user.farmer.crates
+    else
+      @my_crates = []
+      flash[:alert] = "You are not associated with a farmer account."
+    end
+  end
+
+
   def index
     @crates = @farmer.crates
   end

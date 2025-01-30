@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   end
   # Crates ---------------------------
   get "/crates", to: "crates#all", as: "all_crates"
+  get "my-crates", to: "crates#my_crates", as: "my_crates"
 
   # Crate Creation and Update Farmer Only
   # get "my-crates", to: "crates#my_crates", as: "my_crates"
