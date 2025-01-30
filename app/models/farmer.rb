@@ -5,7 +5,7 @@ class Farmer < ApplicationRecord
   has_many :event_attendances
   has_many :events, through: :event_attendances
   has_many :crates
-  has_and_belongs_to_many :categories
+
 
   validates :user_id, presence: true
   validates :bio, presence: true, length: { maximum: 300 }

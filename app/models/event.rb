@@ -5,7 +5,8 @@ class Event < ApplicationRecord
   validates :location, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
-  has_and_belongs_to_many :categories
+  has_many :categories_events
+  has_many :categories, through: :categories_events
 
   # Geocoding
   geocoded_by :location

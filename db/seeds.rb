@@ -70,17 +70,17 @@ events_data.each_with_index do |event, index|
 end
 
 # Step 4: Assign Event Attendances
-farmers.each do |farmer|
-  available_events = events.sample(5) # Each farmer attends up to 5 events
+# farmers.each do |farmer|
+#   available_events = events.sample(5) # Each farmer attends up to 5 events
 
-  available_events.each do |event|
-    EventAttendance.create!(
-      farmer: farmer,
-      event: event,
-      start_time: event.start_time,
-      end_time: event.end_time
-    )
-  end
-end
+#   available_events.each do |event|
+#     EventAttendance.create!(
+#       farmer: farmer,
+#       event: event,
+#       start_time: event.start_time,
+#       end_time: event.end_time
+#     )
+#   end
+# end
 
 puts "Seeding completed successfully!"
