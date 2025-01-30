@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def index
     if params[:query].present?
-      @events = @events.search_by_name_and_category(params[:query])
+      @events = Event.where("name ILIKE ? OR category ILIKE ?", "%#{@query}%", "%#{@query}%")
     else
       @events = Event.all
     end

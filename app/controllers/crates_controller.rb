@@ -1,13 +1,20 @@
 class CratesController < ApplicationController
-  before_action :set_farmer, only: [:index, :new, :create]
+  before_action :set_farmer, only: [:new, :create]
   before_action :set_crate, only: [:show, :edit, :update, :destroy]
 
   def all
     @crates = Crate.all
   end
 
+  # search params added
   def index
-    @crates = @farmer.crates
+    @query = params[:query]
+    if @query.present?
+      @crates = Crate.search_by_name_and_products(@query)
+    else
+      @crates = Crate.all
+    end
+    # @crates = @farmer.crates
   end
 
   def show

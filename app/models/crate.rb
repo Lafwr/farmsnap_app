@@ -4,6 +4,9 @@ class Crate < ApplicationRecord
   validates :price, presence: true
 
   # search
-  # include PgSearch::Model
-  # multisearchable against: [:name, :products, :category]
+  include PgSearch::Model
+  pg_search_scope :search_by_name_and_products,
+    against: [:name],
+    associated_against: { products: [:name] },
+    using: { tsearch: { prefix: true } }
 end
