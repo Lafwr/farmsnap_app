@@ -1,2 +1,19 @@
 <h1>Crates#index</h1>
+
 <%= link_to "View Your Active Crates", my_crates_path %>
+
+<p>Find me in app/views/crates/index.html.erb</p>
+
+<div class="row justify-content-center">
+  <div class="col-sm-8 my-3">
+    <%= form_with url: crates_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Search for a crate"
+      %>
+      <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+

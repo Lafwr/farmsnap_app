@@ -4,8 +4,11 @@
     <h1>Earth to Panrty Direct</h1>
     <p> Discover Farmer's Markets and Fresh Deals Daily</p>
     <div>
-      <a href="#" class="btn btn-light btn-lg">Explore</a>
-
+      <%= form_with(url: search_path, method: :get, local: true) do |form| %>
+        <%= form.select :category, options_for_select([["Events", "events"], ["Crates", "crates"]])%>
+        <%= form.text_field :query, placeholder: "Search for events or crates...", requires: true %>
+        <%= form.submit "Search" %>
+      <% end %>
     </div>
   </div>
 </div>

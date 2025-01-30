@@ -42,6 +42,27 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_29_201701) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_crates", id: false, force: :cascade do |t|
+    t.bigint "crate_id", null: false
+    t.bigint "category_id", null: false
+  end
+
+  create_table "categories_event_attendances", id: false, force: :cascade do |t|
+    t.bigint "event_attendance_id", null: false
+    t.bigint "category_id", null: false
+  end
+
+  create_table "categories_events", id: false, force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "category_id", null: false
+  end
+
   create_table "crates", force: :cascade do |t|
     t.bigint "farmer_id", null: false
     t.boolean "flash_sale", default: false
