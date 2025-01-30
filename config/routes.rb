@@ -27,12 +27,14 @@ Rails.application.routes.draw do
   # Crates ---------------------------
   get "/crates", to: "crates#all", as: "all_crates"
   get "my-crates", to: "crates#my_crates", as: "my_crates"
+  get "my-crates/new", to: "crates#new_my_crate", as: "new_my_crate"
 
   # Crate Creation and Update Farmer Only
   # get "my-crates", to: "crates#my_crates", as: "my_crates"
   # get "my-crates/new", to: "crates#new", as: "new_crate"
   # get "my-crates/edit", to: "crates#new", as: "edit_crate"
    get "my-profile", to: "farmers#myprofile", as: "profile"
+
 
 
 

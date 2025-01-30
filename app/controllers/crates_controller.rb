@@ -15,6 +15,12 @@ class CratesController < ApplicationController
     end
   end
 
+  # Come back to this if /my-create/new is necessary
+  def new_my_crate
+    @farmer = current_user.farmer
+    @crate = @farmer.crates.build
+  end
+
 
   def index
     @crates = @farmer.crates
@@ -27,6 +33,7 @@ class CratesController < ApplicationController
   def new
     @crate = @farmer.crates.build
   end
+
 
   def create
     @crate = @farmer.crates.build(crate_params)
