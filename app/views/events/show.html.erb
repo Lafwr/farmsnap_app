@@ -22,12 +22,17 @@
 <% end %>
 
 <h2>Farmers Attending:</h2>
-<ul>
-  <% @event.event_attendances.each do |attendance| %>
-    <li>
-      <%= attendance.farmer.user.email %> - Attending from
-      <%= attendance.start_time.strftime("%H:%M") %> to
-      <%= attendance.end_time.strftime("%H:%M") %>
-    </li>
-  <% end %>
-</ul>
+  <ul>
+    <% @event.event_attendances.each do |attendance| %>
+    <div class="card-category">
+      <div class="card" style="background-image: url('<%= attendance.farmer.user.avatar %>');">
+        <div class="card-content">
+          <p class="farmer-email"><%= attendance.farmer.user.email %></p>
+          <p class="attendance-time">
+            Attending from <%= attendance.start_time.strftime("%H:%M") %> to <%= attendance.end_time.strftime("%H:%M") %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </ul>
+</div>
