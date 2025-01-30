@@ -1,11 +1,25 @@
 <h1>My profile</h1>
 
-<div class="profile-container">
+<div class="profile-container" data-controller= "toggle">
   <%= cl_image_tag @farmer.photo.key, height: 150, width: 150, crop: :fill %>
+
+
   <div class="profile-paragraph">
     <p><strong>Bio:</strong> <%= @farmer.bio %></p>
     <p><strong>Location📍:</strong> <%= @farmer.location %></p>
   </div>
+
+  <div class="profile-edit">
+    <%= button_tag class: "edit-icon", data: { action: "click->toggle#toggle" } do %>
+      <i class="fa-regular fa-pen-to-square"></i>
+    <% end %>
+  </div>
+
+
+  <div data-toggle-target="form" class="hidden">
+    <%= render 'update', farmer: @farmer %>
+  </div>
+
 </div>
 
 <div class="profile-calendar">
