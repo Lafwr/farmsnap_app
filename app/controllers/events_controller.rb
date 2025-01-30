@@ -3,7 +3,6 @@ class EventsController < ApplicationController
     @events = Event.all # ✅ Ensure @events is always defined first
 
     if params[:query].present?
-
       search_location = Geocoder.search(params[:query]).first
 
       if search_location
