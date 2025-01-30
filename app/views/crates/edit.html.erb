@@ -3,12 +3,12 @@
 <%= form_with(model: @crate, url: farmer_crate_path(@crate.farmer, @crate), method: :patch) do |form| %>
    <div>
     <%= form.label :name %>
-    <%= form.check_box :name %>
+    <%= form.text_field :name %>
   </div>
 
    <div>
     <%= form.label :description %>
-    <%= form.check_box :description %>
+    <%= form.text_field :description %>
   </div>
 
   <div>
