@@ -10,31 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.1].define(version: 2025_01_29_201701)
+ActiveRecord::Schema[7.1].define(version: 2025_01_29_201701) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "categories_crates", id: false, force: :cascade do |t|
-    t.bigint "crate_id", null: false
-    t.bigint "category_id", null: false
-  end
-
-  create_table "categories_event_attendances", id: false, force: :cascade do |t|
-    t.bigint "event_attendance_id", null: false
-    t.bigint "category_id", null: false
-  end
-
-  create_table "categories_events", id: false, force: :cascade do |t|
-    t.bigint "event_id", null: false
-    t.bigint "category_id", null: false
-
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -62,6 +40,27 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_29_201701)
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_crates", id: false, force: :cascade do |t|
+    t.bigint "crate_id", null: false
+    t.bigint "category_id", null: false
+  end
+
+  create_table "categories_event_attendances", id: false, force: :cascade do |t|
+    t.bigint "event_attendance_id", null: false
+    t.bigint "category_id", null: false
+  end
+
+  create_table "categories_events", id: false, force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "category_id", null: false
   end
 
   create_table "crates", force: :cascade do |t|

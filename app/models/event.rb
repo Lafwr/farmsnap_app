@@ -22,3 +22,4 @@ class Event < ApplicationRecord
   using: {
     tsearch: { prefix: true } # Allows partial matches
   }
+end
