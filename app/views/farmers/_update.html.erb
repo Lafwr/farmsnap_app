@@ -1,0 +1,6 @@
+<%= simple_form_for farmer do |f| %>
+  <%= f.input :photo, as: :file, label: "Upload Your Photo" %>
+  <%= f.input :bio, label: "Bio:" %>
+  <%= f.input :location, label: "Location:" %>
+  <%= f.submit "Update Profile", class: "btn btn-dark" %>
+<% end %>

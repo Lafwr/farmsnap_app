@@ -1,5 +1,7 @@
 class Farmer < ApplicationRecord
   belongs_to :user
+  # for the photo to function.
+  has_one_attached :photo
   has_many :event_attendances
   has_many :events, through: :event_attendances
   has_many :crates

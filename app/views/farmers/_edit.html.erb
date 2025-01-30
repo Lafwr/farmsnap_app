@@ -1,0 +1,6 @@
+<h1>Edit Profile</h1>
+<%= simple_form_for @farmer, local: true do |f| %>
+  <%= f.input :bio, label: "Bio:" %>
+  <%= f.input :location, label: "Location:" %>
+  <%= form.submit "Save Changes" %>
+<% end %>

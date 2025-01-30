@@ -1,0 +1,27 @@
+<h1>Crates#edit</h1>
+<p>Find me in app/views/crates/edit.html.erb</p>
+<%= form_with(model: @crate, url: farmer_crate_path(@crate.farmer, @crate), method: :patch) do |form| %>
+   <div>
+    <%= form.label :name %>
+    <%= form.check_box :name %>
+  </div>
+
+   <div>
+    <%= form.label :description %>
+    <%= form.check_box :description %>
+  </div>
+
+  <div>
+    <%= form.label :flash_sale %>
+    <%= form.check_box :flash_sale %>
+  </div>
+
+  <div>
+    <%= form.label :price %>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.submit "Update Crate" %>
+  </div>
+<% end %>

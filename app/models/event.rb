@@ -11,7 +11,7 @@ class Event < ApplicationRecord
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
-
+  # search bar
 
   # OPTION 1:
   include PgSearch::Model
@@ -23,7 +23,4 @@ class Event < ApplicationRecord
   using: {
     tsearch: { prefix: true } # Allows partial matches
   }
-  # OPTION 2:
-  # include PgSearch::Model
-  # multisearchable against: [:name, :category]
-end
+ 

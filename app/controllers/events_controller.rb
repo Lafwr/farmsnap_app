@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   def index
-
     @events = Event.all # ✅ Ensure @events is always defined first
 
     if params[:query].present?
@@ -15,7 +14,7 @@ class EventsController < ApplicationController
         @events = @events.search_by_name_and_category(params[:query])
       end
     end
-
+    
     @markers = @events.geocoded.map do |event|
       {
         lat: event.latitude,

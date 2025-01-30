@@ -8,6 +8,8 @@ class FarmersController < ApplicationController
 
   def show
     @farmer = Farmer.find(params[:id])
+    @upcoming_events = @farmer.event_attendances.where("event_attendances.start_time >= ?", Time.now).order('event_attendances.start_time ASC').includes(:event).map(&:event)
+    @attended_events = @farmer.events
   end
 
   def new
@@ -15,10 +17,11 @@ class FarmersController < ApplicationController
   end
 
   def create
-    @farmer = current_user.build_farmer(farmer_params)
+    @farmer = Farmer.new(farmer_params)
+    @farmer.user = current_user
     if @farmer.save
       current_user.role = "farmer"
-      redirect_to @farmer, notice: "Welcome Your Farmer Profile Has Been Created."
+      redirect_to profile_path, notice: "Welcome Your Farmer Profile Has Been Created."
     else
       render :new, status: unprocessable_entity, alert: "ERROR: Farmer Profile Not Created"
     end
@@ -29,18 +32,25 @@ class FarmersController < ApplicationController
   end
 
   def update
+    @farmer = Farmer.find(params[:id])
     if @farmer.update(farmer_params)
-      redirect_to @farmer, notice: "Your Farmer Profile Has Been Updated."
+      redirect_to profile_path, notice: "Your Farmer Profile Has Been Updated."
     else
       render :edit, status: unprocessable_entity, alert: "ERROR: Farmer Profile Not Updated"
     end
   end
 
+  def myprofile
+    @farmer = current_user.farmer || Farmer.new
+  end
+
+
   private
 
   def farmer_params
-    params.require(:farmer).permit(:bio, :location)
+    params.require(:farmer).permit(:bio, :location, :photo)
   end
+
 
   def ensure_not_farmer
     # redirect_to root_path, alert: "You already have a farmer profile."
