@@ -11,29 +11,17 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import"components/sidebar";
 
 // Mapbox
 @import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
 
-// All Pages Sidebar ---------------
-.row-layout {
-  display: flex;
-  flex-direction: row;  /* Aligns children in a row */
-  justify-content: flex-start; /* Aligns items to the start of the container */
-  align-items: flex-start; /* Aligns items at the top */
-}
-
-.sidebar-1 {
-  position: sticky;
-  top: 0;
-  height: 100vh; /* Full viewport height */
-}
-
-//  Sidebar End -------------------
-
-.container {
+main {
+  background: #f8f9fa;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: auto;
+  // justify-content: center;
+  // align-items: center;
+  padding: 2rem;
 }

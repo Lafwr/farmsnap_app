@@ -1,32 +1,68 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar-1" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span class="fs-4">farmsnap</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li>
-        <%= link_to "Crates", my_crates_path, class: "nav-link text-white" %>
-      </li>
-      <li>
-        <%= link_to "Events", events_path, class: "nav-link text-white" %>
-      </li>
-        <li>
-        <%= link_to "Dashboard", my_crates_path, class: "nav-link text-white" %>
-      </li>
-    </ul>
+<nav id="sidebar" class="col-12 col-md-3 col-lg-2 bg-dark text-white p-3">
+  <div class="top-section-sidebar">
+        <div class="text-center mb-3">
+          <%= link_to root_path do %>
+            <%= image_tag "fs-icon-1.png", alt: "Logo", class: "img-fluid sidebar-logo" %>
+          <% end %>
+        </div>
+      <hr>
+      <ul class="nav flex-column">
+          <li class="nav-item <%= 'active' if current_page?(root_path) %>">
+              <%= link_to root_path, class: "nav-link" do %>
+                <i class="fa-solid fa-house"></i> Home
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(my_crates_path) %>">
+              <%= link_to my_crates_path, class: "nav-link" do %>
+                <i class="fa-solid fa-box-open"></i> Crates
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(root_path) %>">
+              <%= link_to root_path, class: "nav-link" do %>
+                <i class="fa-solid fa-earth-europe"></i> Events
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(root_path) %>">
+              <%= link_to root_path, class: "nav-link" do %>
+                <i class="fa-solid fa-calendar-days"></i> Events Schedule
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(root_path) %>">
+              <%= link_to root_path, class: "nav-link" do %>
+                <i class="fa-solid fa-table-columns"></i> Dashboard
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(root_path) %>">
+              <%= link_to root_path, class: "nav-link" do %>
+                <i class="fa-solid fa-chart-line"></i> Analytics
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(profile_path) %>">
+              <%= link_to profile_path, class: "nav-link" do %>
+                <i class="fas fa-user me-2"></i> Profile
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(root_path) %>">
+              <%= link_to root_path, class: "nav-link" do %>
+                <i class="fa-solid fa-gear"></i> Settings
+              <% end %>
+          </li>
+      </ul>
+  </div>
+  <div class="bottom-section-sidebar">
     <hr>
     <div class="dropdown">
-      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
+        <strong>oskvitae</strong>
       </a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
         <li><a class="dropdown-item" href="#">New project...</a></li>
         <li><a class="dropdown-item" href="#">Settings</a></li>
         <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item"  %></li>
         <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
       </ul>
     </div>
   </div>
+</nav>

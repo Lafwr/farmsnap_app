@@ -1,0 +1,72 @@
+// CSCC VARIABLES
+$sidebar-bg: #1e1e1e; // Sidebar background color
+$sidebar-text-color: rgb(243, 255, 244);
+$active-text-color: #28a745; // Green for active links
+$active-bg-color: rgba(135, 135, 135, 0.1); // Light background for active items
+$hover-text-sidebar: #15cf78;
+
+
+#sidebar {
+  height: 100vh;
+  background-color: $sidebar-bg !important;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // border-radius: 0 16px 16px 0 ;
+
+  .sidebar-logo {
+    // RESIZE LOGO IN SIDEBAR HERE
+    max-width: 80%;
+    height: auto;
+}
+
+
+  .nav-link {
+      color: $sidebar-text-color !important;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: $hover-text-sidebar !important;
+      }
+      border-radius: 8px ;
+      // text-align: center;
+      i {
+        margin-right: 0.5rem !important;
+      }
+  }
+  .dropdown {
+
+    a {
+      color: $sidebar-text-color;
+    }
+  }
+
+  .nav-item {
+    margin: 4px 0;
+  }
+
+  // ACTIVE LINK ITEM STYLING
+  .nav-item.active {
+    .nav-link {
+        color: $active-text-color !important; // Green text
+        background-color: $active-bg-color; // Light background
+    }
+}
+
+}
+
+
+
+
+// ACTIVE NAV ITEMS STYLING
+
+
+//  NAVBAR MOBILE
+@media (max-width: 767px) {
+  #sidebar {
+      position: relative;
+      height: auto;
+  }
+}
