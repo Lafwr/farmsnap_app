@@ -1,0 +1,64 @@
+.event-show-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .btn-dark {
+    margin-bottom: 10px;
+  }
+}
+
+.attendance-form .form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.attendance-form .form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.attendance-form .form-control {
+  width: 100%;
+}
+
+.container-event-overview {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  width: 100%;
+  margin: 16px 0px;
+  .mb-3 {
+    height: 50%;
+  }
+}
+
+.right-column-service {
+  display: grid;
+  gap: 32px;
+  grid-template-rows: 1fr 1fr;
+}
+
+.row-event-provider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  overflow: hidden;
+
+  #temp-map {
+    object-fit: cover;
+    min-height: 100%;
+    max-height: 400px;
+  }
+}
+
+.map {
+  div[style] {
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  }
+}

@@ -1,26 +1,37 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
-
 <h1><%= @event.name %></h1>
-<p><%= @event.location %></p>
-<p><%= @event.start_time.strftime("%B %d, %Y %H:%M") %> - <%= @event.end_time.strftime("%B %d, %Y %H:%M") %></p>
 
-<% if user_signed_in? && current_user.farmer? && !@event.event_attendances.find_by(farmer:current_user.farmer)%>
+<div class="attendance-form">
+  <% if user_signed_in? && current_user.farmer? && !@event.event_attendances.find_by(farmer: current_user.farmer) %>
     <%= form_with model: [@event, EventAttendance.new] do |f| %>
-    <div>
-      <label>Start Time:</label>
-      <%= f.time_select :start_time, include_seconds: false %>
-    </div>
-    <div>
-      <label>End Time:</label>
-      <%= f.time_select :end_time, include_seconds: false %>
-    </div>
-    <%= f.submit "Confirm Attendance", class: "btn btn-primary" %>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="start_time">Start Time:</label>
+          <%= f.time_select :start_time, include_seconds: false, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <label for="end_time">End Time:</label>
+          <%= f.time_select :end_time, include_seconds: false, class: "form-control" %>
+        </div>
+      </div>
+      <%= f.submit "Confirm Attendance", class: "btn btn-primary" %>
+    <% end %>
+  <% else %>
+    <p>You are already attending this event.</p>
   <% end %>
-<% else %>
-  <p>You are already attending this event.</p>
-<% end %>
+</div>
 
+
+  <div class="container-event-overview">
+    <div class="card mb-3">
+      <img src="https://media.houseandgarden.co.uk/photos/63e11c8cb4cfdd5e8b831271/master/w_1600%2Cc_limit/B6M37H.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Borough Market</h5>
+        <p><%= @event.location %></p>
+        <p><%= @event.start_time.strftime("%B %d, %Y %H:%M") %> - <%= @event.end_time.strftime("%B %d, %Y %H:%M") %></p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
 <h2>Farmers Attending:</h2>
   <ul>
     <% @event.event_attendances.each do |attendance| %>
