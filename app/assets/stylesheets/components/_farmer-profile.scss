@@ -70,3 +70,33 @@ img{
 .hidden {
   display: none;
 }
+
+.profile-calendar{
+
+  width: 300px;
+  border-radius: 5px;
+  border-style: none;
+  .simple-calendar{
+    tr{
+      border-style: none;
+    }
+    table{
+      border-style: none;
+      border: none;
+      tbody{
+        border-style: none;
+      }
+    }
+  }
+  .today {
+    background-color: #a7e2b6;
+
+  }
+
+  .calendar-heading{
+    a{
+      text-decoration: none;
+    }
+  }
+
+}
