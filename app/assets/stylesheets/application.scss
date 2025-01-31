@@ -11,6 +11,17 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import"components/sidebar";
 
 // Mapbox
 @import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
+
+main {
+  background: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  padding: 2rem;
+}
