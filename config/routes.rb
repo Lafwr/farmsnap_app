@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'products/show'
   devise_for :users, controllers: { registrations: "users/registrations" }
 
+  # EVENTS--------------------------
   get 'events/index'
   get 'events/show'
   get 'events/edit'
@@ -12,6 +13,13 @@ Rails.application.routes.draw do
   get 'events/create'
   get 'events/destroy'
 
+  get "my-events", to: "events#my_events", as: "my_events"
+  get "my-events/new", to: "events#new_my_event", as: "new_my_event"
+
+  # PAGES ------------------------
+  get "/dashboard", to: "pages#dashboard"
+  get "/analytics", to: "pages#analytics"
+  get "/settings", to: "pages#settings"
 
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -21,7 +29,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   get '/search', to: 'searches#search', as: :search
 
-
+  # FARMERS AND CRATES --------------
   resources :farmers, exlude: [:destroy] do
     resources :crates, exclude: [:new]
   end

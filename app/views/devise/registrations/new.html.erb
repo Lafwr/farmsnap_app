@@ -1,27 +1,38 @@
-<h2>Sign up</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email,
+
+<div class="container px-4 d-flex align-items-cente justify-content-center">
+  <div class="row">
+    <div class="col">
+      <h2>Sign up</h2>
+
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+      <%= f.input :email,
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
+      <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
+      <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
-    <%= f.input :role, as: :select, collection: ["standard", "farmer"], include_blank: false %>
-  </div>
+      <%= f.input :role, as: :select, collection: ["standard", "farmer"], include_blank: false %>
+      </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+      <div class="form-actions">
+      <%= f.button :submit, "Sign up" %>
     <%# ADD A BUTTON TO REDIRECT TO NEW_FARMER_PATH %>
+    <%= render "devise/shared/links" %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+    </div>
+    <div class="col">
+      <%= image_tag "fs-icon-1.png", alt: "Logo", class: "img-fluid sidebar-logo" %>
+    </div>
+  </div>
+</div>

@@ -14,13 +14,24 @@
 
   <div class="container-fluid">
     <div class="row">
+      <% if user_signed_in? && current_user.role == "farmer" %>
       <%= render "sections/sidebar-1" %>
-      <main id="main-content" class="col-12 col-md-9 col-lg-10 p-4">
+      <% elsif user_signed_in? && current_user.role == "standard" %>
+        <%= render "sections/sidebar-2" %>
+      <% else %>
+      <%= render "shared/navbar" %>
+      <%# TODO: render "sections/temp-navbar" %>
+      <% end %>
+      <% if user_signed_in? %>
+        <main id="main-content" class="col-12 col-md-9 col-lg-10 p-4">
+          <%= yield %>
+          <%= render "shared/flashes" %>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+        </main>
+      <% else %>
         <%= yield %>
-        <%= render "shared/flashes" %>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      </main>
+      <% end %>
     </div>
   </div>
 </body>
