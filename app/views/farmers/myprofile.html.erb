@@ -22,11 +22,15 @@
 
 </div>
 
-<div class="profile-calendar">
-    <%= month_calendar(events: @event_attendance, end_attribute: :end_time) do |date, event_attendances| %>
-    <%= date %>
-    <% event_attendances.each do |event_attendance| %>
-      <%= event_attendance.start_time %>
-    <% end %>
- <% end %>
+<div class="calendar-container">
+
+  <div class="profile-calendar">
+      <%= month_calendar(events: @event_attendance, end_attribute: :end_time) do |date, event_attendances| %>
+      <%= date %>
+        <% event_attendances.each do |event_attendance| %>
+          <%= event_attendance.start_time %>
+        <% end %>
+     <% end %>
+  </div>
+
 </div>

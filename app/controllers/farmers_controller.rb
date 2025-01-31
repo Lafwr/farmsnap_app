@@ -46,10 +46,7 @@ class FarmersController < ApplicationController
     start_date = params.fetch(:start_date, Date.today).to_date
 
     # For a monthly view:
-    @event_attendance = EventAttendance.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
-
-    # Or, for a weekly view:
-    # @event_attendances = Meeting.where(starts_at: start_date.beginning_of_week..start_date.end_of_week)
+    @event_attendance = EventAttendance.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).and(EventAttendance.where(farmer: @farmer))
   end
 
 
