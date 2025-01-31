@@ -3,13 +3,23 @@
   <div class="banner-content">
     <h1>Earth to Panrty Direct</h1>
     <p> Discover Farmer's Markets and Fresh Deals Daily</p>
-    <div>
-      <%= form_with(url: search_path, method: :get, local: true) do |form| %>
-        <%= form.select :category, options_for_select([["Events", "events"], ["Crates", "crates"]])%>
-        <%= form.text_field :query, placeholder: "Search for events or crates...", requires: true %>
-        <%= form.submit "Search" %>
-      <% end %>
+
+<div class="search-container">
+  <%= form_with(url: search_path, method: :get, local: true, class: 'search-form') do |form| %>
+    <div class="search-input-group">
+      <!-- Dropdown menu for category selection -->
+      <%= form.select :category, options_for_select([["Events", "events"], ["Crates", "crates"]]), {}, class: "search-select" %>
+      <!-- Search input field -->
+      <%= form.text_field :query, placeholder: "Search location...", required: true, class: "search-input" %>
+      <!-- Search button with icon -->
+      <button type="submit" class="search-icon-button">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
     </div>
+  <% end %>
+</div>
+
+
   </div>
 </div>
 
