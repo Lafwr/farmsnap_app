@@ -1,0 +1,44 @@
+<div class="simple-calendar">
+  <div class="calendar-heading">
+
+  <div class="previous-btn">
+    <%= link_to calendar.url_for_previous_view do %>
+      <i class="fa-solid fa-chevron-left" style="color:#a7e2b6"></i>
+    <%end%>
+  </div>
+
+    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
+
+  <div class="next-btn">
+    <%= link_to calendar.url_for_next_view do %>
+      <i class="fa-solid fa-chevron-right" style="color:#a7e2b6"></i>
+    <% end %>
+  </div>
+
+</div>
+  <div class="table-container">
+    <table class="table table-striped" id="table-border">
+      <thead>
+        <tr>
+          <% date_range.slice(0, 7).each do |day| %>
+            <th><%= t('date.abbr_day_names')[day.wday] %></th>
+          <% end %>
+        </tr>
+      </thead>
+
+      <tbody class="edit-table">
+        <% date_range.each_slice(7) do |dates| %>
+          <tr>
+          <div class="table-block">
+            <% dates.each do |date| %>
+              <%= content_tag :td, class: calendar.td_classes_for(date) do %>
+                  <% passed_block.call date.day, sorted_events.fetch(date, []) %>
+              <% end %>
+            <% end %>
+            </div>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
