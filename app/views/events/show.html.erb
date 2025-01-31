@@ -5,7 +5,7 @@
 <p><%= @event.location %></p>
 <p><%= @event.start_time.strftime("%B %d, %Y %H:%M") %> - <%= @event.end_time.strftime("%B %d, %Y %H:%M") %></p>
 
-<% if user_signed_in? && !@event.event_attendances.find_by(farmer:current_user.farmer)%>
+<% if current_user.farmer? && !@event.event_attendances.find_by(farmer:current_user.farmer)%>
     <%= form_with model: [@event, EventAttendance.new] do |f| %>
     <div>
       <label>Start Time:</label>
