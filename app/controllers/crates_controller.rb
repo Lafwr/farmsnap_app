@@ -24,14 +24,37 @@ class CratesController < ApplicationController
     end
   end
 
+
   def index
-    @query = params[:query]
-    if @query.present?
-      @crates = Crate.search_by_name_and_products(@query)
+    @crates = Crate.all
+
+    if params[:query].present?
+      search_location = Geocoder.search(params[:query]).first
+
+      if search_location
+        latitude = search_location.latitude
+        longitude = search_location.longitude
+        @crates = Crate.near([latitude, longitude], 10).order("distance ASC") # Orders by proximity
+      else
+        @crates = @crates.search_by_name_and_location(params[:query])
+      end
     else
-      @crates = Crate.all
+      @crates = Crate.all.order("distance ASC")
     end
-    # @crates = @farmer.crates
+
+    @markers = @crates.geocoded.map do |crate|
+      {
+        lat: crate.latitude,
+        lng: crate.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { crate: crate }),
+        marker_html: render_to_string(partial: "marker", locals: { crate: crate })
+      }
+    end
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def show
