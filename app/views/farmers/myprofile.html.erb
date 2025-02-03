@@ -1,36 +1,124 @@
-<h1>My profile</h1>
-
-<div class="profile-container" data-controller= "toggle">
-  <%= cl_image_tag @farmer.photo.key, height: 150, width: 150, crop: :fill %>
+<div class="username"><h1>My profile</h1></div>
 
 
-  <div class="profile-paragraph">
-    <p><strong>Bio:</strong> <%= @farmer.bio %></p>
-    <p><strong>Location📍:</strong> <%= @farmer.location %></p>
-  </div>
-
-  <div class="profile-edit">
-    <%= button_tag class: "edit-icon", data: { action: "click->toggle#toggle" } do %>
-      <i class="fa-regular fa-pen-to-square"></i>
-    <% end %>
-  </div>
+<div class="main-profile-container">
+  <div class="left-half">
+    <div class="profile-card-container">
+      <div class="profile-container" data-controller= "toggle">
+        <%= cl_image_tag @farmer.photo.key, height: 150, width: 150, crop: :fill %>
 
 
-  <div data-toggle-target="form" class="hidden">
-    <%= render 'update', farmer: @farmer %>
-  </div>
+        <div class="profile-paragraph">
+          <p><strong>Bio:</strong> <%= @farmer.bio %></p>
+          <p><strong>Location📍:</strong> <%= @farmer.location %></p>
+          <p><strong>Rating: <%= @average_rating == 0 ? 0 : @average_rating %></strong></p>
+        </div>
 
-</div>
+        <% if current_user == @farmer %>
+          <div class="profile-edit">
+            <%= button_tag class: "edit-icon", data: { action: "click->toggle#toggle" } do %>
+              <i class="fa-regular fa-pen-to-square"></i>
+            <% end %>
+          </div>
 
-<div class="calendar-container">
 
-  <div class="profile-calendar">
-      <%= month_calendar(events: @event_attendance, end_attribute: :end_time) do |date, event_attendances| %>
-      <%= date %>
-        <% event_attendances.each do |event_attendance| %>
-          <%= event_attendance.start_time %>
+          <div data-toggle-target="form" class="hidden">
+            <%= render 'update', farmer: @farmer %>
+          </div>
         <% end %>
-     <% end %>
+      </div>
+    </div>
+
+       <div class="container-review">
+        <div class="star-rate">
+          <div class="row">
+            <div class="col-xs-4">
+
+                  <%= simple_form_for( [@farmer, @review],  data: { controller: "submit" }) do |f| %>
+                  <!-- Hidden input for rating -->
+                  <%= f.hidden_field :rating, id: "rating-hidden", data: { controller: "star-rating" } %>
+
+                  <!-- Textarea for review content -->
+                  <%= f.input :content, as: :text, label: "Your Review:", input_html: { rows: 3, class: "form-control" } %>
+
+                  <!-- Star Rating -->
+                  <div class="star-rating" data-controller="star-rating">
+                    <span class="star" data-action="mouseover->star-rating#highlight click->star-rating#select" data-value="1">★</span>
+                    <span class="star" data-action="mouseover->star-rating#highlight click->star-rating#select" data-value="2">★</span>
+                    <span class="star" data-action="mouseover->star-rating#highlight click->star-rating#select" data-value="3">★</span>
+                    <span class="star" data-action="mouseover->star-rating#highlight click->star-rating#select" data-value="4">★</span>
+                    <span class="star" data-action="mouseover->star-rating#highlight click->star-rating#select" data-value="5">★</span>
+                  </div>
+
+
+                  <!-- Submit Button -->
+                  <%= f.submit "Submit Review", class: "btn btn-dark mt-3" %>
+                <% end %>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="reviews-all">
+          <p><strong>All reviews:</strong></p>
+            <% if @reviews.present? %>
+              <% @reviews.each do |review| %>
+                  <%= review.content %>
+                  <%= review.rating %>
+                  comment_by: <%= review.user.first_name %>
+                  <%# if current_user == @farmer %>
+                  <%#= review.comment %>
+                  <hr>
+                <% end %>
+            <% else %>
+              <p>No reviews available yet.</p>
+            <% end %>
+        </div>
+    </div>
   </div>
 
+<div class="right-half">
+     <div class="calendar-card-container">
+        <div class="calendar-container">
+
+          <div class="profile-calendar">
+              <%= month_calendar(events: @event_attendance, end_attribute: :end_time) do |date, event_attendances| %>
+              <%= date %>
+                <% event_attendances.each do |event_attendance| %>
+                  <%= event_attendance.start_time %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    <div class="crates-card-container">
+      <h3>My Crates</h3>
+
+      <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+        <% Crate.all.each_slice(3).with_index do |crates, index| %>
+          <div class="carousel-item <%= "active" if index == 0%>">
+          <div class="row justify-content-center">
+            <% crates.each do |crate| %>
+              <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+                <%= crate.name %>
+              </div>
+            <% end %>
+            </div>
+          </div>
+        <% end %>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
 </div>
