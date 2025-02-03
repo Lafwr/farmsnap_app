@@ -1,9 +1,11 @@
 class Crate < ApplicationRecord
   belongs_to :farmer
-  has_many :products
+  has_many :products, dependent: :destroy
   validates :price, presence: true
   has_many :categories_crates
   has_many :categories, through: :categories_crates
+
+  accepts_nested_attributes_for :products, allow_destroy: true
 
   geocoded_by :current_location
   after_validation :geocode, if: :saved_change_to_farmer_id?
