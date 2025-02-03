@@ -10,7 +10,7 @@ class Farmer < ApplicationRecord
   validates :user_id, presence: true
   validates :bio, presence: true, length: { maximum: 300 }
   validates :location, presence: true
-  validates :name, presence: true
+
 
   # Geocoding
   geocoded_by :location

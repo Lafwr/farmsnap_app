@@ -1,8 +1,13 @@
-<h1>Farmer <%= @farmer.name %> Crates</h1>
-<%= @farmer.location%>
-
+<h1>Crates By <%= @farmer.name %></h1>
+<p><%= @farmer.location%></p>
+<hr>
 <p>Find me in app/views/crates/index.html.erb</p>
+<hr>
+<%= link_to "<< All Crates", all_crates_path %>
+<%= link_to "Farmer Profile", farmer_path(@farmer) %>
 
+<hr>
+<hr>
 
 <!-- Display Crates -->
 <div class="crate-list">
@@ -11,11 +16,10 @@
       <h2><%= crate.name %></h2>
       <p><%= crate.description %></p>
       <p><strong>Price:</strong> £<%= crate.price %></p>
-      <p><strong>Farmer:</strong> <%= crate.farmer.user.first_name if crate.farmer %></p>
-      <p><strong>Location:</strong> <%= crate.current_location %></p>
       <% if crate.flash_sale %>
         <p class="text-danger">🔥 Flash Sale!</p>
       <% end %>
     </div>
+    <hr>
   <% end %>
 </div>
