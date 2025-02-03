@@ -1,27 +1,104 @@
-<h1>Crates#edit</h1>
+<div class="container col-4">
 <p>Find me in app/views/crates/edit.html.erb</p>
-<%= form_with(model: @crate, url: farmer_crate_path(@crate.farmer, @crate), method: :patch) do |form| %>
-   <div>
+<h1>Edit Crate</h1>
+
+<%= form_with(model: @crate, url: farmer_crate_path(@crate.farmer, @crate), method: :patch, local: true) do |form| %>
+
+  <div>
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-   <div>
+  <div>
     <%= form.label :description %>
-    <%= form.text_field :description %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
   <div>
     <%= form.label :flash_sale %>
-    <%= form.check_box :flash_sale %>
+    <%= form.check_box :flash_sale, class: "form-check-input" %>
   </div>
 
   <div>
     <%= form.label :price %>
-    <%= form.number_field :price, step: 0.01 %>
+    <%= form.number_field :price, step: 0.01, class: "form-control" %>
   </div>
 
+  <h3>Products</h3>
+  <div id="products-container">
+    <%= form.fields_for :products do |product_form| %>
+      <div class="product-fields card p-3 mb-2 shadow-sm">
+        <%= product_form.hidden_field :id %> <!-- Preserve product ID for updates -->
+
+        <%= product_form.label :name, "Product Name" %>
+        <%= product_form.text_field :name, class: "form-control" %>
+
+        <%= product_form.label :quantity, "Quantity" %>
+        <%= product_form.number_field :quantity, step: 1, min: 1, class: "form-control" %>
+
+        <%= product_form.label :category, "Category" %>
+        <%= product_form.text_field :category, class: "form-control" %>
+
+        <!-- Allow users to remove a product -->
+        <%= product_form.check_box :_destroy, class: "form-check-input remove-product" %>
+        <%= product_form.label :_destroy, "Remove product" %>
+      </div>
+    <% end %>
+  </div>
+
+  <button type="button" class="btn btn-primary mt-3" id="add-product">Add Product</button>
+
   <div>
-    <%= form.submit "Update Crate" %>
+    <%= form.submit "Update Crate", class: "btn btn-success mt-3" %>
   </div>
 <% end %>
+
+<%= link_to "<< Back to My Crates", my_crates_path, class: "btn btn-secondary mt-3" %>
+</div>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    const addProductButton = document.getElementById("add-product");
+    const productsContainer = document.getElementById("products-container");
+
+    if (!addProductButton || !productsContainer) return;
+
+    let productIndex = document.querySelectorAll(".product-fields").length;
+
+    addProductButton.addEventListener("click", function() {
+      const productFields = `
+        <div class="product-fields card p-3 mb-2 shadow-sm">
+          <label for="crate_products_attributes_${productIndex}_name">Product Name</label>
+          <input class="form-control" type="text" name="crate[products_attributes][${productIndex}][name]" id="crate_products_attributes_${productIndex}_name">
+
+          <label for="crate_products_attributes_${productIndex}_quantity">Quantity</label>
+          <input class="form-control" type="number" name="crate[products_attributes][${productIndex}][quantity]" id="crate_products_attributes_${productIndex}_quantity" step="1" min="1">
+
+          <label for="crate_products_attributes_${productIndex}_category">Category</label>
+          <input class="form-control" type="text" name="crate[products_attributes][${productIndex}][category]" id="crate_products_attributes_${productIndex}_category">
+
+          <button type="button" class="btn btn-danger btn-sm mt-2 remove-product">Remove</button>
+        </div>
+      `;
+
+      productsContainer.insertAdjacentHTML("beforeend", productFields);
+      productIndex++;
+
+      // Attach event listener to new remove buttons
+      attachRemoveEvent();
+    });
+
+    function attachRemoveEvent() {
+      document.querySelectorAll(".remove-product").forEach(button => {
+        button.removeEventListener("click", handleRemove);
+        button.addEventListener("click", handleRemove);
+      });
+    }
+
+    function handleRemove(event) {
+      event.target.closest(".product-fields").remove();
+    }
+
+    attachRemoveEvent(); // Ensure remove buttons work on initial load
+  });
+</script>

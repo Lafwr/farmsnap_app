@@ -1,7 +1,8 @@
 <h1>My Crates</h1>
-<h2>Hey <%= current_user.email.split('@').first %> 👋</h2>
+<h2>Hey <%= current_user.username %> 👋</h2>
 <hr>
-<%= link_to "New Crate", new_my_crate_path %>
+<%= link_to "New Crate", new_my_crate_path(current_user.farmer) %>
+
 <hr>
 <% if @my_crates.any? %>
   <ul>

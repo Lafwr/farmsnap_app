@@ -1,33 +1,11 @@
 class CratesController < ApplicationController
   before_action :set_farmer, only: [:new, :create]
   before_action :set_crate, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new_my_crate, :my_crates, :create_my_crate]
+  before_action :ensure_farmer, only: [:new_my_crate, :create_my_crate, :my_crates]
 
   def all
     @crates = Crate.all
-  end
-
-  def my_crates
-    if current_user.farmer
-      @my_crates = current_user.farmer.crates
-    else
-      @my_crates = []
-      flash[:alert] = "You are not associated with a farmer account."
-    end
-  end
-
-  def new_my_crate
-    if current_user.farmer
-      @farmer = current_user.farmer
-      @crate = current_user.farmer.crates.build
-    else
-      redirect_to root_path, alert: "You must be a farmer to create a crate."
-    end
-  end
-
-
-  def index
-    @crates = Crate.all
-
     if params[:query].present?
       search_location = Geocoder.search(params[:query]).first
 
@@ -56,13 +34,48 @@ class CratesController < ApplicationController
     end
   end
 
+  def my_crates
+    if current_user.farmer
+      @my_crates = current_user.farmer.crates
+    else
+      @my_crates = []
+      flash[:alert] = "You are not associated with a farmer account."
+    end
+  end
+
+  def new_my_crate
+    if current_user.farmer
+      @crate = current_user.farmer.crates.build
+    else
+      redirect_to root_path, alert: "You must be a farmer to create a crate."
+    end
+  end
+
+  def create_my_crate
+    @crate = current_user.farmer.crates.build(crate_params)
+
+    if @crate.save
+      redirect_to my_crates_path, notice: "Crate successfully created."
+    else
+      flash[:alert] = "Failed to create crate."
+      render :new_my_crate
+    end
+  end
+
+  def index
+    @farmer = Farmer.find(params[:farmer_id])
+    @crates = Crate.where(farmer: @farmer)
+    # @crates = Crate.all All crates specific farmer
+  end
+
   def show
     # @name = @farmer.user.first_name
+    @products = Product.where(crate: @crate)
   end
 
   # Not needed: This would create the redundant /farmers/1/crate/new url
   # def new
-  #   @crate = @farmer.crates.build
+  #   @crate = @farmer.Farmer.find(params[:farmer_id])
   # end
 
 
@@ -101,7 +114,17 @@ class CratesController < ApplicationController
     @crate = Crate.find(params[:id])
   end
 
+  def ensure_farmer
+    unless current_user.farmer
+      redirect_to root_path, alert: "You must be a farmer to create a crate."
+    end
+  end
+
   def crate_params
-    params.require(:crate).permit(:flash_sale, :price, :name, :description)
+    params.require(:crate).permit(:flash_sale,
+      :price,
+      :name,
+      :description,
+      products_attributes: [:id, :name, :quantity, :category, :_destroy])
   end
 end
