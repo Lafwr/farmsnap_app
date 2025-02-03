@@ -1,6 +1,9 @@
 puts "Seeding database..."
 
 # Destroy existing records in the correct order
+Like.destroy_all
+Comment.destroy_all
+Post.destroy_all
 Crate.destroy_all  # ✅ Destroy crates first since they depend on farmers
 EventAttendance.destroy_all
 Event.destroy_all
@@ -19,9 +22,9 @@ users = []
   users << User.create!(
     email: "farmer#{i + 1}@farmsnap.com",
     password: "password",
-    first_name: "Farmer#{i + 1}",
+    first_name: "Firstname#{i + 1}",
     last_name: "Lastname#{i + 1}",
-    username: "farmer#{i + 1}"
+    username: "username#{i + 1}"
   )
 end
 
@@ -164,6 +167,29 @@ farmers.each do |farmer|
     created_crates += 1
   end
 end
+
+# POSTS COMMENTS AND LIKES
+
+farmers.each do |farmer|
+  3.times do
+    post = Post.create!(
+      farmer: farmer,
+      caption: "Check out my farm's latest updates! 🌾"
+    )
+
+    # Add likes from random users
+    users.sample(3).each do |user|
+      Like.create!(user: user, post: post)
+    end
+
+    # Add comments from random users
+    users.sample(3).each do |user|
+      Comment.create!(user: user, post: post, content: "Amazing post, #{farmer.name}!")
+    end
+  end
+end
+puts "Social posts, comments and likes loaded..."
+
 
 
 
