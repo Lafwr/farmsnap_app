@@ -1,11 +1,37 @@
 class CratesController < ApplicationController
   before_action :set_farmer, only: [:new, :create]
   before_action :set_crate, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user! # Ensures user is logged in
-  before_action :ensure_farmer, only: [:new_my_crate, :create_my_crate]
+  before_action :authenticate_user!, only: [:new_my_crate, :my_crates, :create_my_crate]
+  before_action :ensure_farmer, only: [:new_my_crate, :create_my_crate, :my_crates]
 
   def all
     @crates = Crate.all
+    if params[:query].present?
+      search_location = Geocoder.search(params[:query]).first
+
+      if search_location
+        latitude = search_location.latitude
+        longitude = search_location.longitude
+        @crates = Crate.near([latitude, longitude], 10).order("distance ASC") # Orders by proximity
+      else
+        @crates = @crates.search_by_name_and_location(params[:query])
+      end
+      @crates = @crates.order("distance ASC") if search_location
+    end
+
+    @markers = @crates.geocoded.map do |crate|
+      {
+        lat: crate.latitude,
+        lng: crate.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { crate: crate }),
+        marker_html: render_to_string(partial: "marker", locals: { crate: crate })
+      }
+    end
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def my_crates
@@ -37,34 +63,9 @@ class CratesController < ApplicationController
   end
 
   def index
-    @crates = Crate.all
-
-    if params[:query].present?
-      search_location = Geocoder.search(params[:query]).first
-
-      if search_location
-        latitude = search_location.latitude
-        longitude = search_location.longitude
-        @crates = Crate.near([latitude, longitude], 10).order("distance ASC") # Orders by proximity
-      else
-        @crates = @crates.search_by_name_and_location(params[:query])
-      end
-      @crates = @crates.order("distance ASC") if search_location
-    end
-
-    @markers = @crates.geocoded.map do |crate|
-      {
-        lat: crate.latitude,
-        lng: crate.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: { crate: crate }),
-        marker_html: render_to_string(partial: "marker", locals: { crate: crate })
-      }
-    end
-
-    respond_to do |format|
-      format.html
-      format.turbo_stream
-    end
+    @farmer = Farmer.find(params[:farmer_id])
+    @crates = Crate.where(farmer: @farmer)
+    # @crates = Crate.all All crates specific farmer
   end
 
   def show
@@ -73,7 +74,7 @@ class CratesController < ApplicationController
 
   # Not needed: This would create the redundant /farmers/1/crate/new url
   # def new
-  #   @crate = @farmer.crates.build
+  #   @crate = @farmer.Farmer.find(params[:farmer_id])
   # end
 
 

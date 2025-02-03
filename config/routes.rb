@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     resources :crates, only: [:index, :show, :edit, :update, :destroy]
   end
   # Crates --------------------------
-  resources :crates, only: [:index]
+  # resources :crates
   get "/crates", to: "crates#all", as: "all_crates"
   get "my-crates", to: "crates#my_crates", as: "my_crates"
   get "my-crates/new", to: "crates#new_my_crate", as: "new_my_crate"
