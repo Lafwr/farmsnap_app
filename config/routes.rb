@@ -47,6 +47,10 @@ Rails.application.routes.draw do
   # get "my-crates/edit", to: "crates#new", as: "edit_crate"
    get "my-profile", to: "farmers#myprofile", as: "profile"
 
+  resources :farmers do
+    resources :reviews, only: [:new, :create]
+  end
+
 
 
   # POSTS, LIKES AND COMMENTS

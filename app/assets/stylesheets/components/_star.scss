@@ -1,0 +1,18 @@
+.star-rating {
+  font-size: 3rem;
+}
+
+.star-rating .star {
+  color: #ccc; /* Default star color */
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.star-rating .star.is-active {
+  color: black; /* Active star color */
+}
+
+.star-rating .star:hover,
+.star-rating .star.is-hover {
+  color: black; /* Hover color */
+}
