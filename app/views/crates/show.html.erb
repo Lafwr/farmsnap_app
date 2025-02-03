@@ -1,9 +1,18 @@
+<h1>Crate Overview: <%= @crate.name %></h1>
+<h4>Supplier: <%= @crate.farmer.user.email.split('@').first  %></h4>
+<h4>Description: <%= @crate.description %></h4>
+<h4>Crate Price: £<%= @crate.price %></h4>
 
-<h1><%= @crate.name %></h1>
-<p>Supplier: <%= @crate.farmer.user.email.split('@').first  %></p>
-<p><%= @crate.description %></p>
-<p>Crate Price:<%= @crate.price %></p>
-
+<h4>Crate Contents:</h4>
+<% @products.each do |product| %>
+  <ul>
+    <li>
+      <%= product.name %>
+      * <%= product.quantity %>
+    </li>
+  </ul>
+<% end %>
+<hr>
 <% if current_user.farmer.id == @crate.farmer_id %>
     <ul>
       <li><%= link_to "Edit Crate", edit_farmer_crate_path(@crate.farmer, @crate) %></li>

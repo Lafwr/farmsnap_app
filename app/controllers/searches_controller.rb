@@ -1,4 +1,6 @@
 class SearchesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [ :search ]
+
   def search
     query = params[:query]
     category = params[:category]
@@ -9,7 +11,7 @@ class SearchesController < ApplicationController
     if category == "events"
       redirect_to events_path(query: query)
     elsif category == "crates"
-      redirect_to crates_path(query: query)
+      redirect_to all_crates_path(query: query)
     else
       redirect_to root_path, alert: "Please select a category."
     end
