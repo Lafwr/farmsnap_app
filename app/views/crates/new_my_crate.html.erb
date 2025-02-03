@@ -1,30 +1,104 @@
+<div class="container col-4">
 <h1>New Crate</h1>
-
+<hr>
+<%= link_to "<< My Crates", my_crates_path, class: "btn btn-outline mt-3" %>
+<hr>
 <%= form_with model: @crate, url: create_my_crate_path, local: true do |f| %>
   <div>
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
 
   <div>
     <%= f.label :description %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, class: "form-control" %>
   </div>
 
   <div>
     <%= f.label :price %>
-    <%= f.number_field :price, step: 0.01 %>
+    <%= f.number_field :price, step: 0.01, class: "form-control" %>
   </div>
-
+  <hr>
   <div>
     <%= f.label :flash_sale %>
-    <%= f.check_box :flash_sale %>
+    <%= f.check_box :flash_sale, class: "form-check-input" %>
+  </div>
+  <hr>
+  <h3>Products</h3>
+  <div id="products-container">
+    <!-- Ensure at least one product field is visible on page load -->
+    <div class="product-fields card p-3 mb-2 shadow-sm">
+      <label for="crate_products_attributes_0_name">Product Name</label>
+      <input class="form-control" type="text" name="crate[products_attributes][0][name]" id="crate_products_attributes_0_name">
+
+      <label for="crate_products_attributes_0_quantity">Quantity</label>
+      <input class="form-control" type="number" name="crate[products_attributes][0][quantity]" id="crate_products_attributes_0_quantity" step="1" min="1">
+
+      <label for="crate_products_attributes_0_category">Category</label>
+      <input class="form-control" type="text" name="crate[products_attributes][0][category]" id="crate_products_attributes_0_category">
+
+      <button type="button" class="btn btn-dark btn-sm mt-2 remove-product">Remove</button>
+    </div>
   </div>
 
+  <button type="button" class="btn btn-primary mt-3" id="add-product">Add Another Product</button>
+
   <div>
-    <%= f.submit "Create Crate" %>
+    <%= f.submit "Create Crate", class: "btn btn-success mt-3" %>
   </div>
 <% end %>
 
 
-<%= link_to "<< My Crates", my_crates_path %>
+</div>
+
+
+
+
+<script>
+  document.addEventListener("turbo:load", function() { // Ensures script runs on first page visit
+    const addProductButton = document.getElementById("add-product");
+    const productsContainer = document.getElementById("products-container");
+
+    if (!addProductButton || !productsContainer) return;
+
+    let productIndex = document.querySelectorAll(".product-fields").length; // Start from 1
+
+    addProductButton.addEventListener("click", function() {
+      const productFields = `
+        <div class="product-fields card p-3 mb-2 shadow-sm">
+          <label for="crate_products_attributes_${productIndex}_name">Product Name</label>
+          <input class="form-control" type="text" name="crate[products_attributes][${productIndex}][name]" id="crate_products_attributes_${productIndex}_name">
+
+          <label for="crate_products_attributes_${productIndex}_quantity">Quantity</label>
+          <input class="form-control" type="number" name="crate[products_attributes][${productIndex}][quantity]" id="crate_products_attributes_${productIndex}_quantity" step="1" min="1">
+
+          <label for="crate_products_attributes_${productIndex}_category">Category</label>
+          <input class="form-control" type="text" name="crate[products_attributes][${productIndex}][category]" id="crate_products_attributes_${productIndex}_category">
+
+          <button type="button" class="btn btn-dark btn-sm mt-2 remove-product">Remove</button>
+        </div>
+      `;
+
+      productsContainer.insertAdjacentHTML("beforeend", productFields);
+      productIndex++;
+
+      // Attach event listener to remove buttons
+      attachRemoveEvent();
+    });
+
+    function attachRemoveEvent() {
+      document.querySelectorAll(".remove-product").forEach(button => {
+        button.removeEventListener("click", handleRemove); // Prevent duplicate listeners
+        button.addEventListener("click", handleRemove);
+      });
+    }
+
+    function handleRemove(event) {
+      if (document.querySelectorAll(".product-fields").length > 1) {
+        event.target.closest(".product-fields").remove();
+      }
+    }
+
+    attachRemoveEvent(); //
+  });
+</script>

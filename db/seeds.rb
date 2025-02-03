@@ -42,8 +42,8 @@ farmers_data = [
 
 farmers_data.each_with_index do |farmer, index|
   farmer_record = Farmer.create!(
-    user: users[index], # Oskar ADDED
-    name: farmer[:name],
+    user: users[index],
+    name: farmer[:name], # Oskar ADDED
     bio: "#{farmer[:name]} is a skilled farmer.",
     location: farmer[:location]
   )
