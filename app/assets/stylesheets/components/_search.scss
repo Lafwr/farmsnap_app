@@ -1,0 +1,72 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.search-form {
+  width: 100%;
+  height: 50px;
+  max-width: 600px; /* Optional: Adjust max width for a cleaner look */
+}
+
+.search-input-group {
+  display: flex;
+  background-color: white;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.search-select {
+  border: none;
+  height: 50px;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  outline: none;
+  appearance: none;
+  flex-shrink: 0; /* Prevents the select from resizing */
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+}
+
+.search-icon-button {
+  background: none;
+  border: none;
+  padding: 10px;
+  color: #007bff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-icon-button i {
+  font-size: 16px;
+}
+
+.search-icon-button:hover {
+  color: #0056b3;
+}
+
+/* Ensuring no gaps between elements */
+.search-select,
+.search-input,
+.search-icon-button {
+  border: none;
+  margin: none;
+  padding: none;
+}
+
+.search-input-group > *:not(:last-child) {
+  border-right: 1px solid #ccc; /* Adds separation between elements */
+}

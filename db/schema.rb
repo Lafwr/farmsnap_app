@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +73,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
     t.decimal "price", precision: 10, scale: 2
     t.string "name"
     t.string "description"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["farmer_id"], name: "index_crates_on_farmer_id"
   end
 

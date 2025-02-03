@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import mapboxgl from 'mapbox-gl' // Don't forget this!
+import mapboxgl from 'mapbox-gl'
 
 export default class extends Controller {
   static values = {
@@ -27,7 +27,7 @@ export default class extends Controller {
       customMarker.innerHTML = marker.marker_html
 
       new mapboxgl.Marker(customMarker)
-        .setLngLat([ marker.lng, marker.lat ])
+        .setLngLat([marker.lng, marker.lat])
         .setPopup(popup)
         .addTo(this.map)
     })

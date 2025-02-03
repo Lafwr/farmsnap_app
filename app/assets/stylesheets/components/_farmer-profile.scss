@@ -18,6 +18,7 @@
 .profile-container{
     width: 500px;
     margin-left: 0;
+    margin-top: 50px;
     margin-bottom: 60px;
     padding:20px;
     border-radius: 5px;
@@ -69,4 +70,63 @@ img{
 
 .hidden {
   display: none;
+}
+
+.profile-calendar{
+
+  width: 300px;
+  border-radius: 5px;
+  border-style: none;
+  .simple-calendar{
+    tr{
+      border-style: none;
+    }
+    table{
+      border-style: none;
+      border: none;
+    }
+  }
+  .today {
+    background-color: #a7e2b6;
+
+  }
+
+
+  .calendar-heading{
+    display: flex;
+    margin-left: 20px;
+
+    .calendar-title{
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+  }
+
+
+  .calendar-heading span{
+    margin: 0px;
+    padding: 0px;
+  }
+
+
+
+
+}
+
+
+.calendar-container{
+  border-radius: 5px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  width: 723.3px;
+}
+
+.table-container{
+  width: 723.3px;
+  border: none;
+
+  #table-border{
+    border: none;
+    border-style: none;
+  }
 }

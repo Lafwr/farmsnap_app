@@ -1,0 +1,55 @@
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Creates a responsive grid */
+  gap: 20px; /* Space between the cards */
+}
+
+.card {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Push content to the bottom of the card */
+  aspect-ratio: 1; /* Ensure the card is square */
+}
+.card-category{
+  background-size: cover;
+  background-position: center;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 1px 1px 3px rgba(87, 87, 87, 0.2);
+  border-radius: 5px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.card-category > h2{
+  color: white;
+  opacity: 0.85;
+  font-size: 24px;
+  font-weight: 600;
+  transition: ease 0.3s;
+
+}
+
+.cards {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+
+.card-content {
+  background: rgba(0, 0, 0, 0.5); /* Optional: Adds a semi-transparent overlay on the bottom */
+  padding: 10px;
+}
+
+.farmer-email, .attendance-time {
+  margin: 0;
+}

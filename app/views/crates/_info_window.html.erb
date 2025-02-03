@@ -1,0 +1,30 @@
+<% current_event = crate.farmer.event_attendances.order(start_time: :desc).first&.event %>
+
+<div class="info-window">
+  <% if current_event %>
+    <h5><strong><%= current_event.name %></strong></h5>
+    <p><strong>Location:</strong> <%= current_event.location %></p>
+
+    <div class="crate-list">
+      <% flash_sale_crates = crate.farmer.crates.select(&:flash_sale) %>
+      <% regular_crates = crate.farmer.crates.reject(&:flash_sale) %>
+
+      <% (flash_sale_crates + regular_crates).first(5).each do |crate| %>
+        <div class="crate-item <%= 'flash-sale' if crate.flash_sale %>">
+          <strong><%= crate.name %> by <%= crate.farmer.user.first_name %></strong> - £<%= crate.price %>
+          <% if crate.flash_sale %>
+            <span class="text-danger">🔥 Flash Sale</span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if crate.farmer.crates.count > 5 %>
+      <p class="text-muted">+ <%= crate.farmer.crates.count - 5 %> more crates available</p>
+    <% end %>
+
+    <p><%= link_to "View Crates at This Event", crates_path(query: current_event.name), class: "btn btn-sm btn-primary" %></p>
+  <% else %>
+    <p><strong>No event currently assigned for this crate.</strong></p>
+  <% end %>
+</div>
