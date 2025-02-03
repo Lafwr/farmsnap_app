@@ -1,0 +1,21 @@
+<h1>All Posts</h1>
+
+<% @posts.each do |post| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5><%= post.farmer.name %></h5>
+      <p><%= post.caption %></p>
+
+      <% if post.images.attached? %>
+        <% post.images.each do |image| %>
+          <%= image_tag image, class: "img-fluid", width: 300 %>
+        <% end %>
+      <% end %>
+
+      <p><strong>Likes:</strong> <%= post.likes.count %></p>
+
+      <%= link_to "Like", like_post_path(post), method: :post, class: "btn btn-primary" %>
+      <%= link_to "Comment", post_path(post), class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>
