@@ -120,6 +120,6 @@ class CratesController < ApplicationController
   end
 
   def crate_params
-    params.require(:crate).permit(:flash_sale, :price, :name, :description)
+    params.require(:crate).permit(:flash_sale, :price, :name, :description, products_attributes: [:name, :quantity])
   end
 end
