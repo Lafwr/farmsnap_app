@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
-
+ActiveRecord::Schema[7.1].define(version: 2025_02_03_174900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,11 +50,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
 
   create_table "categories_crates", id: false, force: :cascade do |t|
     t.bigint "crate_id", null: false
-    t.bigint "category_id", null: false
-  end
-
-  create_table "categories_event_attendances", id: false, force: :cascade do |t|
-    t.bigint "event_attendance_id", null: false
     t.bigint "category_id", null: false
   end
 
@@ -123,6 +116,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
     t.index ["crate_id"], name: "index_products_on_crate_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string "content"
+    t.integer "rating"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "farmer_id", null: false
+    t.index ["farmer_id"], name: "index_reviews_on_farmer_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -149,4 +152,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
   add_foreign_key "events", "farmers"
   add_foreign_key "farmers", "users"
   add_foreign_key "products", "crates"
+  add_foreign_key "reviews", "farmers"
 end
