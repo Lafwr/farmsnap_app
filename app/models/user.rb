@@ -11,6 +11,10 @@ class User < ApplicationRecord
 
   ROLES = %w[customer farmer admin].freeze
 
+  # LIKES AND COMMENTS FOR POSTS
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
   # Role helper methods
   def customer?
     role == "standard"

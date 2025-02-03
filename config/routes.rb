@@ -29,9 +29,10 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   get '/search', to: 'searches#search', as: :search
 
-  # FARMERS AND CRATES --------------
+  # FARMERS, CRATES AND POSTS --------------
   resources :farmers, exlude: [:destroy] do
     resources :crates, only: [:index, :show, :edit, :update, :destroy]
+     resources :posts, only: [:index], controller: 'farmers/posts'
   end
   # Crates --------------------------
   # resources :crates
@@ -50,6 +51,16 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
+
+
+  # POSTS, LIKES AND COMMENTS
+  resources :posts, only: [:index, :show, :destroy] do
+    post "like", on: :member
+    post "comment", on: :member
+  end
+
+  get 'my-posts', to: 'posts#my_posts', as: 'my_posts'
+  get 'my-posts/new', to: 'posts#new', as: 'new_post'
 
 
 
