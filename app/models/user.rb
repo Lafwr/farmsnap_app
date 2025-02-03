@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :farmer, dependent: :destroy
   # validates :role, presence: true (Unless commented out, used needs a role before being able to create an account)
-
+  validates :username, presence: true, uniqueness: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   ROLES = %w[customer farmer admin].freeze
 
