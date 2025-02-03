@@ -48,6 +48,12 @@ Rails.application.routes.draw do
 
 
 
+  # POSTS, LIKES AND COMMENTS
+  resources :posts, only: [:index, :show, :new, :create, :destroy] do
+    post "like", on: :member
+    post "comment", on: :member
+  end
+
 
   resources :events do
     resources :event_attendances, only: [:create, :destroy]
