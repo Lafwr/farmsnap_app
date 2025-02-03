@@ -38,8 +38,7 @@ class CratesController < ApplicationController
       else
         @crates = @crates.search_by_name_and_location(params[:query])
       end
-    else
-      @crates = Crate.all.order("distance ASC")
+      @crates = @crates.order("distance ASC") if search_location
     end
 
     @markers = @crates.geocoded.map do |crate|

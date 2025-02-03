@@ -6,8 +6,7 @@ class Crate < ApplicationRecord
   has_many :categories, through: :categories_crates
 
   geocoded_by :current_location
-  after_validation :geocode, if: :will_save_change_to_farmer?
-
+  after_validation :geocode, if: :saved_change_to_farmer_id?
   # search
   include PgSearch::Model
   pg_search_scope :search_by_name_and_products,

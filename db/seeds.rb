@@ -141,13 +141,23 @@ farmers.each do |farmer|
   crate_list.each_with_index do |crate_name, index|
     break if created_crates >= total_crates_needed
 
+    current_event = farmer.event_attendances.order(start_time: :desc).first&.event
+    location = current_event ? current_event.location : farmer.location
+
     new_crate = Crate.create!(
       farmer: farmer,
-      name: "#{crate_name} by #{farmer.user.first_name}",
+      name: "#{crate_name}",
       description: "A selection of premium farm products from #{farmer.user.first_name}'s farm.",
       price: rand(5.00..50.00).round(2),
       flash_sale: index < num_flash_sales
     )
+
+    # ✅ Ensure crates get geocoded dynamically
+    geocoded = Geocoder.search(location).first
+    if geocoded
+      new_crate.update(latitude: geocoded.latitude, longitude: geocoded.longitude)
+    end
+
 
     crates << new_crate
     created_crates += 1
