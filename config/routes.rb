@@ -31,13 +31,14 @@ Rails.application.routes.draw do
 
   # FARMERS AND CRATES --------------
   resources :farmers, exlude: [:destroy] do
-    resources :crates, exclude: [:new]
+    resources :crates, only: [:index, :show, :edit, :update, :destroy]
   end
   # Crates --------------------------
   resources :crates, only: [:index]
   get "/crates", to: "crates#all", as: "all_crates"
   get "my-crates", to: "crates#my_crates", as: "my_crates"
   get "my-crates/new", to: "crates#new_my_crate", as: "new_my_crate"
+  post "my-crates", to: "crates#create_my_crate", as: "create_my_crate"
 
   # Crate Creation and Update Farmer Only
   # get "my-crates", to: "crates#my_crates", as: "my_crates"

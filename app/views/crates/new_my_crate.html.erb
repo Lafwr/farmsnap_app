@@ -1,25 +1,30 @@
-<%= form_with model: [@farmer, @crate], local: true do |form| %>
+<h1>New Crate</h1>
+
+<%= form_with model: @crate, url: create_my_crate_path, local: true do |f| %>
   <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-    <div>
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-  <div>
-    <%= form.label :flash_sale %>
-    <%= form.check_box :flash_sale %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
   </div>
 
   <div>
-    <%= form.label :price %>
-    <%= form.number_field :price, step: 0.01 %>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
   </div>
 
   <div>
-    <%= form.submit "Create Crate" %>
+    <%= f.label :price %>
+    <%= f.number_field :price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= f.label :flash_sale %>
+    <%= f.check_box :flash_sale %>
+  </div>
+
+  <div>
+    <%= f.submit "Create Crate" %>
   </div>
 <% end %>
+
 
 <%= link_to "<< My Crates", my_crates_path %>

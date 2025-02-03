@@ -1,6 +1,8 @@
 class CratesController < ApplicationController
   before_action :set_farmer, only: [:new, :create]
   before_action :set_crate, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user! # Ensures user is logged in
+  before_action :ensure_farmer, only: [:new_my_crate, :create_my_crate]
 
   def all
     @crates = Crate.all
@@ -17,13 +19,22 @@ class CratesController < ApplicationController
 
   def new_my_crate
     if current_user.farmer
-      @farmer = current_user.farmer
       @crate = current_user.farmer.crates.build
     else
       redirect_to root_path, alert: "You must be a farmer to create a crate."
     end
   end
 
+  def create_my_crate
+    @crate = current_user.farmer.crates.build(crate_params)
+
+    if @crate.save
+      redirect_to my_crates_path, notice: "Crate successfully created."
+    else
+      flash[:alert] = "Failed to create crate."
+      render :new_my_crate
+    end
+  end
 
   def index
     @crates = Crate.all
@@ -99,6 +110,12 @@ class CratesController < ApplicationController
 
   def set_crate
     @crate = Crate.find(params[:id])
+  end
+
+  def ensure_farmer
+    unless current_user.farmer
+      redirect_to root_path, alert: "You must be a farmer to create a crate."
+    end
   end
 
   def crate_params

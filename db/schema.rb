@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,11 +50,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
 
   create_table "categories_crates", id: false, force: :cascade do |t|
     t.bigint "crate_id", null: false
-    t.bigint "category_id", null: false
-  end
-
-  create_table "categories_event_attendances", id: false, force: :cascade do |t|
-    t.bigint "event_attendance_id", null: false
     t.bigint "category_id", null: false
   end
 
