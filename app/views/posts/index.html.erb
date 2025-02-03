@@ -1,4 +1,4 @@
-<h1>All Posts</h1>
+<h1>Latest Farm Updates</h1>
 
 <% @posts.each do |post| %>
   <div class="card mb-3">
@@ -14,7 +14,7 @@
 
       <p><strong>Likes:</strong> <%= post.likes.count %></p>
 
-      <%= link_to "Like", like_post_path(post), method: :post, class: "btn btn-primary" %>
+      <%= button_to "Like", like_post_path(post), data: { turbo_method: :post }, class: "btn btn-primary" %>
       <%= link_to "Comment", post_path(post), class: "btn btn-secondary" %>
     </div>
   </div>
