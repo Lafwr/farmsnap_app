@@ -42,6 +42,7 @@ class FarmersController < ApplicationController
 
   def myprofile
     @farmer = current_user.farmer || Farmer.new
+    @review = Review.new
 
     start_date = params.fetch(:start_date, Date.today).to_date
 
@@ -49,11 +50,16 @@ class FarmersController < ApplicationController
     @event_attendance = EventAttendance.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).and(EventAttendance.where(farmer: @farmer))
   end
 
+  def farmer_ratings
+    @farmer= Farmer.find(params[:id])
+    @average_rating = @farmer.reviews.exists? ? @farmer.reviews.average(:rating).to_f.round(1) : 0
+    @average_rating = @farmer.average_rating
+  end
 
   private
 
   def farmer_params
-    params.require(:farmer).permit(:bio, :location, :photo)
+    params.require(:farmer).permit(:bio, :location, :photo,)
   end
 
 

@@ -1,13 +1,34 @@
 <h1>All Crates</h1>
 <hr>
-<ul>
-<% @crates.each do |crate| %>
-  <%= crate.farmer.user.email %>
-  <%= crate.name %>
-  <%= crate.description %>
-  <%= crate.price %>
-  <hr>
+<p>Find me in app/views/crates/all.html.erb</p>
+<!-- Search Form -->
+<%= form_with url: all_crates_path, method: :get, class: "search-form" do %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search for a crate or location...", class: "search-input" %>
+  <%= submit_tag "Search", class: "search-button" %>
 <% end %>
-</ul>
+
+<!-- Map Section -->
+<div style="width: 100%; height: 600px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
+
+<!-- Display Crates -->
+<div class="crate-list">
+  <% @crates.each do |crate| %>
+    <div class="crate-card">
+      <h2><%= crate.name %></h2>
+      <p><%= crate.description %></p>
+      <p><strong>Price:</strong> £<%= crate.price %></p>
+      <p><strong>Farmer:</strong> <%= crate.farmer.user.first_name if crate.farmer %></p>
+      <p><strong>Location:</strong> <%= crate.current_location %></p>
+      <% if crate.flash_sale %>
+        <p class="text-danger">🔥 Flash Sale!</p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
 <%= link_to "New Crate", new_my_crate_path %>
 <%= link_to "My Crates", my_crates_path %>

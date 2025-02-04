@@ -29,15 +29,17 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   get '/search', to: 'searches#search', as: :search
 
-  # FARMERS AND CRATES --------------
+  # FARMERS, CRATES AND POSTS --------------
   resources :farmers, exlude: [:destroy] do
-    resources :crates, exclude: [:new]
+    resources :crates, only: [:index, :show, :edit, :update, :destroy]
+     resources :posts, only: [:index], controller: 'farmers/posts'
   end
   # Crates --------------------------
-  resources :crates, only: [:index]
+  # resources :crates
   get "/crates", to: "crates#all", as: "all_crates"
   get "my-crates", to: "crates#my_crates", as: "my_crates"
   get "my-crates/new", to: "crates#new_my_crate", as: "new_my_crate"
+  post "my-crates", to: "crates#create_my_crate", as: "create_my_crate"
 
   # Crate Creation and Update Farmer Only
   # get "my-crates", to: "crates#my_crates", as: "my_crates"
@@ -45,6 +47,20 @@ Rails.application.routes.draw do
   # get "my-crates/edit", to: "crates#new", as: "edit_crate"
    get "my-profile", to: "farmers#myprofile", as: "profile"
 
+  resources :farmers do
+    resources :reviews, only: [:new, :create]
+  end
+
+
+
+  # POSTS, LIKES AND COMMENTS
+  resources :posts, only: [:index, :show, :destroy] do
+    post "like", on: :member
+    post "comment", on: :member
+  end
+
+  get 'my-posts', to: 'posts#my_posts', as: 'my_posts'
+  get 'my-posts/new', to: 'posts#new', as: 'new_post'
 
 
 

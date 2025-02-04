@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
-
+ActiveRecord::Schema[7.1].define(version: 2025_02_03_174900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +63,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
     t.bigint "category_id", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "crates", force: :cascade do |t|
     t.bigint "farmer_id", null: false
     t.boolean "flash_sale", default: false
@@ -111,7 +119,25 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
+    t.string "name"
     t.index ["user_id"], name: "index_farmers_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "farmer_id", null: false
+    t.text "caption"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["farmer_id"], name: "index_posts_on_farmer_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -120,7 +146,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
     t.bigint "crate_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity"
     t.index ["crate_id"], name: "index_products_on_crate_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "content"
+    t.integer "rating"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "farmer_id", null: false
+    t.index ["farmer_id"], name: "index_reviews_on_farmer_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -143,10 +180,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_095726) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "crates", "farmers"
   add_foreign_key "event_attendances", "events"
   add_foreign_key "event_attendances", "farmers"
   add_foreign_key "events", "farmers"
   add_foreign_key "farmers", "users"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
+  add_foreign_key "posts", "farmers"
   add_foreign_key "products", "crates"
+  add_foreign_key "reviews", "farmers"
 end

@@ -1,44 +1,27 @@
-<%# <h1>Crates#index</h1>
 
-<%= link_to "View Your Active Crates", my_crates_path %>
+<h1>Crates By <%= @farmer.name %></h1>
+<p><%= @farmer.location%></p>
+<hr>
+<p>Find me in app/views/crates/index.html.erb</p>
+<hr>
+<%= link_to "<< All Crates", all_crates_path %>
+<%= link_to "Farmer Profile", farmer_path(@farmer) %>
 
-<%# <p>Find me in app/views/crates/index.html.erb</p> %> %>
+<hr>
+<hr>
 
-
-<!-- Search Form -->
-  <%= form_with url: crates_path, method: :get, class: "search-form" do %>
-    <%= text_field_tag :query, params[:query], placeholder: "Search for a crate or location...", class: "search-input" %>
-    <%= submit_tag "Search", class: "search-button" %>
+<!-- Display Crates -->
+<div class="crate-list">
+  <% @crates.each do |crate| %>
+    <div class="crate-card">
+      <h2><%= crate.name %></h2>
+      <p><%= crate.description %></p>
+      <p><strong>Price:</strong> £<%= crate.price %></p>
+      <% if crate.flash_sale %>
+        <p class="text-danger">🔥 Flash Sale!</p>
+      <% end %>
+    </div>
+    <hr>
   <% end %>
 
-<div class="map-and-crates">
-  <!-- Map Section -->
-    <%# <div class=map-div> %>
-    <div style="width: 80%; height: 1000px;"
-      data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-    </div>
-  <%# </div> %>
-
-  <!-- Display Crates -->
-    <div class="crate-main-listing-container">
-      <h4>Available Crates</h4>
-      <div class="crate-list">
-        <% @crates.each do |crate| %>
-          <div class="crate-card"
-              data-crate-id="<%= crate.id %>"
-              data-lat="<%= crate.latitude %>"
-              data-lng="<%= crate.longitude %>">
-            <h4><%= crate.name %></h4>
-            <% if crate.flash_sale %>
-              <p class="text-danger">🔥 Flash Sale!</p>
-            <% end %>
-            <p><%= crate.description %></p>
-            <p><strong>Price:</strong> £<%= crate.price %></p>
-            <p><strong>Location:</strong> <%= crate.current_location %></p>
-          </div>
-        <% end %>
-      </div>
-    </div>
 </div>
