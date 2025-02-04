@@ -55,7 +55,6 @@ class CratesController < ApplicationController
 
   def create_my_crate
     @crate = current_user.farmer.crates.build(crate_params)
-
     if @crate.save
       redirect_to my_crates_path, notice: "Crate successfully created."
     else

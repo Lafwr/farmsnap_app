@@ -1,28 +1,34 @@
 class PostsController < ApplicationController
   # before_action :authenticate_user!, only: [:new, :create, :like, :comment, :destroy]
-  # before_action :set_post, only: [:show, :like, :comment, :destroy]
+  before_action :set_post, only: [:show, :like, :comment, :destroy, :edit, :update]
   # before_action :ensure_farmer, only: [:new, :create, :destroy]
   # before_action :authorize_post_deletion, only: [:destroy]
 
-  def index
+  def all
+    @posts = Post.includes(:farmer, :likes, :comments).order(created_at: :desc).limit(16)
     # DESCENDING ORDER
-    @posts = Post.includes(:farmer, :likes, :comments).order(created_at: :desc)
-    .limit(16)
-    # ADD LIMIT TO IMPROVE LOADING?
+    # @posts = Post.includes(:farmer, :likes, :comments).order(created_at: :desc).limit(16)
+
     # Research .includes -- Supposed efficient manner of loading
   end
 
+  def index
+    @farmer = Farmer.find(params[:farmer_id])
+    @posts = Post.where(farmer: @farmer)
+  end
+
   def show
+
   end
 
   def new
     @post = current_user.farmer.posts.build
   end
 
-  def create
+  def create_my_post
     @post = current_user.farmer.posts.build(post_params)
     if @post.save
-      redirect_to post_path(@post), notice: "Post created successfully!"
+      redirect_to my_posts_path, notice: "Post created successfully!"
     else
       render :new
     end
@@ -34,7 +40,18 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path, notice: "Post deleted successfully!"
+    redirect_to my_posts_path, notice: "Post deleted successfully!"
+  end
+
+  def edit
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to farmer_post_path(@post.farmer, @post), notice: 'post was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def like
@@ -60,7 +77,8 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:caption, images: [])
+    # params.require(:post).permit(:caption, images: [])
+    params.require(:post).permit(:caption)
   end
 
   def set_post

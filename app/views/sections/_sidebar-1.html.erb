@@ -47,6 +47,11 @@
                 <i class="fa-solid fa-gear"></i> Settings
               <% end %>
           </li>
+          <li class="nav-item <%= 'active' if current_page?(my_posts_path) %>">
+              <%= link_to my_posts_path, class: "nav-link" do %>
+               <i class="fa-solid fa-newspaper"></i> Posts
+              <% end %>
+          </li>
       </ul>
   </div>
   <div class="bottom-section-sidebar">

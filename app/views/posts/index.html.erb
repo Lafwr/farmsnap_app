@@ -1,21 +1,22 @@
-<h1>Latest Farm Updates</h1>
+<h1>Posts By <%= @farmer.name %></h1>
+<p><%= @farmer.location%></p>
+<hr>
+<p>Find me in app/views/posts/index.html.erb</p>
+<hr>
+<%= link_to "<< All posts", all_posts_path %>
+<%= link_to "Farmer Profile", farmer_path(@farmer) %>
 
-<% @posts.each do |post| %>
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5><%= post.farmer.name %></h5>
+<hr>
+<hr>
+
+<!-- Display posts -->
+<div class="post-list">
+  <% @posts.each do |post| %>
+    <div class="post-card">
+
       <p><%= post.caption %></p>
-
-      <% if post.images.attached? %>
-        <% post.images.each do |image| %>
-          <%= image_tag image, class: "img-fluid", width: 300 %>
-        <% end %>
-      <% end %>
-
-      <p><strong>Likes:</strong> <%= post.likes.count %></p>
-
-      <%= button_to "Like", like_post_path(post), data: { turbo_method: :post }, class: "btn btn-primary" %>
-      <%= link_to "Comment", post_path(post), class: "btn btn-secondary" %>
     </div>
-  </div>
-<% end %>
+    <hr>
+  <% end %>
+
+</div>
