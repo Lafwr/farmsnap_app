@@ -153,7 +153,8 @@ farmers.each do |farmer|
       name: "#{crate_name}",
       description: "A selection of premium farm products from #{farmer.user.first_name}'s farm.",
       price: rand(5.00..50.00).round(2),
-      flash_sale: index < num_flash_sales
+      flash_sale: index < num_flash_sales,
+      event: farmer.events.shuffle.first
     )
 
     # ✅ Ensure crates get geocoded dynamically

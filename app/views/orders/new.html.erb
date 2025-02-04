@@ -1,18 +1,11 @@
 <h1>Order <%= @crate.name %></h1>
 <p>Price: $<%= @crate.price %></p>
-<p>Pickup Details: <%= @crate.event%></p>
+<p>Pickup Details: <em><%= @crate.event.location%></em></p>
 
-<%= form_with(model: @order, local: true) do |form| %>
+<%= simple_form_for [@crate, @order] do |f| %>
   <h2>Order Details</h2>
-  <div>
-    <%= form.label :name, "Full Name" %>
-    <%= form.text_field :name, required: true %>
-  </div>
-  <div>
-    <%= form.label :email, "Email Address" %>
-    <%= form.email_field :email, required: true %>
-  </div>
-
+  <%= f.input :name  %>
+  <%= f.input :email  %>
   <h2>Payment Details (Dummy)</h2>
   <div>
     <label for="cardholder_name">Cardholder Name</label>
@@ -35,5 +28,5 @@
     <input type="text" id="postcode" name="postcode" placeholder="12345" required />
   </div>
 
-  <%= form.submit "Confirm Purchase", class: "btn btn-success" %>
+  <%= f.submit "Confirm Purchase", class: "btn btn-success" %>
 <% end %>
