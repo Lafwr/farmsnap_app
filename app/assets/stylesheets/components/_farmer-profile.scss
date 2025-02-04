@@ -231,7 +231,7 @@ img{
 }
 
 // Carousel design
-.card {
+.carousel-card {
   width: 185px;
   height: 240px;
   border-radius: 15px;
@@ -382,5 +382,8 @@ button:active {
 
 .calendar-icon{
   color: #fafafa;
-  width: 40px;
+}
+
+.calendar-event-time{
+  color:#fafafa;
 }

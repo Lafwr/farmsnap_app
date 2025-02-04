@@ -189,6 +189,32 @@ farmers.each do |farmer|
     end
   end
 end
+
+
+
+
+
+reviews = [
+  { rating: 5, content: "Excellent service and top-quality produce!" },
+  { rating: 4, content: "Great experience, but delivery took a bit long." },
+  { rating: 3, content: "Average quality, expected better." },
+  { rating: 5, content: "Absolutely amazing! Fresh and organic products." },
+  { rating: 2, content: "Not satisfied. The vegetables were not fresh." },
+  { rating: 4, content: "Good quality, but a bit expensive." },
+  { rating: 1, content: "Poor service, would not recommend." },
+  { rating: 5, content: "Best farm produce I’ve ever had!" },
+  { rating: 3, content: "It was okay, nothing special." },
+  { rating: 4, content: "Fresh fruits, but the packaging needs improvement." }
+]
+
+farmer = Farmer.first # Pick any farmer
+users = User.pluck(:id) # Get all user IDs
+
+reviews.each do |review|
+  farmer.reviews.create!(review.merge(user_id: users.sample))
+end
+
+
 puts "Social posts, comments and likes loaded..."
 
 
