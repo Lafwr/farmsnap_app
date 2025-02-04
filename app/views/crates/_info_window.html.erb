@@ -27,7 +27,7 @@
     </div>
       </div>
 
-    <p><%= link_to "View Crates at This Event", crates_path(query: current_event.name), class: "btn btn-sm btn-primary" %></p>
+    <p><%= link_to "View Crates at This Event", all_crates_path(query: current_event.name), class: "btn btn-sm btn-primary" %></p>
   <% else %>
     <p><strong>No event currently assigned for this crate.</strong></p>
   <% end %>
