@@ -127,6 +127,7 @@ class CratesController < ApplicationController
       :price,
       :name,
       :description,
+      :event_id,
       products_attributes: [:id, :name, :quantity, :category, :_destroy])
   end
 end

@@ -23,7 +23,13 @@
     <%= f.label :flash_sale %>
     <%= f.check_box :flash_sale, class: "form-check-input" %>
   </div>
+
+   <div>
+    <%= form.label :pickup, "Pickup Location (Event)" %>
+    <%= form.collection_select :event_id, current_farmer.event_attendances.map(&:event), :id, :name, prompt: "Select an Event", class: "form-control" %>
+  </div>
   <hr>
+
   <h3>Products</h3>
   <div id="products-container">
     <!-- Ensure at least one product field is visible on page load -->

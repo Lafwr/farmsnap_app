@@ -2,7 +2,7 @@
 <h4>Supplier: <%= @crate.farmer.user.email.split('@').first  %></h4>
 <h4>Description: <%= @crate.description %></h4>
 <h4>Crate Price: £<%= @crate.price %></h4>
-
+<h4>Pickup Details: <%= @crate.pickup_details || "Not available" %></h4>
 <h4>Crate Contents:</h4>
 <% @products.each do |product| %>
   <ul>
@@ -12,6 +12,13 @@
     </li>
   </ul>
 <% end %>
+
+<% if @crate.current_event %>
+  <%= link_to "Buy Now", new_crate_order_path(@crate), class: "btn btn-primary" %>
+<% else %>
+  <p class="text-danger">This crate is not currently available for purchase.</p>
+<% end %>
+
 <hr>
 <% if current_user.farmer.id == @crate.farmer_id %>
     <ul>
