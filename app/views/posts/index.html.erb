@@ -1,4 +1,42 @@
 <h1>Latest Farm Updates</h1>
+<div id="feed-container" class="container d-flex flex-column align-items-center">
+  <% @posts.each do |post| %>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <!-- Post Card -->
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <!-- Avatar and User Info -->
+                <div class="col-2">
+                  <img src="https://placehold.co/90x90" alt="User Avatar" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-10">
+                  <div>
+                    <p class="m-0"><strong><%= post.farmer.user.first_name %> <%= post.farmer.user.last_name %></strong></p>
+                    <p class="m-0 text-muted">@<%= post.farmer.user.username %></p>
+                   </div>
+                   <p class="m-0 text-muted small"><%= post_timer( post.created_at ) %></p>
+                </div>
+              </div>
+              <hr>
+              <!-- Caption -->
+              <p class="card-text"><%= post.caption %></p>
+              <!-- Post Image -->
+              <img src="https://placehold.co/600x400" class="img-fluid" alt="Post Image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+
+
+
+</div>
+
 
 <% @posts.each do |post| %>
   <div class="card mb-3">
