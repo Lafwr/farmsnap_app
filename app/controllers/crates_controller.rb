@@ -1,4 +1,6 @@
 class CratesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [ :index, :show ] #Jesse
+
   before_action :set_farmer, only: [:new, :create]
   before_action :set_crate, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new_my_crate, :my_crates, :create_my_crate]

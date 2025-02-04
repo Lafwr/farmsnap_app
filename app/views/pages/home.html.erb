@@ -1,27 +1,53 @@
 <div class="banner">
-  <img src="<%= asset_path('fieldImage.jpg') %>" alt="Banner Image">
+  <img src="<%= asset_path('fieldImage.jpg')%> "alt="Banner Image">
   <div class="banner-content">
-    <h1>Earth to Panrty Direct</h1>
+    <h1>Earth to Pantry Direct</h1>
     <p> Discover Farmer's Markets and Fresh Deals Daily</p>
 
-<div class="search-container">
-  <%= form_with(url: search_path, method: :get, local: true, class: 'search-form') do |form| %>
-    <div class="search-input-group">
-      <!-- Dropdown menu for category selection -->
-      <%= form.select :category, options_for_select([["Events", "events"], ["Crates", "crates"]]), {}, class: "search-select" %>
-      <!-- Search input field -->
-      <%= form.text_field :query, placeholder: "Search location...", required: true, class: "search-input" %>
-      <!-- Search button with icon -->
-      <button type="submit" class="search-icon-button">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
+
+
+
+
+  <meta name="viewport" content="width=device-width, intial-scale=1">
+
+
+
+    <div class="search-container">
+      <%= form_with(url: search_path, method: :get, local: true, class: 'search-form') do |form| %>
+        <div class="search-input-group">
+          <!-- Dropdown menu for category selection -->
+          <%= form.select :category, options_for_select([["Events", "events"], ["Crates", "crates"]]), {}, class: "search-select" %>
+          <!-- Search input field -->
+          <%= form.text_field :query, placeholder: "Search location...", required: true, class: "search-input" %>
+          <!-- Search button with icon -->
+          <button type="submit" class="search-icon-button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-</div>
+
+
+
+
 
 
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <%# Categories Cards Template %>
 <div class="container categories-section">
