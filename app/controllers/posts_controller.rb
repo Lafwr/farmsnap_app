@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   # before_action :authenticate_user!, only: [:new, :create, :like, :comment, :destroy]
-  # before_action :set_post, only: [:show, :like, :comment, :destroy]
+  before_action :set_post, only: [:show, :like, :comment, :destroy]
   # before_action :ensure_farmer, only: [:new, :create, :destroy]
   # before_action :authorize_post_deletion, only: [:destroy]
 
@@ -18,6 +18,7 @@ class PostsController < ApplicationController
   end
 
   def show
+
   end
 
   def new
