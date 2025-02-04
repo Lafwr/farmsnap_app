@@ -1,0 +1,76 @@
+<h1>Updates</h1>
+<div id="feed-container" class="container d-flex flex-column align-items-center">
+  <% @posts.each do |post| %>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <!-- Post Card -->
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <!-- Avatar and User Info -->
+                <div class="col-2">
+                  <%= image_tag "farmer-dp.jpg", alt: "avatar", class: "img-fluid rounded-circle border border-3 border-success" %>
+
+                </div>
+                <div class="col-6">
+                  <div>
+                    <p class="m-0"><strong><%= post.farmer.user.first_name %> <%= post.farmer.user.last_name %></strong></p>
+                    <p class="m-0 text-muted">@<%= post.farmer.user.username %></p>
+                   </div>
+                   <p class="m-0 text-muted small"><%= post_timer( post.created_at ) %></p>
+                </div>
+                <div class="col-4 d-flex align-items-center justify-content-end">
+                  <div class="ml-2 d-flex  justify-content-end ">
+                        <button button class="btn btn-dark btn-sm">
+                            Follow
+                        </button>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- Caption -->
+              <p class="card-text"><%= post.caption %></p>
+              <!-- Post Image -->
+              <%= image_tag "warmFood.jpg", alt: "super warm soup", class: "img-fluid" %>
+              <div class="mt-2 d-flex align-items-center">
+                <button button class="btn btn-outline-secondary btn-sm">
+                  <i class="fa-regular fa-heart"></i> Like
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+<%# LIKES SOLUTION %>
+<%# <% @posts.each do |post| %>
+  <%# <div class="card mb-3"> %>
+    <%# <div class="card-body"> %>
+      <%# <h5> <%= post.farmer.user.username </h5>
+      <%# <p><%= post.caption </p>
+
+      <%# <% if post.images.attached? %>
+        <%# <% post.images.each do |image| %>
+          <%# <%= image_tag image, class: "img-fluid", width: 300 %>
+        <%# <% end %>
+      <%# <% end %>
+
+      <%# <p><strong>Likes:</strong> <%= post.likes.count </p> %>
+
+      <%# <%= button_to "Like", like_post_path(post), data: { turbo_method: :post }, class: "btn btn-primary" %>
+      <%# <%= link_to "Comment", post_path(post), class: "btn btn-secondary" %>
+    <%# </div> %>
+  <%# </div> %>
+<%# <% end %>

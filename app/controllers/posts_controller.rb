@@ -4,12 +4,17 @@ class PostsController < ApplicationController
   # before_action :ensure_farmer, only: [:new, :create, :destroy]
   # before_action :authorize_post_deletion, only: [:destroy]
 
-  def index
+  def all
     @posts = Post.includes(:farmer, :likes, :comments).order(created_at: :desc).limit(16)
     # DESCENDING ORDER
     # @posts = Post.includes(:farmer, :likes, :comments).order(created_at: :desc).limit(16)
 
     # Research .includes -- Supposed efficient manner of loading
+  end
+
+  def index
+    @farmer = Farmer.find(params[:farmer_id])
+    @posts = Post.where(farmer: @farmer)
   end
 
   def show

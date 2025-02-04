@@ -1,18 +1,26 @@
-<h1>Your Posts</h1>
-<%= link_to "<< All Posts", posts_path %>
-<%= link_to "+ New Post", new_post_path %>
+<div class="row">
+  <div class="col-8">
+      <h1>Your Posts</h1>
+      <%= link_to "<< All Posts", all_posts_path %>
+      <%= link_to "+ New Post", new_post_path %>
+      <hr>
 
-<% @posts.each do |post| %>
-  <div class="post-card">
-    <h3><%= post.caption %></h3>
-    <%# MUST ADD IMAGE UPLOAD FUNCTION %>
-    <%# <% if post.images.attached? %>
-      <%# <% post.images.each do |image| %>
-        <%# <%= image_tag image, class: "img-fluid", width: 300 %>
-      <%# <% end %>
-    <%# <% end %>
-    <%= link_to "Show", post_path(post) %>
-    <%# <%= link_to "Edit", edit_post_path(post) %>
-    <%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
+      <% @posts.each do |post| %>
+        <div class="post-card">
+          <h4><%= post.caption %></h4>
+          <%# MUST ADD IMAGE UPLOAD FUNCTION %>
+          <%# <% if post.images.attached? %>
+            <%# <% post.images.each do |image| %>
+              <%# <%= image_tag image, class: "img-fluid", width: 300 %>
+            <%# <% end %>
+          <%# <% end %>
+          <%= link_to "Show", post_path(post) %>
+          <%# <%= link_to "Edit", edit_post_path(post) %>
+          <%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
+        </div>
+        <hr>
+      <% end %>
   </div>
-<% end %>
+  <div class="col-4">
+  </div>
+</div>
