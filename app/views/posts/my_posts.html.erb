@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-8">
       <h1>Your Posts</h1>
-      <%= link_to "<< All Posts", all_posts_path %>
+      <h3><%= link_to "<< All Posts", all_posts_path %></h3>
       <%= link_to "+ New Post", new_post_path %>
       <hr>
 
@@ -14,9 +14,9 @@
               <%# <%= image_tag image, class: "img-fluid", width: 300 %>
             <%# <% end %>
           <%# <% end %>
-          <%= link_to "Show", farmer_post_path(post) %>
+          <%= link_to "Show", farmer_post_path(post.farmer, post) %>
           <%# <%= link_to "Edit", edit_post_path(post) %>
-          <%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
+          <%= link_to "Details", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
         </div>
         <hr>
       <% end %>

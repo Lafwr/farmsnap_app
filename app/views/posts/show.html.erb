@@ -1,2 +1,17 @@
-Farmer Post
-<%= @post.caption %>
+<h1>Farmer Post</h1>
+<hr>
+<%= link_to "All Posts", all_posts_path %>
+<hr>
+<h2><%= @post.caption %></h2>
+<h4>Posted at: <%= post_timer(@post.created_at) %></h4>
+<hr>
+<p>Like</p>
+<p>Comment</p>
+<% if current_user.farmer.id == @post.farmer_id %>
+    <ul>
+      <li><%= link_to "Edit Post", edit_farmer_post_path(@post.farmer, @post) %></li>
+      <li><%= link_to "Delete post", farmer_post_path(@post.farmer, @post), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></li>
+      <li><%= link_to "New post", new_post_path %></li>
+      <li><%= link_to "View all your posts", my_posts_path %></li>
+  </ul>
+<% end %>

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   # before_action :authenticate_user!, only: [:new, :create, :like, :comment, :destroy]
-  before_action :set_post, only: [:show, :like, :comment, :destroy]
+  before_action :set_post, only: [:show, :like, :comment, :destroy, :edit, :update]
   # before_action :ensure_farmer, only: [:new, :create, :destroy]
   # before_action :authorize_post_deletion, only: [:destroy]
 
@@ -40,7 +40,18 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path, notice: "Post deleted successfully!"
+    redirect_to my_posts_path, notice: "Post deleted successfully!"
+  end
+
+  def edit
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to farmer_post_path(@post.farmer, @post), notice: 'post was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def like
