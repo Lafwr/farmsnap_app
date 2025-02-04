@@ -2,14 +2,20 @@
 <p>Find me in app/views/events/index.html.erb</p>
 
 <%#search %>
-<div class="row justify-content-center">
-  <div class="col-sm-8 my-3">
-    <%= form_with url: events_path, method: :get, class: "d-flex" do %>
-      <%= text_field_tag :query, params[:query], class: "form-control me-2", placeholder: "Search events or locations" %>
-      <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
+<div class="search-container">
+      <%= form_with(url: search_path, method: :get, local: true, class: 'search-form') do |form| %>
+        <div class="search-input-group">
+          <!-- Dropdown menu for category selection -->
+          <%= form.select :category, options_for_select([["Events", "events"], ["Crates", "crates"]]), {}, class: "search-select" %>
+          <!-- Search input field -->
+          <%= form.text_field :query, placeholder: "Search location...", required: true, class: "search-input" %>
+          <!-- Search button with icon -->
+          <button type="submit" class="search-icon-button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      <% end %>
+    </div>
 
 <div style="width: 100%; height: 600px;"
   data-controller="map"
