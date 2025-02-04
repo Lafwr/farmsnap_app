@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_03_174900) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_04_132231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,11 +53,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_174900) do
     t.bigint "category_id", null: false
   end
 
-  create_table "categories_event_attendances", id: false, force: :cascade do |t|
-    t.bigint "event_attendance_id", null: false
-    t.bigint "category_id", null: false
-  end
-
   create_table "categories_events", id: false, force: :cascade do |t|
     t.bigint "event_id", null: false
     t.bigint "category_id", null: false
@@ -83,6 +78,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_174900) do
     t.string "description"
     t.float "latitude"
     t.float "longitude"
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_crates_on_event_id"
     t.index ["farmer_id"], name: "index_crates_on_farmer_id"
   end
 
@@ -130,6 +127,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_174900) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_orders_on_event_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -182,6 +188,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_174900) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "crates", "events"
   add_foreign_key "crates", "farmers"
   add_foreign_key "event_attendances", "events"
   add_foreign_key "event_attendances", "farmers"
@@ -189,6 +196,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_174900) do
   add_foreign_key "farmers", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "orders", "events"
   add_foreign_key "posts", "farmers"
   add_foreign_key "products", "crates"
   add_foreign_key "reviews", "farmers"

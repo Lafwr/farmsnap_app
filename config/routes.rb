@@ -34,6 +34,11 @@ Rails.application.routes.draw do
     resources :crates, only: [:index, :show, :edit, :update, :destroy]
      resources :posts, only: [:index], controller: 'farmers/posts'
   end
+
+  resources :crates, only: [:index, :show] do
+    resources :orders, only: [:new, :create]
+  end
+  get "order_confirmation/:id", to: "orders#confirmation", as: "order_confirmation"
   # Crates --------------------------
   # resources :crates
   get "/crates", to: "crates#all", as: "all_crates"
