@@ -14,11 +14,9 @@
           <p><strong>Rating: <%= @average_rating == 0 ? 0 : @average_rating %></strong></p>
         </div>
 
-        <% if current_user == @farmer %>
           <div class="profile-edit">
             <%= button_tag class: "edit-icon", data: { action: "click->toggle#toggle" } do %>
               <i class="fa-regular fa-pen-to-square"></i>
-            <% end %>
           </div>
 
 
@@ -88,6 +86,8 @@
               <%= date %>
                 <% event_attendances.each do |event_attendance| %>
                   <i class="fa-solid fa-carrot calendar-icon"></i>
+                 <div class="calendar-event-time"><%= event_attendance.start_time.strftime(("%H:%M")) %></div>
+                 <div class="calendar-event-time"><%= event_attendance.end_time.strftime(("%H:%M")) %></div>
                 <% end %>
             <% end %>
           </div>
@@ -103,7 +103,7 @@
           <div class="carousel-item <%= "active" if index == 0%>">
           <div class="row justify-content-center">
             <% crates.each do |crate| %>
-              <div class="card">
+              <div class="carousel-card">
                 <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
                 </div>
                 <div class="card-div">
