@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # FARMERS, CRATES AND POSTS --------------
   resources :farmers, exlude: [:destroy] do
     resources :crates, only: [:index, :show, :edit, :update, :destroy]
-     resources :posts, only: [:index], controller: 'farmers/posts'
+    resources :posts, only: [:index], controller: 'farmers/posts'
   end
   # Crates --------------------------
   # resources :crates
@@ -61,6 +61,7 @@ Rails.application.routes.draw do
 
   get 'my-posts', to: 'posts#my_posts', as: 'my_posts'
   get 'my-posts/new', to: 'posts#new', as: 'new_post'
+  post "my-posts", to: "posts#create_my_post", as: "create_my_post"
 
 
 

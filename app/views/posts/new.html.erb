@@ -1,16 +1,16 @@
 <h1>New Post</h1>
 <h1>Create a New Post</h1>
 
-<%= form_with model: @post, url: posts_path, local: true do |form| %>
+<%= form_with model: @post, url: create_my_post_path, local: true do |form| %>
   <div class="form-group">
     <%= form.label :caption, "Post Caption" %>
     <%= form.text_area :caption, class: "form-control", rows: 5 %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :images, "Upload Images" %>
-    <%= form.file_field :images, multiple: true, class: "form-control" %>
-  </div>
+  <%# <div class="form-group"> %>
+    <%# <%= form.label :images, "Upload Images" %>
+    <%# <%= form.file_field :images, multiple: true, class: "form-control" %>
+  <%# </div> %>
 
   <div class="form-group">
     <%= form.submit "Create Post", class: "btn btn-primary" %>
