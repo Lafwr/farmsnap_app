@@ -1,6 +1,5 @@
 <div class="search-container">
       <%= form_with(url: search_path, method: :get, local: true, class: 'search-form') do |form| %>
-      <%# Keep this - Jesse %>
         <div class="search-input-group">
           <!-- Dropdown menu for category selection -->
           <%= form.select :category, options_for_select([["Events", "events"], ["Crates", "crates"]]), {}, class: "search-select" %>
@@ -14,26 +13,30 @@
       <% end %>
     </div>
 
-<div style="width: 100%; height: 600px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-</div>
+<div class="map-and-crates">
+  <!-- Map Section -->
+    <%# <div class=map-div> %>
+    <div style="width: 80%; height: 1000px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
+  <%# </div> %>
 
-<div class="row">
-  <% @events.each do |event| %>
-    <div class="col-md-4 mb-4">
-      <div class="card shadow-sm">
+   <!-- Scrollable Events Container -->
+  <div class="main-listing-container">
+    <h4>Upcoming Events</h4>
+    <div class="event-list">
+      <% @events.each do |event| %>
+        <div class="card shadow-sm">
         <div class="card-body">
-          <h5 class="card-title"><%= event.name %></h5>
-          <p class="card-text">
-            📍 <strong>Location:</strong> <%= event.location %><br>
-            🕒 <strong>Hours:</strong> <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %><br>
-            🏷 <strong>Categories:</strong> <%= event.categories.map(&:name).join(", ") %>
-          </p>
+          <h5><%= event.name %></h5>
+          <p>📍 <strong>Location:</strong> <%= event.location %></p>
+          <p>🕒 <strong>Hours:</strong> <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %></p>
+          <p>🏷 <strong>Categories:</strong> <%= event.categories.map(&:name).join(", ") %></p>
           <%= link_to "View Event", event_path(event), class: "btn btn-primary" %>
         </div>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>

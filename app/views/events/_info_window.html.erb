@@ -1,2 +1,6 @@
-<h3><%= event.name %></h3>
-<p><%= event.location %></p>
+<div class="info-window">
+  <h5><%= event.name %></h5>
+  <p><strong>Location:</strong> <%= event.location %></p>
+  <p><strong>Time:</strong> <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %></p>
+  <%= link_to "View Event", event_path(event), class: "btn btn-primary btn-sm" %>
+</div>
