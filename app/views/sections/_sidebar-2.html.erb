@@ -48,7 +48,15 @@
 
       </ul>
   </div>
+
   <div class="bottom-section-sidebar">
+    <ul class="nav flex-column">
+              <li class="nav-item <%= 'active' if current_page?(new_farmer_path) %>">
+              <%= link_to new_farmer_path, class: "nav-link" do %>
+                <i class="fa-solid fa-seedling"></i> Create A Farmer Profile
+              <% end %>
+          </li>
+    </ul>
     <hr>
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
