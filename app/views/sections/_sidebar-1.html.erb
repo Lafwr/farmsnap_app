@@ -22,9 +22,24 @@
                 <i class="fa-solid fa-earth-europe"></i> Events
               <% end %>
           </li>
+         <li class="nav-item <%= 'active' if current_page?(farmers_path) %>">
+              <%= link_to farmers_path, class: "nav-link" do %>
+                <i class="fa-solid fa-people-roof"></i> Farmers
+              <% end %>
+          </li>
           <li class="nav-item <%= 'active' if current_page?(my_events_path) %>">
               <%= link_to my_events_path, class: "nav-link" do %>
                 <i class="fa-solid fa-calendar-days"></i> Events Schedule
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(my_posts_path) %>">
+              <%= link_to my_posts_path, class: "nav-link" do %>
+               <i class="fa-solid fa-newspaper"></i> Posts
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(profile_path) %>">
+              <%= link_to profile_path, class: "nav-link" do %>
+                <i class="fas fa-user me-2"></i> Profile
               <% end %>
           </li>
           <li class="nav-item <%= 'active' if current_page?(dashboard_path) %>">
@@ -37,21 +52,6 @@
                 <i class="fa-solid fa-chart-line"></i> Analytics
               <% end %>
           </li>
-          <li class="nav-item <%= 'active' if current_page?(profile_path) %>">
-              <%= link_to profile_path, class: "nav-link" do %>
-                <i class="fas fa-user me-2"></i> Profile
-              <% end %>
-          </li>
-          <li class="nav-item <%= 'active' if current_page?(settings_path) %>">
-              <%= link_to settings_path, class: "nav-link" do %>
-                <i class="fa-solid fa-gear"></i> Settings
-              <% end %>
-          </li>
-          <li class="nav-item <%= 'active' if current_page?(my_posts_path) %>">
-              <%= link_to my_posts_path, class: "nav-link" do %>
-               <i class="fa-solid fa-newspaper"></i> Posts
-              <% end %>
-          </li>
       </ul>
   </div>
   <div class="bottom-section-sidebar">
@@ -62,9 +62,10 @@
         <strong><%= current_user.email.split('@').first %></strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+            <i class="fa-solid fa-gear"></i>  Settings
+              <% end %>
+        </li>
         <li><hr class="dropdown-divider"></li>
         <li><%= link_to "Sign out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item"  %></li>
       </ul>
