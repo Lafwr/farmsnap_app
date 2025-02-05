@@ -22,28 +22,38 @@
 
 
   <div class="container-event-overview">
-    <div class="card mb-3">
-      <img src="https://media.houseandgarden.co.uk/photos/63e11c8cb4cfdd5e8b831271/master/w_1600%2Cc_limit/B6M37H.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
+  <div class="event-details">
+    <img src="https://media.houseandgarden.co.uk/photos/63e11c8cb4cfdd5e8b831271/master/w_1600%2Cc_limit/B6M37H.jpg"
+         class="event-show-image" alt="Market Image">
+      <div class="event-info">
+        <h1><%= @event.name %></h1>
         <h5 class="card-title">Borough Market</h5>
         <p><%= @event.location %></p>
         <p><%= @event.start_time.strftime("%B %d, %Y %H:%M") %> - <%= @event.end_time.strftime("%B %d, %Y %H:%M") %></p>
         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-  </div>
-<h2>Farmers Attending:</h2>
-  <ul>
-    <% @event.event_attendances.each do |attendance| %>
-    <div class="card-category">
-      <div class="card" style="background-image: url('<%= attendance.farmer.user.avatar %>');">
-        <div class="card-content">
-          <p class="farmer-email"><%= attendance.farmer.user.email %></p>
-          <p class="attendance-time">
-            Attending from <%= attendance.start_time.strftime("%H:%M") %> to <%= attendance.end_time.strftime("%H:%M") %>
-          </p>
+
+        <!-- Add a separate div for the map -->
+        <div class="mini-map-container">
+          <div id="mini-map"
+            data-controller="map"
+            data-map-markers-value="<%= @markers.to_json %>"
+            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+          </div>
         </div>
       </div>
-    <% end %>
-  </ul>
+
+  </div>
 </div>
+
+<h2>Farmers Attending:</h2>
+<ul class="farmers-attendance-list">
+  <% @event.event_attendances.each do |attendance| %>
+    <li class="farmer-attendance-item">
+      <img src="<%= attendance.farmer.user.avatar %>" alt="Farmer Avatar" class="farmer-avatar">
+      <span class="farmer-name"><%= attendance.farmer.user.email %></span>
+      <span class="attendance-time">
+        (<%= attendance.start_time.strftime("%H:%M") %> - <%= attendance.end_time.strftime("%H:%M") %>)
+      </span>
+    </li>
+  <% end %>
+</ul>
