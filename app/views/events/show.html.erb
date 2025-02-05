@@ -2,15 +2,13 @@
 
 <div class="attendance-form">
   <% if user_signed_in? && current_user.farmer? && !@event.event_attendances.find_by(farmer: current_user.farmer) %>
-    <%= form_with model: [@event, EventAttendance.new] do |f| %>
+    <%= simple_form_for [@event, EventAttendance.new] do |f| %>
       <div class="form-row">
-        <div class="form-group">
-          <label for="start_time">Start Time:</label>
-          <%= f.time_select :start_time, include_seconds: false, class: "form-control" %>
+          <div class="form-group">
+          <%= f.input :start_time, include_seconds: false, class: "form-control" %>
         </div>
         <div class="form-group">
-          <label for="end_time">End Time:</label>
-          <%= f.time_select :end_time, include_seconds: false, class: "form-control" %>
+          <%= f.input :end_time, include_seconds: false, class: "form-control" %>
         </div>
       </div>
       <%= f.submit "Confirm Attendance", class: "btn btn-primary" %>
