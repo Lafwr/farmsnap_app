@@ -8,8 +8,11 @@ class FarmersController < ApplicationController
 
   def show
     @farmer = Farmer.find(params[:id])
+    @review = Review.new
+    @reviews = @farmer.reviews
     @upcoming_events = @farmer.event_attendances.where("event_attendances.start_time >= ?", Time.now).order('event_attendances.start_time ASC').includes(:event).map(&:event)
     @attended_events = @farmer.events
+    @average_rating = farmer_ratings
   end
 
   def new
@@ -42,8 +45,7 @@ class FarmersController < ApplicationController
 
   def myprofile
     @farmer = current_user.farmer || Farmer.new
-    @review = Review.new
-
+    @reviews = @farmer.reviews
     start_date = params.fetch(:start_date, Date.today).to_date
 
     # For a monthly view:
@@ -51,17 +53,15 @@ class FarmersController < ApplicationController
   end
 
   def farmer_ratings
-    @farmer= Farmer.find(params[:id])
+    @farmer = Farmer.find(params[:id])
     @average_rating = @farmer.reviews.exists? ? @farmer.reviews.average(:rating).to_f.round(1) : 0
-    @average_rating = @farmer.average_rating
   end
 
   private
 
   def farmer_params
-    params.require(:farmer).permit(:bio, :location, :photo,)
+    params.require(:farmer).permit(:bio, :location, :photo)
   end
-
 
   def ensure_not_farmer
     # redirect_to root_path, alert: "You already have a farmer profile."

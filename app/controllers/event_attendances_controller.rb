@@ -7,7 +7,6 @@ class EventAttendancesController < ApplicationController
     @attendance = EventAttendance.new(event_attendance_params)
     @attendance.farmer = current_user.farmer
     @attendance.event = @event
-
     if @attendance.save
       redirect_to farmer_path(current_user.farmer), notice: "Great! You have marked your attendance for this event"
     else
@@ -47,6 +46,6 @@ class EventAttendancesController < ApplicationController
   end
 
   def event_attendance_params
-    params.require(:event_attendance).permit(:start_time, :end_time, category_ids: [])
+    params.require(:event_attendance).permit(:start_time, :end_time, :month, :day, category_ids: [])
   end
 end

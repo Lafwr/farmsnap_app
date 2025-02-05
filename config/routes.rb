@@ -70,13 +70,13 @@ Rails.application.routes.draw do
 
 
   resources :events do
-    resources :event_attendances, only: [:create, :destroy]
+    resources :event_attendances, only: [:create]
     collection do
       get "category/:category_name", to: "events#by_category", as: "by_category"
     end
   end
 
-  resources :event_attendances do
+  resources :event_attendances, only: [:destroy] do
     collection do
       get "category/:category_name", to: "event_attendances#by_category", as: "by_category"
     end
