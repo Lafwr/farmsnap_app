@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, except: [:new]
+
   def new
     @crate = Crate.find(params[:crate_id])
     if @crate.event.nil?
