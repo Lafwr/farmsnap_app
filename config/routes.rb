@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get "my-crates", to: "crates#my_crates", as: "my_crates"
   get "my-crates/new", to: "crates#new_my_crate", as: "new_my_crate"
   post "my-crates", to: "crates#create_my_crate", as: "create_my_crate"
+  get "super-sales", to: "crates#super_sales", as: "super_sales"
 
   # Crate Creation and Update Farmer Only
   # get "my-crates", to: "crates#my_crates", as: "my_crates"
@@ -68,13 +69,13 @@ Rails.application.routes.draw do
 
 
   resources :events do
-    resources :event_attendances, only: [:create, :destroy]
+    resources :event_attendances, only: [:create]
     collection do
       get "category/:category_name", to: "events#by_category", as: "by_category"
     end
   end
 
-  resources :event_attendances do
+  resources :event_attendances, only: [:destroy] do
     collection do
       get "category/:category_name", to: "event_attendances#by_category", as: "by_category"
     end
