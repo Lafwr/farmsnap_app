@@ -36,6 +36,10 @@ class CratesController < ApplicationController
     end
   end
 
+  def super_sales
+    @crates = Crate.where(flash_sale: true)
+  end
+
   def my_crates
     if current_user.farmer
       @my_crates = current_user.farmer.crates

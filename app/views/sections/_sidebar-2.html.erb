@@ -17,13 +17,6 @@
                 <i class="fa-solid fa-box-open"></i> Crates
               <% end %>
           </li>
-          <li class="nav-item <%= 'active' if current_page?(all_crates_path) %>">
-              <%= link_to all_crates_path, class: "nav-link d-flex align-items-center" do %>
-                <i class="fa-solid fa-percent"></i>
-                <span class="ms-1">Live Super Sales</span>
-                <span class="badge bg-success ms-2 rounded-pill"><%= @super_sales_count %>1</span>
-              <% end %>
-          </li>
           <li class="nav-item <%= 'active' if current_page?(events_path) %>">
               <%= link_to events_path, class: "nav-link" do %>
                 <i class="fa-solid fa-earth-europe"></i> Events
@@ -37,6 +30,13 @@
           <li class="nav-item <%= 'active' if current_page?(all_posts_path) %>">
               <%= link_to all_posts_path, class: "nav-link" do %>
                <i class="fa-solid fa-newspaper"></i> News & Updates
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(super_sales_path) %>">
+              <%= link_to super_sales_path, class: "nav-link d-flex align-items-center" do %>
+                <i class="fa-solid fa-percent"></i>
+                <span class="ms-1">Live Super Sales</span>
+                <span class="badge bg-success ms-2 rounded-pill"><%= @super_sales_count %>1</span>
               <% end %>
           </li>
           <li class="nav-item <%= 'active' if current_page?(dashboard_path) %>">

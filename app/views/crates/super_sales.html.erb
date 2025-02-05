@@ -1,0 +1,10 @@
+<h1>Super Sales</h1>
+<hr>
+<% @crates.each do |crate| %>
+  <hr>
+  <h2>
+    <%= link_to crate.name, farmer_crate_path(crate.farmer_id, crate), class: "text-decoration-none text-dark" %>
+  </h2>
+  <p><%= crate.description %></p>
+  <p><strong>Price:</strong> <%= crate.price %></p>
+<% end %>

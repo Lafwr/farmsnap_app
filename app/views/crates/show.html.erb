@@ -13,7 +13,7 @@
   </ul>
 <% end %>
 <hr>
-<% if current_user.farmer.id == @crate.farmer_id %>
+<% if current_user.role == "farmer" && current_user.farmer.id == @crate.farmer_id %>
     <ul>
       <li><%= link_to "Edit Crate", edit_farmer_crate_path(@crate.farmer, @crate) %></li>
       <li><%= link_to "Delete Crate", farmer_crate_path(@crate.farmer, @crate), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></li>
