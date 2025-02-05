@@ -1,5 +1,10 @@
-<h1>Updates</h1>
-<%= link_to "My Posts", my_posts_path %>
+<h1>News & Updates</h1>
+<% if current_user.role == "farmer" %>
+  <%= link_to "My Posts", my_posts_path %>
+  <% else %>
+  <%# <%= link_to "Favourite Farmers", my_favourites_posts_path %>
+  <%# ADD ONCE FAVOURITES FUNCTION IS LIVE %>
+<% end %>
 <div id="feed-container" class="container d-flex flex-column align-items-center">
   <% @posts.each do |post| %>
     <div class="container mt-5">
