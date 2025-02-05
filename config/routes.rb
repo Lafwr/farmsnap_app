@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
-  get 'products/index'
-  get 'products/new'
-  get 'products/show'
+  # get 'products/index'
+  # get 'products/new'
+  # get 'products/show'
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   # EVENTS--------------------------
-  get 'events/index'
-  get 'events/show'
-  get 'events/edit'
-  get 'events/update'
-  get 'events/new'
-  get 'events/create'
-  get 'events/destroy'
+  # get 'events/index'
+  # get 'events/show'
+  # get 'events/edit'
+  # get 'events/update'
+  # get 'events/new'
+  # get 'events/create'
+  # get 'events/destroy'
 
   get "my-events", to: "events#my_events", as: "my_events"
   get "my-events/new", to: "events#new_my_event", as: "new_my_event"
@@ -33,9 +33,11 @@ Rails.application.routes.draw do
   resources :farmers, exlude: [:destroy] do
     resources :crates, only: [:index, :show, :edit, :update, :destroy]
     resources :posts, only: [:index, :show, :edit, :update, :destroy ]
+    resources :reviews, only: [:new, :create]
   end
 
-  resources :crates, only: [:index, :show] do
+  # This version removed the index etc in the array to make searches work
+  resources :crates, only: [] do
     resources :orders, only: [:new, :create]
   end
   get "order_confirmation/:id", to: "orders#confirmation", as: "order_confirmation"
@@ -51,11 +53,6 @@ Rails.application.routes.draw do
   # get "my-crates/new", to: "crates#new", as: "new_crate"
   # get "my-crates/edit", to: "crates#new", as: "edit_crate"
    get "my-profile", to: "farmers#myprofile", as: "profile"
-
-  resources :farmers do
-    resources :reviews, only: [:new, :create]
-  end
-
 
 
   # POSTS, LIKES AND COMMENTS

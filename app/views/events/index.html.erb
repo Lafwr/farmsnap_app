@@ -1,5 +1,6 @@
 <div class="search-container">
       <%= form_with(url: search_path, method: :get, local: true, class: 'search-form') do |form| %>
+      <%# Keep this - Jesse %>
         <div class="search-input-group">
           <!-- Dropdown menu for category selection -->
           <%= form.select :category, options_for_select([["Events", "events"], ["Crates", "crates"]]), {}, class: "search-select" %>
