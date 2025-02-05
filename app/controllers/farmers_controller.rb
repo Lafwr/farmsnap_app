@@ -20,7 +20,7 @@ class FarmersController < ApplicationController
     @farmer = Farmer.new(farmer_params)
     @farmer.user = current_user
     if @farmer.save
-      current_user.role = "farmer"
+      current_user.update(role: "farmer")
       redirect_to profile_path, notice: "Welcome Your Farmer Profile Has Been Created."
     else
       render :new, status: unprocessable_entity, alert: "ERROR: Farmer Profile Not Created"

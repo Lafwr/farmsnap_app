@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get "my-crates", to: "crates#my_crates", as: "my_crates"
   get "my-crates/new", to: "crates#new_my_crate", as: "new_my_crate"
   post "my-crates", to: "crates#create_my_crate", as: "create_my_crate"
+  get "super-sales", to: "crates#super_sales", as: "super_sales"
 
   # Crate Creation and Update Farmer Only
   # get "my-crates", to: "crates#my_crates", as: "my_crates"
