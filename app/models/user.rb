@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   # LIKES AND COMMENTS FOR POSTS
   has_many :likes, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  # has_many :comments, dependent: :destroy
 
   # Role helper methods
   def customer?
