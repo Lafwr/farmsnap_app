@@ -1,5 +1,25 @@
 <h1>Farmer Post</h1>
 <hr>
+<% if user_signed_in? %>
+  <% if @post.likes.exists?(user: current_user) %>
+    <!-- Unlike Button (Solid Heart) -->
+    <%= button_to farmer_post_like_path(@post.farmer, @post, @post.likes.find_by(user: current_user)),
+          method: :delete, class: "btn btn-link text-danger p-0 border-0" do %>
+      <i class="fa-solid fa-heart fa-2x"></i>
+    <% end %>
+  <% else %>
+    <!-- Like Button (Regular Heart) -->
+    <%= button_to farmer_post_likes_path(@post.farmer, @post),
+          method: :post, class: "btn btn-link text-dark p-0 border-0" do %>
+      <i class="fa-regular fa-heart fa-2x"></i>
+    <% end %>
+  <% end %>
+<% end %>
+
+<p><strong>Likes:</strong> <%= @post.likes.count %></p>
+
+
+<hr>
 <%= link_to "All Posts", all_posts_path %>
 <hr>
 <h2><%= @post.caption %></h2>

@@ -25,8 +25,8 @@
   </div>
 
    <div>
-    <%= form.label :pickup, "Pickup Location (Event)" %>
-    <%= form.collection_select :event_id, current_farmer.event_attendances.map(&:event), :id, :name, prompt: "Select an Event", class: "form-control" %>
+    <%= f.label :pickup, "Pickup Location (Event)" %>
+    <%= f.collection_select :event_id, current_user.farmer.event_attendances.map(&:event), :id, :name, prompt: "Select an Event", class: "form-control" %>
   </div>
   <hr>
 

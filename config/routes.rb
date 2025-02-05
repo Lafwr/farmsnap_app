@@ -30,9 +30,11 @@ Rails.application.routes.draw do
   get '/search', to: 'searches#search', as: :search
 
   # FARMERS, CRATES AND POSTS --------------
-  resources :farmers, exlude: [:destroy] do
+  resources :farmers, exclude: [:destroy] do
     resources :crates, only: [:index, :show, :edit, :update, :destroy]
-    resources :posts, only: [:index, :show, :edit, :update, :destroy ]
+    resources :posts, only: [:index, :show, :edit, :update, :destroy ] do
+      resources :likes, only: [:create, :destroy]
+    end
     resources :reviews, only: [:new, :create]
   end
 
@@ -49,18 +51,10 @@ Rails.application.routes.draw do
   post "my-crates", to: "crates#create_my_crate", as: "create_my_crate"
   get "super-sales", to: "crates#super_sales", as: "super_sales"
 
-  # Crate Creation and Update Farmer Only
-  # get "my-crates", to: "crates#my_crates", as: "my_crates"
-  # get "my-crates/new", to: "crates#new", as: "new_crate"
-  # get "my-crates/edit", to: "crates#new", as: "edit_crate"
    get "my-profile", to: "farmers#myprofile", as: "profile"
 
 
   # POSTS, LIKES AND COMMENTS
-  resources :posts, only: [:show, :destroy] do
-    post "like", on: :member
-    post "comment", on: :member
-  end
   get "/posts", to: "posts#all", as: "all_posts"
   get 'my-posts', to: 'posts#my_posts', as: 'my_posts'
   get 'my-posts/new', to: 'posts#new', as: 'new_post'
@@ -80,9 +74,4 @@ Rails.application.routes.draw do
       get "category/:category_name", to: "event_attendances#by_category", as: "by_category"
     end
   end
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
-
-# URLS
-# Events/

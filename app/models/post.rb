@@ -7,4 +7,5 @@ class Post < ApplicationRecord
   # MULTIPLE OPTIONAL IMAGE ATTACHMENTS
 
   validates :caption, presence: true
+
 end

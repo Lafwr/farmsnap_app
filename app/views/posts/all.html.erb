@@ -1,10 +1,16 @@
-<h1>News & Updates</h1>
-<% if current_user.role == "farmer" %>
+
+<div class="container">
+  <h1>News & Updates</h1>
+  <hr>
+  <hr>
+  <% if current_user.role == "farmer" %>
   <%= link_to "My Posts", my_posts_path %>
   <% else %>
   <%# <%= link_to "Favourite Farmers", my_favourites_posts_path %>
   <%# ADD ONCE FAVOURITES FUNCTION IS LIVE %>
 <% end %>
+</div>
+
 <div id="feed-container" class="container d-flex flex-column align-items-center">
   <% @posts.each do |post| %>
     <div class="container mt-5">
@@ -39,10 +45,24 @@
               <p class="card-text"><%= post.caption %></p>
               <!-- Post Image -->
               <%= image_tag "warmFood.jpg", alt: "super warm soup", class: "img-fluid" %>
+
               <div class="mt-2 d-flex align-items-center">
-                <button button class="btn btn-outline-secondary btn-sm">
-                  <i class="fa-regular fa-heart"></i> Like
-                </button>
+                    <% if user_signed_in? %>
+                      <% if post.likes.exists?(user: current_user) %>
+                        <!-- Unlike Button (Solid Heart) -->
+                        <%= button_to farmer_post_like_path(post.farmer, post, post.likes.find_by(user: current_user)),
+                              method: :delete, class: "btn btn-link text-danger p-0 border-0" do %>
+                          <i class="fa-solid fa-heart fa-2x"></i>
+                        <% end %>
+                      <% else %>
+                        <!-- Like Button (Regular Heart) -->
+                        <%= button_to farmer_post_likes_path(post.farmer, post),
+                              method: :post, class: "btn btn-link text-dark p-0 border-0" do %>
+                          <i class="fa-regular fa-heart fa-2x"></i>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                    <p class="mb-0 ms-2 d-flex align-items-center"><strong>Likes: &nbsp;</strong><%= post.likes.count %></p>
               </div>
             </div>
           </div>
@@ -54,6 +74,9 @@
 
 
 
+          <%# <div class="mt-2 d-flex align-items-center"> %>
+                  <%# <%= button_to "Like", post_like_index_path(post_id: post.id), method: :post, class: "btn btn-outline-secondary btn-sm" %>
+            <%# </div> %>
 
 
 
