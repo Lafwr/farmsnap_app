@@ -121,82 +121,9 @@ img{
 
 
 
-// }
-
-// .simple-calendar {
-//   background: #ffffff;
-//   border: none !important; /* Force removal of borders */
-//   border-radius: 5px; /* Curved border */
-//   width: 100%; /* Make it wider */
-//   max-width: 800px; /* Prevent excessive stretching */
-//   margin: auto;
-// }
-
-// /* Header styling (e.g., Mon, Tue, Wed) */
-// .simple-calendar .header {
-//   background: transparent !important; /* Remove any background */
-//   color: #4caf50 !important; /* Green text for a clean look */
-//   font-size: 1rem;
-//   font-weight: bold;
-//   text-align: center;
-//   border: none; /* Remove any default border */
-//   padding: 10px 0;
-// }
-
-// .simple-calendar .header .day-name {
-//   color: #4caf50 !important; /* Force color for day names */
-//   margin: 0;
-//   padding: 5px;
-//   font-weight: 600;
-// }
-
-// /* Make days into circles */
-// .simple-calendar .day {
-//   overflow: hidden !important;
-//   background: #ffffff !important;
-//   color: #000000;
-//   border: none !important;
-//   width: 44px !important;
-//   height: 44px !important;
-//   line-height: 44px !important;
-//   text-align: center;
-//   border-radius: 50% !important;
-//   margin: 5px auto;
-//   box-shadow: none;
-// }
-
-// /* Highlight the current day */
-// .simple-calendar .day.today {
-//   background: #4caf50 !important; /* Green for current day */
-//   color: white !important;
-//   font-weight: bold;
-//   border-radius: 50%;
-// }
-
-// /* Add hover effect for day circles */
-// .simple-calendar .day:hover {
-//   background: #e0e0e0 !important; /* Light grey hover effect */
-//   cursor: pointer;
-// }
-
-// /* Remove any row/column borders */
-// .simple-calendar .row, .simple-calendar .col {
-//   border: none !important;
-//   background: transparent !important;
-// }
-
-
-// .table-container{
-//   width: 723.3px;
-//   border: none;
-
-//   #table-border{
-//     border: none;
-//     border-style: none;
-//   }
-// }
-
-// Calender code
+.profile-calendar{
+  text-decoration: none !important;
+}
 
 
 .card-category {

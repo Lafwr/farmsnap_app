@@ -9,8 +9,8 @@
   <ul>
     <% @my_events.each do |event| %>
       <li><h4><%= event.name %></h4></li>
-      <%= link_to "Details", farmer_event_path(event.farmer, event) %>
-      <%= link_to "Edit", edit_farmer_event_path(event.farmer, event) %>
+      <%= link_to "Details", event_path(event.farmer, event) %>
+      <%= link_to "Edit", edit_event_path(event.farmer, event) %>
       <hr>
     <% end %>
   </ul>

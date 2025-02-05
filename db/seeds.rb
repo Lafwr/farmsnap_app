@@ -1,3 +1,5 @@
+require "open-uri"
+
 puts "Seeding database..."
 
 # Destroy existing records in the correct order
@@ -31,7 +33,7 @@ end
 # Step 2: Create Farmers
 farmers = []
 farmers_data = [
-  { name: "Ali Khan", location: "Hertfordshire, UK" },
+  { name: "Ali Khan", location: "Hertfordshire, UK", url: "https://randomuser.me/api/portraits/men/48.jpg" },
   { name: "Emma Davis", location: "Surrey, UK" },
   { name: "Liam Johnson", location: "Kent, UK" },
   { name: "Sophia Wilson", location: "Essex, UK" },
@@ -44,12 +46,15 @@ farmers_data = [
 ]
 
 farmers_data.each_with_index do |farmer, index|
-  farmer_record = Farmer.create!(
+  farmer_record = Farmer.new(
     user: users[index],
     name: farmer[:name], # Oskar ADDED
     bio: "#{farmer[:name]} is a skilled farmer.",
     location: farmer[:location]
   )
+  file = URI.parse(farmer[:url]).open
+  farmer_record.photo.attach(io: file, filename: "profile-pic", content_type: "image/jpg")
+  farmer_record.save!
   farmers << farmer_record
 end
 

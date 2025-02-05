@@ -8,9 +8,9 @@ class EventAttendancesController < ApplicationController
     @attendance.farmer = current_user.farmer
     @attendance.event = @event
     if @attendance.save
-      redirect_to farmer_path(current_user.farmer), notice: "Great! You have marked your attendance for this event"
+      redirect_to profile_path, notice: "Great! You have marked your attendance for this event"
     else
-      redirect_to farmer_path(current_user.farmer), alert: @attendance.errors.full_messages.join(", ")
+      redirect_to event_path(@event), alert: @attendance.errors.full_messages.join(", ")
     end
   end
 
