@@ -12,9 +12,16 @@
                 <i class="fa-solid fa-house"></i> Home
               <% end %>
           </li>
-          <li class="nav-item <%= 'active' if current_page?(my_crates_path) %>">
-              <%= link_to my_crates_path, class: "nav-link" do %>
+          <li class="nav-item <%= 'active' if current_page?(all_crates_path) %>">
+              <%= link_to all_crates_path, class: "nav-link" do %>
                 <i class="fa-solid fa-box-open"></i> Crates
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(all_crates_path) %>">
+              <%= link_to all_crates_path, class: "nav-link d-flex align-items-center" do %>
+                <i class="fa-solid fa-percent"></i>
+                <span class="ms-1">Live Super Sales</span>
+                <span class="badge bg-success ms-2 rounded-pill"><%= @super_sales_count %>1</span>
               <% end %>
           </li>
           <li class="nav-item <%= 'active' if current_page?(events_path) %>">
@@ -22,17 +29,23 @@
                 <i class="fa-solid fa-earth-europe"></i> Events
               <% end %>
           </li>
+          <li class="nav-item <%= 'active' if current_page?(farmers_path) %>">
+              <%= link_to farmers_path, class: "nav-link" do %>
+                <i class="fa-solid fa-people-roof"></i> Farmers
+              <% end %>
+          </li>
+          <li class="nav-item <%= 'active' if current_page?(all_posts_path) %>">
+              <%= link_to all_posts_path, class: "nav-link" do %>
+               <i class="fa-solid fa-newspaper"></i> News & Updates
+              <% end %>
+          </li>
           <li class="nav-item <%= 'active' if current_page?(dashboard_path) %>">
               <%= link_to dashboard_path, class: "nav-link" do %>
                 <i class="fa-solid fa-table-columns"></i> Dashboard
               <% end %>
           </li>
-          </li>
-          <li class="nav-item <%= 'active' if current_page?(settings_path) %>">
-              <%= link_to settings_path, class: "nav-link" do %>
-                <i class="fa-solid fa-gear"></i> Settings
-              <% end %>
-          </li>
+
+
       </ul>
   </div>
   <div class="bottom-section-sidebar">
@@ -43,9 +56,10 @@
         <strong><%= current_user.email.split('@').first %></strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+            <i class="fa-solid fa-gear"></i>  Settings
+              <% end %>
+        </li>
         <li><hr class="dropdown-divider"></li>
         <li><%= link_to "Sign out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item"  %></li>
       </ul>

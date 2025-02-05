@@ -12,13 +12,13 @@
                 <i class="fa-solid fa-house"></i> Home
               <% end %>
           </li>
-          <li class="nav-item <%= 'active' if current_page?(my_crates_path) %>">
+          <li class="nav-item <%= 'active' if current_page?(my_crates_path) || current_page?(all_crates_path) %>">
               <%= link_to my_crates_path, class: "nav-link" do %>
                 <i class="fa-solid fa-box-open"></i> Crates
               <% end %>
           </li>
-          <li class="nav-item <%= 'active' if current_page?(events_path) %>">
-              <%= link_to events_path, class: "nav-link" do %>
+          <li class="nav-item <%= 'active' if current_page?(my_events_path) || current_page?(events_path) %>">
+              <%= link_to my_events_path, class: "nav-link" do %>
                 <i class="fa-solid fa-earth-europe"></i> Events
               <% end %>
           </li>
@@ -27,12 +27,7 @@
                 <i class="fa-solid fa-people-roof"></i> Farmers
               <% end %>
           </li>
-          <li class="nav-item <%= 'active' if current_page?(my_events_path) %>">
-              <%= link_to my_events_path, class: "nav-link" do %>
-                <i class="fa-solid fa-calendar-days"></i> Events Schedule
-              <% end %>
-          </li>
-          <li class="nav-item <%= 'active' if current_page?(my_posts_path) %>">
+          <li class="nav-item <%= 'active' if current_page?(my_posts_path) || current_page?(all_posts_path)  %>">
               <%= link_to my_posts_path, class: "nav-link" do %>
                <i class="fa-solid fa-newspaper"></i> Posts
               <% end %>
