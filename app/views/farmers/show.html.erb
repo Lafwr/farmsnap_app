@@ -21,9 +21,11 @@
   <div class="left-half">
     <div class="profile-card-container">
       <div class="profile-container" data-controller= "toggle">
+      <% if @farmer.photo.attached? %>
         <%= cl_image_tag @farmer.photo.key, height: 150, width: 150, crop: :fill %>
-
-
+      <% else %>
+        <img class= "no-image" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png" alt="no-image" style=" height: 150px; width: 150;">
+      <% end %>
         <div class="profile-paragraph">
           <p><strong>Bio:</strong> <%= @farmer.bio %></p>
           <p><strong>Location📍:</strong> <%= @farmer.location %></p>
@@ -32,10 +34,7 @@
 
 
 
-          <div data-toggle-target="form" class="hidden">
-            <%= render 'update', farmer: @farmer %>
-          </div>
-        <% end %>
+
       </div>
     </div>
 

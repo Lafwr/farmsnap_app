@@ -54,6 +54,8 @@
       <span class="attendance-time">
         (<%= attendance.start_time.strftime("%H:%M") %> - <%= attendance.end_time.strftime("%H:%M") %>)
       </span>
+      <%= link_to "View Profile", farmer_path(attendance.farmer), class: "btn btn-primary btn-sm" %>
+    </li>
     </li>
   <% end %>
 </ul>
