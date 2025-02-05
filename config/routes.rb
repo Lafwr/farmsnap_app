@@ -58,9 +58,9 @@ Rails.application.routes.draw do
 
   # POSTS, LIKES AND COMMENTS
   resources :posts, only: [:show, :destroy] do
-    post "like", on: :member
-    post "comment", on: :member
+    resources :like, only: [:create, :destroy]
   end
+
   get "/posts", to: "posts#all", as: "all_posts"
   get 'my-posts', to: 'posts#my_posts', as: 'my_posts'
   get 'my-posts/new', to: 'posts#new', as: 'new_post'
@@ -80,9 +80,4 @@ Rails.application.routes.draw do
       get "category/:category_name", to: "event_attendances#by_category", as: "by_category"
     end
   end
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
-
-# URLS
-# Events/
