@@ -8,7 +8,15 @@ class CratesController < ApplicationController
 
   def all
     @crates = Crate.all
-    if params[:query].present?
+
+    # 1️⃣ If latitude and longitude are provided (clicked from map button), use them directly
+    if params[:latitude].present? && params[:longitude].present?
+      latitude = params[:latitude].to_f
+      longitude = params[:longitude].to_f
+      @crates = Crate.near([latitude, longitude], 10).order("distance ASC")
+
+    # 2️⃣ If a text query is provided (search bar), use Geocoder to find location
+    elsif params[:query].present?
       search_location = Geocoder.search(params[:query]).first
 
       if search_location
@@ -16,9 +24,9 @@ class CratesController < ApplicationController
         longitude = search_location.longitude
         @crates = Crate.near([latitude, longitude], 10).order("distance ASC") # Orders by proximity
       else
+        # 3️⃣ If Geocoder fails, fallback to a fuzzy name and location search in the database
         @crates = @crates.search_by_name_and_location(params[:query])
       end
-      @crates = @crates.order("distance ASC") if search_location
     end
 
     @markers = @crates.geocoded.map do |crate|
