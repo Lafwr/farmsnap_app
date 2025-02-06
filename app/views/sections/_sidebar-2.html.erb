@@ -27,6 +27,11 @@
                 <i class="fa-solid fa-people-roof"></i> Farmers
               <% end %>
           </li>
+                      <li class="nav-item <%= 'active' if current_page?(favourites_path) %>">
+              <%= link_to favourites_path, class: "nav-link" do %>
+                <i class="fa-solid fa-star"></i> Favourites
+              <% end %>
+          </li>
           <li class="nav-item <%= 'active' if current_page?(all_posts_path) %>">
               <%= link_to all_posts_path, class: "nav-link" do %>
                <i class="fa-solid fa-newspaper"></i> News & Updates

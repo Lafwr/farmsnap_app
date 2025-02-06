@@ -5,7 +5,7 @@ class Farmer < ApplicationRecord
   has_many :event_attendances
   has_many :events, through: :event_attendances
   has_many :crates
-  
+
   has_many :posts, dependent: :destroy
   has_many :reviews
 
@@ -13,6 +13,13 @@ class Farmer < ApplicationRecord
   validates :user_id, presence: true
   validates :bio, presence: true, length: { maximum: 300 }
   validates :location, presence: true
+
+  # FOLLOWERS
+  class Farmer < ApplicationRecord
+    has_many :follows, dependent: :destroy
+    has_many :followers, through: :follows, source: :user
+  end
+
 
 
   # Geocoding

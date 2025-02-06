@@ -53,11 +53,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_06_123226) do
     t.bigint "category_id", null: false
   end
 
-  create_table "categories_event_attendances", id: false, force: :cascade do |t|
-    t.bigint "event_attendance_id", null: false
-    t.bigint "category_id", null: false
-  end
-
   create_table "categories_events", id: false, force: :cascade do |t|
     t.bigint "event_id", null: false
     t.bigint "category_id", null: false
@@ -123,6 +118,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_06_123226) do
     t.float "longitude"
     t.string "name"
     t.index ["user_id"], name: "index_farmers_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "farmer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["farmer_id"], name: "index_follows_on_farmer_id"
+    t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -203,6 +207,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_06_123226) do
   add_foreign_key "event_attendances", "farmers"
   add_foreign_key "events", "farmers"
   add_foreign_key "farmers", "users"
+  add_foreign_key "follows", "farmers"
+  add_foreign_key "follows", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "orders", "crates"

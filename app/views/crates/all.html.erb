@@ -13,22 +13,22 @@
   <% end %>
 </div>
 
-<div class="map-and-crates">
-  <!-- Map Section -->
-    <%# <div class=map-div> %>
+<div class="map-and-contents">
+
+
     <div style="width: 80%; height: 1000px;"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
-  <%# </div> %>
 
-  <!-- Display Crates -->
+
     <div class="main-listing-container">
       <h4>Available Crates</h4>
-      <div class="crate-list">
+      <div class="contents-list">
         <% @crates.each do |crate| %>
-          <div class="crate-card"
+
+          <div class="card-body"
               data-crate-id="<%= crate.id %>"
               data-lat="<%= crate.latitude %>"
               data-lng="<%= crate.longitude %>">
@@ -43,3 +43,4 @@
         <% end %>
       </div>
     </div>
+</div>

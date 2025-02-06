@@ -57,6 +57,22 @@ class FarmersController < ApplicationController
     @average_rating = @farmer.reviews.exists? ? @farmer.reviews.average(:rating).to_f.round(1) : 0
   end
 
+  #  FOLLOW UNFOLLOW
+  def follow
+    farmer = Farmer.find(params[:farmer_id])
+    unless current_user.follows?(farmer)
+      current_user.followed_farmers << farmer
+    end
+    redirect_back fallback_location: root_path
+  end
+
+  def unfollow
+    farmer = Farmer.find(params[:farmer_id])
+    current_user.followed_farmers.delete(farmer)
+    redirect_back fallback_location: root_path
+  end
+
+
   private
 
   def farmer_params
