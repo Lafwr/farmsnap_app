@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: "pages#dashboard"
   get "/analytics", to: "pages#analytics"
   get "/settings", to: "pages#settings"
+  get "/favourites", to: "pages#favourites"
 
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
