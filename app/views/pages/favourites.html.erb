@@ -1,1 +1,46 @@
-<h1>Favourite Farmers</h1>
+<div class="container mt-4" id="favourites-container">
+  <h1 class="mb-4">Favourite Farmers</h1>
+
+  <% if @farmers.any? %>
+    <div class="row">
+      <% @farmers.each do |farmer| %>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <%= link_to farmer_path(farmer), class: "card farmer-card shadow-sm p-3 text-decoration-none" do %>
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="me-3">
+                  <%= image_tag "farmer-dp.jpg", class: "rounded-circle border border-3 border-success", width: 50, height: 50, alt: "Farmer Avatar" %>
+                </div>
+                <div>
+                  <h5 class="card-title text-dark mb-1"><%= farmer.name %></h5>
+                  <p class="text-muted mb-0">@<%= farmer.user.username %></p>
+                </div>
+              </div>
+
+              <% last_three_posts = farmer.posts.order(created_at: :desc).limit(3) %>
+
+              <% if last_three_posts.any? %>
+                <div class="mt-3">
+                  <h6 class="text-muted">Latest Updates</h6>
+                  <% last_three_posts.each do |post| %>
+                    <div class="post-card p-2 border rounded bg-light mb-2">
+                      <p class="mb-1 text-muted small"><strong>Posted:</strong> <%= time_ago_in_words(post.created_at) %> ago</p>
+                      <p class="mb-0"><%= post.caption %></p>
+                      <% if post.respond_to?(:image) && post.image.attached? %>
+                        <%= image_tag post.image, class: "img-fluid rounded mt-2" %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              <% else %>
+                <p class="text-muted mt-2">No recent posts.</p>
+              <% end %>
+            </div>
+          <% end %> <!-- End of link_to block -->
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center text-muted">You are not following any farmers yet.</p>
+  <% end %>
+</div>

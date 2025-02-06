@@ -5,6 +5,6 @@ class PagesController < ApplicationController
   end
 
   def favourites
-
+    @farmers = current_user.followed_farmers.includes(:posts)
   end
 end
