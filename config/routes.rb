@@ -38,6 +38,12 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
+  #  TEMP FOLLOW ROUTES: DELETE IF INTRODUCE BUGS
+  resources :farmers, only: [:index, :show] do
+    post 'follow', to: 'farmers#follow'
+    delete 'unfollow', to: 'farmers#unfollow'
+  end
+
   # This version removed the index etc in the array to make searches work
   resources :crates, only: [] do
     resources :orders, only: [:new, :create]
