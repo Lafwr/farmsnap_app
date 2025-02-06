@@ -42,7 +42,8 @@ Rails.application.routes.draw do
   resources :crates, only: [] do
     resources :orders, only: [:new, :create]
   end
-  get "order_confirmation/:id", to: "orders#confirmation", as: "order_confirmation"
+  get "orders/:id/order_confirmation", to: "orders#confirmation", as: "order_confirmation"
+
   # Crates --------------------------
   # resources :crates
   get "/crates", to: "crates#all", as: "all_crates"

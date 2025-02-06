@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_04_181609) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_06_123226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -140,6 +140,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_04_181609) do
     t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "crate_id", null: false
+    t.index ["crate_id"], name: "index_orders_on_crate_id"
     t.index ["event_id"], name: "index_orders_on_event_id"
   end
 
@@ -203,6 +205,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_04_181609) do
   add_foreign_key "farmers", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "orders", "crates"
   add_foreign_key "orders", "events"
   add_foreign_key "posts", "farmers"
   add_foreign_key "products", "crates"
