@@ -23,6 +23,7 @@
 @import 'pages/my_posts';
 @import 'pages/my_events';
 @import 'pages/my_crates';
+@import 'pages/show_event';
 
 
 @import "components/eventshow";
@@ -47,4 +48,27 @@ main {
   display: flex;
   flex-direction: column;
   font-size: 16px;
+}
+
+.posts-avatar {
+  width: 100%; /* Makes it fill the parent container */
+  aspect-ratio: 1 / 1; /* Ensures the height always matches the width */
+  object-fit: cover; /* Ensures the image covers the entire area without distortion */
+  border-radius: 50%; /* Makes it a perfect circle */
+  border: 4px solid #28a745; /* Green border */
+  min-width: 60px;
+  max-width: 76px;
+}
+
+.red {
+  background-color: red;
+}
+.coral {
+  background-color: coral;
+}
+.teal {
+  background-color: teal;
+}
+.gray {
+  background-color: gray;
 }
