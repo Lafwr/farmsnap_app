@@ -1,0 +1,62 @@
+#event-show-page {
+
+  height: 60vh;
+
+  .col-6 {
+    padding: 0px 16px; /* To remove default padding from the columns */
+  }
+  .img-fluid {
+    width: 100%; /* Ensure the image spans the full width */
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+  .row {
+    display: flex;
+    flex-grow: 1;
+    margin: 0;
+    border-radius: 16px;
+    max-height: 50%;
+
+    text-align: center;
+    min-height: fit-content;
+  }
+  .row-top {
+    background-color: white;
+  }
+
+  .flex-grow-1 {
+    flex-grow: 1; /* This ensures that the rows in the right column grow equally */
+  }
+  .d-flex {
+    gap: 16px;
+  }
+  .map {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 900px !important;
+    max-height: 400px !important;
+
+  }
+
+  .show-event-img-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .attendance-pill {
+    top: 16px;
+    left: 16px;
+    background-color: rgba(46, 169, 44, 0.9); /* Bootstrap primary color */
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 50px; /* Gives it a pill shape */
+    z-index: 10;
+  }
+
+}

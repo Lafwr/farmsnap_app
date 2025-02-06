@@ -1,27 +1,45 @@
-<div class="container-event-overview">
-  <div class="event-details">
-      <% if @event.photo.attached? %>
-       <%= cl_image_tag @event.photo.key, height: 500, width: 700 %>
-      <%else%>
-        <img class="event-show-image" alt="Market Image" src="https://media.houseandgarden.co.uk/photos/63e11c8cb4cfdd5e8b831271/master/w_1600%2Cc_limit/B6M37H.jpg" alt="no-image" style=" height: 500; width: 700;">
-      <% end %>
+<div class="container col-12">
+  <div class="row" id="event-show-page">
 
-    <div class="event-info">
-      <h1><%= @event.name %></h1>
-      <p><%= @event.location %></p>
-      <p><%= @event.start_time.strftime("%B %d, %Y %H:%M") %> - <%= @event.end_time.strftime("%B %d, %Y %H:%M") %></p>
-<div class="map">
-      <div style="width: 100%; height: 300px;"
-           data-controller="map"
-           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-           data-map-marker-value="<%= @marker.to_json %>">
+      <%# LEFT COL (IMAGE WITH ATTENDANCE PILL) %>
+    <div class="col-6 p-0 position-relative show-event-img-col">
+      <%# Attendance pill in the top-left corner %>
+      <span class="attendance-pill position-absolute">
+        <%= EventAttendance.where(event_id: @event.id).count %> Verified Farmers Attending
+      </span>
+
+      <%= cl_image_tag @event.photo.key, class: "img-fluid"%>
+    </div>
+
+    <%# RIGHT COL (TEXT + MAP) %>
+    <div class="col-6 d-flex flex-column">
+
+      <%# TOP ROW - EVENT DETAILS %>
+      <div class="row flex-grow-1 p-4 text-start event-details d-flex flex-column justify-content-center row-top">
+        <h1 class="event-title"><%= @event.name %></h1>
+        <p class="event-location"><%= @event.location %></p>
+        <p class="event-time">
+          <%= @event.start_time.strftime("%B %d, %Y %H:%M") %> -
+          <%= @event.end_time.strftime("%B %d, %Y %H:%M") %>
+        </p>
       </div>
-    </div>
-    </div>
 
+      <%# BOTTOM ROW - MAP %>
+      <div class="row flex-grow-1 p-2 ">
+        <div class="map">
+          <div style="width: 100%; height: 100%; margin: 0; padding: 0"
+            data-controller="map"
+            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+            data-map-marker-value="<%= @marker.to_json %>">
+          </div>
+        </div>
+      </div>
 
+    </div>
   </div>
 </div>
+
+
 
 <div class="event-show-farmers">
 
@@ -88,6 +106,6 @@
       </div>
     <% end %>
   </div>
-  
+
 
 </div>
