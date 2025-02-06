@@ -1,88 +1,121 @@
-.event-show-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .btn-dark {
-    margin-bottom: 10px;
-  }
-}
-
-.attendance-form .form-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.attendance-form .form-group {
-  flex: 1;
-  min-width: 200px;
-}
-
-.attendance-form .form-control {
-  width: 100%;
-}
-
-// 1
+// Main container for the event details
 .container-event-overview {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
+  gap: 20px;
+  width: 90vw;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
+// Event details section
 .event-details {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 30px;
   align-items: flex-start;
+  justify-content: center;
+  width: 100%;
 }
 
+// Image styling for the market
 .event-show-image {
-  width: 70%; /* Adjust as needed */
-  // max-width: 600px;
-  border-radius: 5px;
+  width: 100%;
+  max-width: 600px; // Prevents it from getting too large
+  height: auto; // Maintains aspect ratio
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+// Event info section
 .event-info {
-  width: 30%;
+  flex: 1;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 10px;
 }
-// 1
 
-.right-column-service {
-  display: grid;
-  gap: 32px;
-  grid-template-rows: 1fr 1fr;
+// Map container, ensuring it’s responsive
+.map {
+  width: 100%;
+  max-width: 500px;
+  height: 200px; // Reduced height to balance focus
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+
+  // div {
+  //   width: 100%;
+  //   height: 100%;
+  // }
 }
 
-.row-event-provider {
+// Farmers attending section
+.farmers-attendance-list {
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  overflow: hidden;
+}
 
-  #temp-map {
-    object-fit: cover;
-    min-height: 100%;
-    max-height: 400px;
+// Individual farmer item
+.farmer-attendance-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #f9f9f9;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-3px);
   }
 }
-.mini-map-container {
-  width: 100%; /* Ensures it takes full width of .event-info */
-  max-width: 400px; /* Adjust as needed */
-  height: 200px; /* Set the map height */
-  margin-top: auto;
-  border-radius: 5px;
-  overflow: hidden; /* Prevents any map overflow */
+
+// Farmer avatar image
+.farmer-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
 }
 
-#mini-map {
-  width: 100%;
-  height: 100%;
+// Farmer details
+.farmer-name {
+  font-weight: bold;
+}
+
+.attendance-time {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+// Style adjustments for buttons
+.btn-primary {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+
+.event-show-farmers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 90vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
 }
