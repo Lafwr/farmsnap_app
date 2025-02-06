@@ -4,7 +4,7 @@
     <% @farmers.each do |farmer| %>
       <ul class="farmers-list">
         <li>
-        <p> <strong>farmer:</strong> <%= farmer.name %> </p>
+        <p> <strong>Farmer:</strong> <%= farmer.name %> </p>
         <p> <strong>Location:</strong> <%= farmer.location %></p>
         </li>
         <%= link_to farmer_path(farmer) do %>
@@ -25,7 +25,7 @@
                   </svg>
               </div>
             </div>
-            <span>Profile</span>
+            <span>View Profile</span>
           </button>
         <% end %>
       </ul>
