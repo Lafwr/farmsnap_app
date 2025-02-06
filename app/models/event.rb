@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   belongs_to :farmer
   has_many :event_attendances
   has_many :crates
+  has_one_attached :photo
   validates :name, presence: true
   validates :location, presence: true
   validates :start_time, presence: true
