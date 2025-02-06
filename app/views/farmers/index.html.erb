@@ -2,6 +2,7 @@
 <div class="main-farmer-index">
   <div class="farmer-index-container">
     <% @farmers.each do |farmer| %>
+
       <div class="farmers-list">
       <div class="d-flex">
       <% if farmer.photo.attached? %>
@@ -9,6 +10,7 @@
        <% end %>
        <div>
         <h4><%= farmer.name %></h4>
+
         <p> <strong>Location:</strong> <%= farmer.location %></p>
         <%= link_to farmer_path(farmer) do %>
           <button>

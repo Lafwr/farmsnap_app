@@ -1,5 +1,14 @@
-<h1><%= @farmer.name %>'s Profile</h1>
-
+<h1><%= @farmer.name %> Profile</h1>
+<%# ABILITY TO FOLLOW TEST %>
+<div class="d-flex justify-content-end">
+  <% if user_signed_in? %>
+    <% if current_user.follows?(@farmer) %>
+      <%= button_to "Unfollow", farmer_unfollow_path(@farmer), method: :delete, class: "btn btn-outline-dark" %>
+    <% else %>
+      <%= button_to "Follow", farmer_follow_path(@farmer), method: :post, class: "btn btn-dark" %>
+    <% end %>
+  <% end %>
+</div>
 
 
 <div class="main-profile-container">
@@ -16,9 +25,9 @@
 
 
         <div class="profile-paragraph">
-          <p><strong>Bio:</strong> <%= @farmer.bio %></p>
-          <p><strong>Location📍:</strong> <%= @farmer.location %></p>
-          <p><strong>Rating: <%= @average_rating == 0 ? 0 : @average_rating %></strong></p>
+          <p><strong><i class="fa-solid fa-address-card"></i> :</strong> <%= @farmer.bio %></p>
+          <p><strong><i class="fa-solid fa-location-dot"></i> :</strong> <%= @farmer.location %></p>
+          <p><strong><i class="fa-solid fa-star"></i> : <%= @average_rating == 0 ? 0 : @average_rating %></strong></p>
         </div>
 
 
@@ -97,7 +106,7 @@
           <div class="row justify-content-center">
             <% crates.each do |crate| %>
               <div class="carousel-card">
-                <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+                <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://www.firstchoiceproduce.com/wp-content/uploads/2020/03/large-produce-box.jpg)">
                 </div>
                 <div class="card-div">
                   <strong><%= crate.name %></strong>

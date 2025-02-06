@@ -1,0 +1,71 @@
+#favourites-container {
+  /* Container styling */
+
+/* Card styling */
+.farmer-card {
+  border-radius: 12px; /* Rounded borders */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth hover effect */
+  background: #fff; /* White background */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  overflow: hidden; /* Ensures rounded corners are respected */
+  text-decoration: none; /* Removes underline from link */
+}
+
+/* Hover effect for the card */
+.farmer-card:hover {
+  transform: translateY(-5px); /* Slightly raise the card */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Card body styling */
+.card-body {
+  padding: 1.25rem; /* Add some padding to the card */
+}
+
+/* Title & Farmer Info */
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333; /* Dark color for the title */
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #777; /* Lighter color for other text */
+}
+
+/* Farmer Avatar */
+.farmer-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid #28a745; /* Green border */
+}
+
+/* Styling for the post cards inside each farmer's card */
+.post-card {
+  background-color: #f9f9f9; /* Light gray background for post cards */
+  border-radius: 8px; /* Rounded corners */
+  padding: 1rem;
+  margin-bottom: 1rem; /* Space between posts */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow for post cards */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover effect for post cards */
+.post-card:hover {
+  transform: translateY(-3px); /* Slightly lift the post card */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+/* Remove default anchor styling inside cards */
+a {
+  color: inherit; /* Prevent link color change */
+  text-decoration: none; /* Remove underline from links */
+}
+
+/* Optional: Add a bit of spacing between the farmer cards on larger screens */
+.row {
+  margin-top: 2rem;
+}
+}

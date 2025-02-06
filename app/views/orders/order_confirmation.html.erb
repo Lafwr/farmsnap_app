@@ -1,0 +1,4 @@
+<h2>Order Confirmation</h2>
+<p>Thank you for your reservation, <%= @order.name %>!</p>
+<p>Your order has been confirmed. We will send you an email at <%= @order.email %> with the details on how and where to pick up your crate!.</p>
+<%= raw @qr_code_svg %>

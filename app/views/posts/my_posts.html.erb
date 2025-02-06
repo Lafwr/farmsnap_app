@@ -4,6 +4,8 @@
       <h3><%= link_to "<< All Posts", all_posts_path %></h3>
       <%= link_to "+ New Post", new_post_path %>
       <hr>
+      <h2>Total Likes: <%= @total_likes %></h2>
+      <hr>
 
       <% @posts.each do |post| %>
         <div class="post-card">
@@ -15,8 +17,6 @@
             <%# <% end %>
           <%# <% end %>
           <%= link_to "Show", farmer_post_path(post.farmer, post) %>
-          <%# <%= link_to "Edit", edit_post_path(post) %>
-          <%= link_to "Details", post_path(post), method: :delete, data: { confirm: "Are you sure?" } %>
         </div>
         <hr>
       <% end %>

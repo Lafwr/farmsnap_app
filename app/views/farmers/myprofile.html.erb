@@ -9,9 +9,9 @@
 
 
         <div class="profile-paragraph">
-          <p><strong>Bio:</strong> <%= @farmer.bio %></p>
-          <p><strong>Location📍:</strong> <%= @farmer.location %></p>
-          <p><strong>Rating: <%= @average_rating == 0 ? 0 : @average_rating %></strong></p>
+          <p><strong><i class="fa-solid fa-address-card"></i> :</strong> <%= @farmer.bio %></p>
+          <p><strong><i class="fa-solid fa-location-dot"></i> :</strong> <%= @farmer.location %></p>
+          <p><strong><i class="fa-solid fa-star"></i> : <%= @average_rating == 0 ? 0 : @average_rating %></strong></p>
         </div>
 
           <div class="profile-edit">
@@ -70,6 +70,7 @@
         <div class="crates-card-container">
           <h3>My Crates</h3>
 
+
           <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
             <% Crate.all.each_slice(3).with_index do |crates, index| %>
@@ -77,11 +78,12 @@
               <div class="row justify-content-center">
                 <% crates.each do |crate| %>
                   <div class="carousel-card">
-                    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+                    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://www.firstchoiceproduce.com/wp-content/uploads/2020/03/large-produce-box.jpg)">
                     </div>
                     <div class="card-div">
                       <strong><%= crate.name %></strong>
                       <p>£<%= crate.price %></p>
+
                   </div>
                   </div>
                 <% end %>

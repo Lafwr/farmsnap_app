@@ -1,32 +1,58 @@
-<h1>Order <%= @crate.name %></h1>
-<p>Price: $<%= @crate.price %></p>
-<p>Pickup Details: <em><%= @crate.event.location%></em></p>
+<div class="checkout-container">
+  <div class="left-half">
+    <img class="crate-image" src="https://www.firstchoiceproduce.com/wp-content/uploads/2020/03/large-produce-box.jpg">
+  </div>
+  <div class="right-half">
+    <h1>Crate: <%= @crate.name %></h1>
+    <p>Price: $<%= @crate.price %></p>
+    <p>Pickup Details: <em><%= @crate.event.location%></em></p>
+  </div>
+</div>
 
-<%= simple_form_for [@crate, @order] do |f| %>
-  <h2>Order Details</h2>
-  <%= f.input :name  %>
-  <%= f.input :email  %>
-  <h2>Payment Details (Dummy)</h2>
-  <div>
-    <label for="cardholder_name">Cardholder Name</label>
-    <input type="text" id="cardholder_name" name="cardholder_name" placeholder="John Doe" required />
-  </div>
-  <div>
-    <label for="card_number">Card Number</label>
-    <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" maxlength="16" pattern="\d*" required />
-  </div>
-  <div>
-    <label for="expiry_date">Expiry Date (MM/YY)</label>
-    <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required />
-  </div>
-  <div>
-    <label for="cvv">CVV</label>
-    <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" pattern="\d*" required />
-  </div>
-  <div>
-    <label for="postcode">Postcode</label>
-    <input type="text" id="postcode" name="postcode" placeholder="12345" required />
-  </div>
+  <%= simple_form_for [@crate, @order] do |f| %>
+    <h2 class="my-4">Customer Details</h2>
+    <%= f.input :name  %>
+    <%= f.input :email  %>
 
-  <%= f.submit "Confirm Purchase", class: "btn btn-success" %>
-<% end %>
+    <%= f.submit "Reserve Crate", class: "btn btn-success" %>
+  <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <%# <h2>Payment Details (Dummy)</h2> %>
+    <%#
+    <div>
+      <label for="cardholder_name">Cardholder Name</label>
+      <input type="text" id="cardholder_name" name="cardholder_name" placeholder="John Doe" required />
+    </div>
+    <div>
+      <label for="card_number">Card Number</label>
+      <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" maxlength="16" pattern="\d*" required />
+    </div>
+    <div>
+      <label for="expiry_date">Expiry Date (MM/YY)</label>
+      <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required />
+    </div>
+    <div>
+      <label for="cvv">CVV</label>
+      <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" pattern="\d*" required />
+    </div>
+    <div>
+      <label for="postcode">Postcode</label>
+      <input type="text" id="postcode" name="postcode" placeholder="12345" required />
+    </div> %>

@@ -13,6 +13,13 @@ class User < ApplicationRecord
 
   # LIKES AND COMMENTS FOR POSTS
   has_many :likes, dependent: :destroy
+  # ADDED FOR FOLLOW FUNCTION
+  has_many :follows, dependent: :destroy
+  has_many :followed_farmers, through: :follows, source: :farmer
+  def follows?(farmer)
+    followed_farmers.include?(farmer)
+  end
+
   # has_many :comments, dependent: :destroy
 
   # Role helper methods

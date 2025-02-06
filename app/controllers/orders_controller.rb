@@ -12,12 +12,11 @@ class OrdersController < ApplicationController
 
   def create
     @crate = Crate.find(params[:crate_id])
-    @order = Order.new
+    @order = @crate.orders.new(order_params)
     if @order.save
       redirect_to order_confirmation_path(@order)
     else
-      @crate.event
-      render :new, status: unprocessable_entity, alert: "ERROR: Order Not Created"
+      render :new, alert: "ERROR: Order Not Created"
     end
   end
 
@@ -30,6 +29,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:name, :email, :event_id)
+    params.require(:order).permit(:name, :email, :event_id, :crate_id)
   end
 end

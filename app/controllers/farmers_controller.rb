@@ -10,7 +10,7 @@ class FarmersController < ApplicationController
     @farmer = Farmer.find(params[:id])
     @review = Review.new
     @reviews = @farmer.reviews
-    @upcoming_events = @farmer.event_attendances.where("event_attendances.start_time >= ?", Time.now).order('event_attendances.start_time ASC').includes(:event).map(&:event)
+    @upcoming_events = @farmer.event_attendances.where("event_attendances.start_time >= ?", Time.now-86400).order('event_attendances.start_time ASC').includes(:event).map(&:event)
     @attended_events = @farmer.events
     @average_rating = farmer_ratings
   end
@@ -56,6 +56,22 @@ class FarmersController < ApplicationController
     @farmer = Farmer.find(params[:id])
     @average_rating = @farmer.reviews.exists? ? @farmer.reviews.average(:rating).to_f.round(1) : 0
   end
+
+  #  FOLLOW UNFOLLOW
+  def follow
+    farmer = Farmer.find(params[:farmer_id])
+    unless current_user.follows?(farmer)
+      current_user.followed_farmers << farmer
+    end
+    redirect_back fallback_location: root_path
+  end
+
+  def unfollow
+    farmer = Farmer.find(params[:farmer_id])
+    current_user.followed_farmers.delete(farmer)
+    redirect_back fallback_location: root_path
+  end
+
 
   private
 
