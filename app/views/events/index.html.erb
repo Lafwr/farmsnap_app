@@ -29,9 +29,9 @@
       <% @events.each do |event| %>
         <div class="card-body">
           <h5><%= event.name %></h5>
-          <p>📍 <strong>Location:</strong> <%= event.location %></p>
-          <p>🕒 <strong>Hours:</strong> <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %></p>
-          <p>🏷 <strong>Categories:</strong> <%= event.categories.map(&:name).join(", ") %></p>
+          <p>📍 <strong>:</strong> <%= event.location %></p>
+          <p>🕒 <strong>:</strong> <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %></p>
+          <p>🏷 <strong>:</strong> <%= event.categories.map(&:name).join(", ") %></p>
           <%= link_to "View Event", event_path(event), class: "btn btn-primary" %>
         </div>
       <% end %>
