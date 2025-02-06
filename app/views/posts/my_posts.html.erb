@@ -9,9 +9,7 @@
 
       <%= link_to "+ New Post", new_post_path, class: "btn btn-green btn-sm mt-3" %>
 
-      <hr>
 
-      <h2>Total Likes: <%= @total_likes %></h2>
 
       <hr>
 
@@ -31,6 +29,9 @@
 
     <div class="col-4">
      <h2>@<%= current_user.username %></h2>
+     <hr>
+
+      <h2>Total Likes: <%= @total_likes %></h2>
     </div>
   </div>
 </div>

@@ -13,6 +13,7 @@ Review.destroy_all
 Farmer.destroy_all
 User.destroy_all
 Category.destroy_all
+Follow.destroy_all
 
 # Create categories for events
 categories = [
@@ -199,8 +200,7 @@ farmers.each do |farmer|
   end
 end
 
-#  Create Follows
-Follow.destroy_all
+
 
 # Create 30 follow relationships with user_id and farmer_id between 1 and 6
 30.times do
