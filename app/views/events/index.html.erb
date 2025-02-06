@@ -13,22 +13,20 @@
       <% end %>
     </div>
 
-<div class="map-and-crates">
+<div class="map-and-contents">
   <!-- Map Section -->
-    <%# <div class=map-div> %>
     <div style="width: 80%; height: 1000px;"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
-  <%# </div> %>
+
 
    <!-- Scrollable Events Container -->
   <div class="main-listing-container">
     <h4>Upcoming Events</h4>
-    <div class="event-list">
+    <div class="contents-list">
       <% @events.each do |event| %>
-        <div class="card shadow-sm">
         <div class="card-body">
           <h5><%= event.name %></h5>
           <p>📍 <strong>Location:</strong> <%= event.location %></p>
