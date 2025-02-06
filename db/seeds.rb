@@ -199,6 +199,19 @@ farmers.each do |farmer|
   end
 end
 
+#  Create Follows
+Follow.destroy_all
+
+# Create 30 follow relationships with user_id and farmer_id between 1 and 6
+30.times do
+  user_id = rand(1..6)   # Random user_id between 1 and 6
+  farmer_id = rand(1..6) # Random farmer_id between 1 and 6
+
+  # Ensure no user follows the same farmer more than once (optional)
+  Follow.create!(user_id: user_id, farmer_id: farmer_id)
+end
+
+puts "Seeded 30 follows data"
 
 
 

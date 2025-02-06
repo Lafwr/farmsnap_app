@@ -1,26 +1,36 @@
-<div class="row">
-  <div class="col-8">
-      <h1>Your Posts</h1>
-      <h3><%= link_to "<< All Posts", all_posts_path %></h3>
-      <%= link_to "+ New Post", new_post_path %>
+<div class="container">
+  <div class="row" id="my-posts-row">
+    <div class="col-8">
+      <h1 class="mb-4">Your Posts</h1>
+
+      <h3>
+        <%= link_to "<< All Posts", all_posts_path, class: "btn btn-outline-green btn-sm" %>
+      </h3>
+
+      <%= link_to "+ New Post", new_post_path, class: "btn btn-green btn-sm mt-3" %>
+
       <hr>
+
       <h2>Total Likes: <%= @total_likes %></h2>
+
       <hr>
 
       <% @posts.each do |post| %>
         <div class="post-card">
           <h4><%= post.caption %></h4>
+
           <%# MUST ADD IMAGE UPLOAD FUNCTION %>
-          <%# <% if post.images.attached? %>
-            <%# <% post.images.each do |image| %>
-              <%# <%= image_tag image, class: "img-fluid", width: 300 %>
-            <%# <% end %>
-          <%# <% end %>
-          <%= link_to "Show", farmer_post_path(post.farmer, post) %>
+          <%# <%= link_to "Show", farmer_post_path(post.farmer, post) %>
+
+          <%= link_to "Show", farmer_post_path(post.farmer, post), class: "btn btn-outline-green" %>
         </div>
+
         <hr>
       <% end %>
-  </div>
-  <div class="col-4">
+    </div>
+
+    <div class="col-4">
+     <h2>@<%= current_user.username %></h2>
+    </div>
   </div>
 </div>
