@@ -50,7 +50,7 @@ farmers_data.each_with_index do |farmer, index|
   farmer_record = Farmer.new(
     user: users[index],
     name: farmer[:name], # Oskar ADDED
-    bio: "#{farmer[:name]} is a skilled farmer.",
+    bio: "#{farmer[:name]} is a passionate farmer growing fresh, sustainable produce with love and dedication on aour family farm.",
     location: farmer[:location]
   )
   file = URI.parse(farmer[:url]).open

@@ -10,7 +10,7 @@ class FarmersController < ApplicationController
     @farmer = Farmer.find(params[:id])
     @review = Review.new
     @reviews = @farmer.reviews
-    @upcoming_events = @farmer.event_attendances.where("event_attendances.start_time >= ?", Time.now).order('event_attendances.start_time ASC').includes(:event).map(&:event)
+    @upcoming_events = @farmer.event_attendances.where("event_attendances.start_time >= ?", Time.now-86400).order('event_attendances.start_time ASC').includes(:event).map(&:event)
     @attended_events = @farmer.events
     @average_rating = farmer_ratings
   end
