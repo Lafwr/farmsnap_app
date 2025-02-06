@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
   def create
     @crate = Crate.find(params[:crate_id])
     @order = @crate.orders.new(order_params)
+    @order.event = @crate.event
     if @order.save
       redirect_to order_confirmation_path(@order)
     else
@@ -22,8 +23,6 @@ class OrdersController < ApplicationController
 
   def confirmation
     @order = Order.find(params[:id])
-    qr_code = RQRCode::QRCode.new(order_url(@order))
-    @qr_code_svg = qr_code.as_svg(module_size: 4)
   end
 
   private
