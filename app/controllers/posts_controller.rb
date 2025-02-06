@@ -36,6 +36,7 @@ class PostsController < ApplicationController
 
   def my_posts
     @posts = current_user.farmer.posts.order(created_at: :desc)
+    @total_likes = @posts.joins(:likes).count
   end
 
   def destroy
