@@ -15,9 +15,12 @@
     <div class="col-6 d-flex flex-column">
 
       <%# TOP ROW - EVENT DETAILS %>
-      <div class="row flex-grow-1 p-4 text-start event-details d-flex flex-column justify-content-center row-top">
+      <div class="row flex-grow-1 p-4 text-start event-details d-flex flex-column justify-content-center row-top shadow-sm">
         <h1 class="event-title"><%= @event.name %></h1>
+        <hr>
+        <p>Address</p>
         <p class="event-location"><%= @event.location %></p>
+        <p>Time</p>
         <p class="event-time">
           <%= @event.start_time.strftime("%B %d, %Y %H:%M") %> -
           <%= @event.end_time.strftime("%B %d, %Y %H:%M") %>
@@ -39,6 +42,40 @@
   </div>
 </div>
 
+
+<%# ATTENDANCE FORM %>
+<div class="attendance-form-v2 card p-4 shadow-sm col-8">
+  <% if user_signed_in? && current_user.farmer? %>
+    <% if @event.event_attendances.exists?(farmer: current_user.farmer) %>
+      <p class="text-muted text-center">✅ You are already attending this event.</p>
+    <% else %>
+      <h4 class="text-center mb-3">Confirm Your Attendance</h4>
+      <%= simple_form_for [@event, EventAttendance.new], html: { class: "d-flex flex-column gap-3" } do |f| %>
+
+        <%# Start Time (with 10-minute intervals) %>
+        <div class="form-group">
+          <%= f.input :start_time,
+            # as: :time,
+            minute_step: 15,
+            include_seconds: false,
+            class: "form-control rounded-input" %>
+        </div>
+
+        <%# End Time (with 10-minute intervals) %>
+        <div class="form-group">
+          <%= f.input :end_time,
+             # as: :time,
+            minute_step: 15,
+            include_seconds: false,
+            class: "form-control rounded-input" %>
+        </div>
+
+        <%# Submit Button %>
+        <%= f.submit "Confirm Attendance", class: "btn btn-primary rounded-btn" %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
 
 
 <div class="event-show-farmers">
