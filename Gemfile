@@ -55,6 +55,7 @@ gem "geocoder"
 gem "cloudinary"
 gem "pg_search"
 gem "simple_calendar", "~> 2.4"
+gem "faker"
 
 
 
