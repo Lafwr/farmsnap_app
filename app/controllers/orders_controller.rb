@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
       redirect_to order_confirmation_path(@order)
     else
       @crate.event
-      render :new, status: unprocessable_entity, alert: "ERROR: Order Not Created"
+      render :new, alert: "ERROR: Order Not Created"
     end
   end
 

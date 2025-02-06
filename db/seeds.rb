@@ -1,4 +1,4 @@
-require "open-uri"
+# require "open-uri"
 
 puts "Seeding database..."
 
@@ -33,7 +33,7 @@ end
 # Step 2: Create Farmers
 farmers = []
 farmers_data = [
-  { name: "Ali Khan", location: "Hertfordshire, UK", url: "https://randomuser.me/api/portraits/men/48.jpg" },
+  { name: "Ali Khan", location: "Hertfordshire, UK",},
   { name: "Emma Davis", location: "Surrey, UK" },
   { name: "Liam Johnson", location: "Kent, UK" },
   { name: "Sophia Wilson", location: "Essex, UK" },
@@ -52,8 +52,8 @@ farmers_data.each_with_index do |farmer, index|
     bio: "#{farmer[:name]} is a skilled farmer.",
     location: farmer[:location]
   )
-  file = URI.parse(farmer[:url]).open
-  farmer_record.photo.attach(io: file, filename: "profile-pic", content_type: "image/jpg")
+  # file = URI.parse(farmer[:url]).open
+  # farmer_record.photo.attach(io: file, filename: "profile-pic", content_type: "image/jpg")
   farmer_record.save!
   farmers << farmer_record
 end
