@@ -1,5 +1,5 @@
-# require "open-uri"
-
+require "open-uri"
+# require "pry"
 puts "Seeding database..."
 
 # Destroy existing records in the correct order
@@ -9,6 +9,7 @@ Post.destroy_all
 Crate.destroy_all  # ✅ Destroy crates first since they depend on farmers
 EventAttendance.destroy_all
 Event.destroy_all
+Review.destroy_all
 Farmer.destroy_all
 User.destroy_all
 Category.destroy_all
@@ -33,16 +34,16 @@ end
 # Step 2: Create Farmers
 farmers = []
 farmers_data = [
-  { name: "Ali Khan", location: "Hertfordshire, UK",},
-  { name: "Emma Davis", location: "Surrey, UK" },
-  { name: "Liam Johnson", location: "Kent, UK" },
-  { name: "Sophia Wilson", location: "Essex, UK" },
-  { name: "Noah Brown", location: "Hampshire, UK" },
-  { name: "Olivia Martinez", location: "Berkshire, UK" },
-  { name: "James Anderson", location: "Norfolk, UK" },
-  { name: "Charlotte Lee", location: "Oxfordshire, UK" },
-  { name: "Benjamin Harris", location: "Gloucestershire, UK" },
-  { name: "Mia Walker", location: "Cambridgeshire, UK" }
+  { name: "Ali Khan", location: "Hertfordshire, UK", url: "https://randomuser.me/api/portraits/men/48.jpg" },
+  { name: "Emma Davis", location: "Surrey, UK", url: "https://t4.ftcdn.net/jpg/06/01/86/55/360_F_601865599_IuuZWat7GqziLoF5tfXG8Ify96xH1pRr.jpg"},
+  { name: "Liam Johnson", location: "Kent, UK", url: "https://media.istockphoto.com/id/1269841295/photo/side-view-of-a-senior-farmer-standing-in-corn-field-examining-crop-at-sunset.jpg?s=612x612&w=0&k=20&c=Lheldd6VVGQGxrgC8_mwUTLxXGg9v8Y6abjmYLhLHug="},
+  { name: "Sophia Wilson", location: "Essex, UK", url: "https://media.istockphoto.com/id/1321487999/photo/female-farmer-or-agronomist-examining-green-soybean-plants-in-field.jpg?s=612x612&w=0&k=20&c=qZlBSldnMpr3dm14QpGi_ZqekoqofcVW19g4Rbo7jqg=" },
+  { name: "Noah Brown", location: "Hampshire, UK", url: "https://thefoodgroupmn.org/wp-content/uploads/2022/08/296TerraSuraPhotography-BigRiverFarms5x7-0984.jpg" },
+  { name: "Olivia Martinez", location: "Berkshire, UK", url: "https://media.istockphoto.com/id/1329208436/photo/mature-latin-woman-holding-fresh-eggs-elderly-farmer-person-smiling-in-camera.jpg?s=612x612&w=0&k=20&c=cHzVKc2IhZAk9UUsckAx6JNwh-LOMk-6aR5VWSb77og="},
+  { name: "James Anderson", location: "Norfolk, UK", url: "https://spotlights.dtnpf.com/innovations/assets/images/HeathWhitmore_3.jpg" },
+  { name: "Charlotte Lee", location: "Oxfordshire, UK", url: "https://media.istockphoto.com/id/538889138/photo/african-woman-laughing.jpg?s=612x612&w=0&k=20&c=OJTMbnqP8x9v-Ly2KyXD_MGWMoEbJDcdcTX0Lc2dock=" },
+  { name: "Benjamin Harris", location: "Gloucestershire, UK", url: "https://t3.ftcdn.net/jpg/06/34/21/18/360_F_634211884_Rg63xefg07sO79viofi4mlyP74VYPClq.jpg" },
+  { name: "Mia Walker", location: "Cambridgeshire, UK", url: "https://t4.ftcdn.net/jpg/06/36/88/55/360_F_636885527_MgSULmWt6vIinD9j1J4blMDCCaDVvF6v.jpg"}
 ]
 
 farmers_data.each_with_index do |farmer, index|
@@ -60,20 +61,20 @@ end
 
 # Step 3: Create Events (Markets) - Assign a Farmer to Each Event
 events_data = [
-  { name: "Borough Market", location: "8 Southwark St, London SE1 1TL", start_time: "08:00", end_time: "17:00", categories: ["Seafood", "Dairy", "Meats", "Organic", "Fruit & Veg", "Baked Goods", "Warm Food"] },
-  { name: "Spitalfields Market", location: "56 Brushfield St, London E1 6AA", start_time: "09:00", end_time: "18:00", categories: ["Organic", "Baked Goods", "Fruit & Veg"] },
-  { name: "Portobello Road Market", location: "Portobello Rd, London W11 1LJ", start_time: "09:00", end_time: "16:00", categories: ["Meats", "Seafood", "Warm Food", "Baked Goods"] },
-  { name: "Camden Market", location: "Camden Lock Pl, London NW1 8AF", start_time: "10:00", end_time: "19:00", categories: ["Warm Food", "Alcohols"] },
-  { name: "Greenwich Market", location: "5B Greenwich Market, London SE10 9HZ", start_time: "10:00", end_time: "17:30", categories: ["Organic", "Dairy", "Baked Goods"] },
-  { name: "Broadway Market", location: "Broadway Market, London E8 4PH", start_time: "09:00", end_time: "17:00", categories: ["Fruit & Veg", "Meats", "Seafood"] },
-  { name: "Brick Lane Market", location: "91 Brick Ln, London E1 6QR", start_time: "10:00", end_time: "17:00", categories: ["Warm Food", "Organic", "Baked Goods"] },
-  { name: "Columbia Road Flower Market", location: "Columbia Rd, London E2 7RG", start_time: "08:00", end_time: "15:00", categories: ["Fruit & Veg", "Dairy"] },
-  { name: "Southbank Centre Market", location: "Southbank Centre, Belvedere Rd, London SE1 8XX", start_time: "11:00", end_time: "20:00", categories: ["Warm Food", "Alcohols", "Baked Goods"] },
-  { name: "Maltby Street Market", location: "41 Maltby St, London SE1 3PA", start_time: "10:00", end_time: "18:00", categories: ["Meats", "Seafood", "Baked Goods"] },
-  { name: "Hackney Flea Market", location: "Amhurst Terrace, London E8 2BT", start_time: "09:00", end_time: "17:00", categories: ["Baked Goods", "Organic", "Fruit & Veg"] },
-  { name: "Peckham Farmers' Market", location: "Peckham Square, London SE15 5JT", start_time: "10:00", end_time: "16:00", categories: ["Meats", "Seafood", "Fruit & Veg"] },
-  { name: "Walthamstow Market", location: "High St, London E17 7LD", start_time: "08:30", end_time: "17:30", categories: ["Dairy", "Warm Food", "Organic"] },
-  { name: "Brixton Market", location: "Electric Ave, London SW9 8JY", start_time: "08:00", end_time: "18:00", categories: ["Seafood", "Warm Food", "Fruit & Veg"] }
+  { name: "Borough Market", location: "8 Southwark St, London SE1 1TL", start_time: "08:00", end_time: "17:00", categories: ["Seafood", "Dairy", "Meats", "Organic", "Fruit & Veg", "Baked Goods", "Warm Food"], url: "https://offloadmedia.feverup.com/secretldn.com/wp-content/uploads/2023/04/25124446/shutterstock_736291438-2-666x374.jpg"},
+  { name: "Spitalfields Market", location: "56 Brushfield St, London E1 6AA", start_time: "09:00", end_time: "18:00", categories: ["Organic", "Baked Goods", "Fruit & Veg"], url: "https://www.cktravels.com/wp-content/uploads/2023/02/london-farmers-markets.jpg" },
+  { name: "Portobello Road Market", location: "Portobello Rd, London W11 1LJ", start_time: "09:00", end_time: "16:00", categories: ["Meats", "Seafood", "Warm Food", "Baked Goods"], url: "https://www.cktravels.com/wp-content/uploads/2023/02/london-farmers-markets.jpg" },
+  { name: "Camden Market", location: "Camden Lock Pl, London NW1 8AF", start_time: "10:00", end_time: "19:00", categories: ["Warm Food", "Alcohols"], url: "https://www.southwesternrailway.com/-/media/images/content-images/where-next/things-to-do/2022/april/farmers-markets/farmers-markets-body-image-hampshire.jpg" },
+  { name: "Greenwich Market", location: "5B Greenwich Market, London SE10 9HZ", start_time: "10:00", end_time: "17:30", categories: ["Organic", "Dairy", "Baked Goods"], url: "https://www.swlondoner.co.uk/wp-content/uploads/2020/09/Teds-Veg-PG-opening-day-3000-pixels.jpg" },
+  { name: "Broadway Market", location: "Broadway Market, London E8 4PH", start_time: "09:00", end_time: "17:00", categories: ["Fruit & Veg", "Meats", "Seafood"], url: "https://www.cktravels.com/wp-content/uploads/2023/02/london-farmers-markets.jpg" },
+  { name: "Brick Lane Market", location: "91 Brick Ln, London E1 6QR", start_time: "10:00", end_time: "17:00", categories: ["Warm Food", "Organic", "Baked Goods"], url: "https://mediaproxy.salon.com/width/1200/https://media2.salon.com/2021/08/farmers-market-produce-0812211.jpg" },
+  { name: "Columbia Road Flower Market", location: "Columbia Rd, London E2 7RG", start_time: "08:00", end_time: "15:00", categories: ["Fruit & Veg", "Dairy"], url: "https://www.cktravels.com/wp-content/uploads/2023/02/london-farmers-markets.jpg" },
+  { name: "Southbank Centre Market", location: "Southbank Centre, Belvedere Rd, London SE1 8XX", start_time: "11:00", end_time: "20:00", categories: ["Warm Food", "Alcohols", "Baked Goods"], url: "https://foodtank.com/wp-content/uploads/2024/07/American-Farmland-Trust-Americas-Farmers-Market-Celebration-farmers-markets-local-food.jpg" },
+  { name: "Maltby Street Market", location: "41 Maltby St, London SE1 3PA", start_time: "10:00", end_time: "18:00", categories: ["Meats", "Seafood", "Baked Goods"], url: "https://res.cloudinary.com/dguhp96ik/image/upload/v1722616860/JAZ_5214_5704c4f849.jpg" },
+  { name: "Hackney Flea Market", location: "Amhurst Terrace, London E8 2BT", start_time: "09:00", end_time: "17:00", categories: ["Baked Goods", "Organic", "Fruit & Veg"], url: "https://img1.10bestmedia.com/Images/Photos/404621/GettyImages-1422148652_55_660x440.jpg" },
+  { name: "Peckham Farmers' Market", location: "Peckham Square, London SE15 5JT", start_time: "10:00", end_time: "16:00", categories: ["Meats", "Seafood", "Fruit & Veg"], url: "https://ediblerenotahoe.com/wp-content/uploads/2024/05/AdobeStock_608139476.png" },
+  { name: "Walthamstow Market", location: "High St, London E17 7LD", start_time: "08:30", end_time: "17:30", categories: ["Dairy", "Warm Food", "Organic"], url: "https://www.thepublicdiscourse.com/wp-content/uploads/2021/03/AdobeStock_159794400-1024x682.jpeg" },
+  { name: "Brixton Market", location: "Electric Ave, London SW9 8JY", start_time: "08:00", end_time: "18:00", categories: ["Seafood", "Warm Food", "Fruit & Veg"], url: "https://d27p2a3djqwgnt.cloudfront.net/wp-content/uploads/2017/10/19050002/market-1558658_1280-e1508344545263.jpg" }
 ]
 
 
@@ -86,6 +87,9 @@ events_data.each_with_index do |event, index|
     end_time: event[:end_time],
     farmer: farmers[index % farmers.length] # ✅ Assign a farmer to the event
   )
+  file = URI.parse(event[:url]).open
+  event_record.photo.attach(io: file, filename: "event-pic", content_type: "image/jpg")
+  event_record.save!
   event_record.categories << Category.where(name: event[:categories])
   events << event_record
 end
