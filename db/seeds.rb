@@ -53,8 +53,8 @@ farmers_data.each_with_index do |farmer, index|
     bio: "#{farmer[:name]} is a skilled farmer.",
     location: farmer[:location]
   )
-  # file = URI.parse(farmer[:url]).open
-  # farmer_record.photo.attach(io: file, filename: "profile-pic", content_type: "image/jpg")
+  file = URI.parse(farmer[:url]).open
+  farmer_record.photo.attach(io: file, filename: "profile-pic", content_type: "image/jpg")
   farmer_record.save!
   farmers << farmer_record
 end
