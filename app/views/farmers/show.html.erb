@@ -16,9 +16,9 @@
 
 
         <div class="profile-paragraph">
-          <p><strong>Bio:</strong> <%= @farmer.bio %></p>
-          <p><strong>Location📍:</strong> <%= @farmer.location %></p>
-          <p><strong>Rating: <%= @average_rating == 0 ? 0 : @average_rating %></strong></p>
+          <p><strong><i class="fa-solid fa-address-card"></i> :</strong> <%= @farmer.bio %></p>
+          <p><strong><i class="fa-solid fa-location-dot"></i> :</strong> <%= @farmer.location %></p>
+          <p><strong><i class="fa-solid fa-star"></i> : <%= @average_rating == 0 ? 0 : @average_rating %></strong></p>
         </div>
 
 
