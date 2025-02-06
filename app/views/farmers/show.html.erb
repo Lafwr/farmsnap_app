@@ -1,5 +1,14 @@
 <h1><%= @farmer.name %>'s Profile</h1>
-
+<%# ABILITY TO FOLLOW TEST %>
+<div class="d-flex justify-content-end">
+  <% if user_signed_in? %>
+    <% if current_user.follows?(@farmer) %>
+      <%= button_to "Unfollow", farmer_unfollow_path(@farmer), method: :delete, class: "btn btn-outline-dark" %>
+    <% else %>
+      <%= button_to "Follow", farmer_follow_path(@farmer), method: :post, class: "btn btn-dark" %>
+    <% end %>
+  <% end %>
+</div>
 
 
 <div class="main-profile-container">

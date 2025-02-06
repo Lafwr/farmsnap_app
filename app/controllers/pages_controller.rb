@@ -3,4 +3,8 @@ class PagesController < ApplicationController
 
   def home
   end
+
+  def favourites
+    @farmers = current_user.followed_farmers.includes(:posts)
+  end
 end
