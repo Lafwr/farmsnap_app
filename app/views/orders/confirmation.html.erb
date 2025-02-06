@@ -1,0 +1,19 @@
+<div class="main-confirmation-container">
+  <div class="confirmation-container">
+    <div class="confirmation-box">
+      <h1 class="confirmation-title">Reservation Confirmed</h1>
+      <img class="qrcode-image" src="https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg">
+      <p class="thank-you-message">Thank you for your reservation, <strong><%= @order.name %></strong>!</p>
+      <p class="reservation-details">We will send you an email at <strong><%= @order.email %></strong> with the details on how and where to pick up your crate.</p>
+      <p class="reservation-details"> When you arrive at the pick up location and spot your farmer, <strong>show them the QR code to collect your order!</strong> Dont forget to give them a follow to support local farms!
+      <div class="pickup-info">
+        <h2>Pickup Information</h2>
+        <p>Location: <strong>Greenwich Market, London SE10 9HZ</strong></p>
+        <p>Pickup Date: <strong>February 10, 2025</strong></p>
+      </div>
+      <div class="footer">
+        <p>If you have any questions, feel free to <a href="mailto:support@farmsnapexample.com">contact us</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
