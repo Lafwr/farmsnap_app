@@ -1,7 +1,10 @@
 <div class="container-event-overview">
   <div class="event-details">
-    <img src="https://media.houseandgarden.co.uk/photos/63e11c8cb4cfdd5e8b831271/master/w_1600%2Cc_limit/B6M37H.jpg"
-         class="event-show-image" alt="Market Image">
+      <% if @event.photo.attached? %>
+       <%= cl_image_tag @event.photo.key, height: 500, width: 700 %>
+      <%else%>
+        <img class="event-show-image" alt="Market Image" src="https://media.houseandgarden.co.uk/photos/63e11c8cb4cfdd5e8b831271/master/w_1600%2Cc_limit/B6M37H.jpg" alt="no-image" style=" height: 500; width: 700;">
+      <% end %>
 
     <div class="event-info">
       <h1><%= @event.name %></h1>
