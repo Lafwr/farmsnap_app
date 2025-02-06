@@ -1,4 +1,5 @@
 require "open-uri"
+require "faker"
 # require "pry"
 puts "Seeding database..."
 
@@ -26,8 +27,8 @@ users = []
   users << User.create!(
     email: "farmer#{i + 1}@farmsnap.com",
     password: "password",
-    first_name: "Firstname#{i + 1}",
-    last_name: "Lastname#{i + 1}",
+    first_name: Faker::Name.name.split(" ").first,
+    last_name: Faker::Name.name.split(" ").second,
     username: "username#{i + 1}"
   )
 end
@@ -51,7 +52,7 @@ farmers_data.each_with_index do |farmer, index|
   farmer_record = Farmer.new(
     user: users[index],
     name: farmer[:name], # Oskar ADDED
-    bio: "#{farmer[:name]} is a skilled farmer.",
+    bio: "#{farmer[:name]} is a passionate farmer growing fresh, sustainable produce with love and dedication on aour family farm.",
     location: farmer[:location]
   )
   file = URI.parse(farmer[:url]).open
@@ -213,9 +214,6 @@ end
 
 puts "Seeded 30 follows data"
 
-
-
-
 reviews = [
   { rating: 5, content: "Excellent service and top-quality produce!" },
   { rating: 4, content: "Great experience, but delivery took a bit long." },
@@ -229,12 +227,22 @@ reviews = [
   { rating: 4, content: "Fresh fruits, but the packaging needs improvement." }
 ]
 
-farmer = Farmer.first # Pick any farmer
-users = User.pluck(:id) # Get all user IDs
-
-reviews.each do |review|
-  farmer.reviews.create!(review.merge(user_id: users.sample))
+farmers = Farmer.all
+farmers.each do |farmer|
+  3.times do
+    review = Review.new(reviews.sample)
+    review.user = User.all.sample
+    review.farmer = farmer
+    review.save!
+  end
 end
+
+# farmer = Farmer.first # Pick any farmer
+# users = User.pluck(:id) # Get all user IDs
+
+# reviews.each do |review|
+#   farmer.reviews.create!(review.merge(user_id: users.sample))
+# end
 
 
 puts "Social posts, comments and likes loaded..."

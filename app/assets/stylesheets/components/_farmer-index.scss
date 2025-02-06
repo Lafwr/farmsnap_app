@@ -1,26 +1,33 @@
+.main-farmer-index {
+  height: 100vh;
+  width: 100%;
 
-.main-farmer-index{
-height: 100vh;
-width:100%;
+  .farmer-index-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // ✅ Evenly spaced columns
+    grid-auto-rows: minmax(150px, auto);  // ✅ Flexible row height
+    column-gap: 20px;
+    row-gap: 20px;
+  }
 
-.farmer-index-container{
-  display: grid;
-  grid-template-columns: 100px 50px 100px;
-  grid-template-rows: 80px auto 80px;
-  column-gap: 10px;
-  row-gap: 15px;
-}
+  .farmers-list {
+    width: 100%;
+    max-width: 400px;
+    min-height: 200px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow:  rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    list-style: none;
+    background-color: white;
 
-.farmers-list{
-  width: 500px;
-  margin-left: 0;
-  margin-right: 60px;
-  margin-top: 0;
-  margin-bottom: 60px;
-  padding:20px;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
-  list-style: none;
-}
+    a{
+      text-decoration: none;
+    }
+
+    img{
+      border-radius: 5px;
+      margin-right: 15px;
+    }
+  }
 
 }
