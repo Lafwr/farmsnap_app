@@ -48,3 +48,56 @@
   background-color: rgba(0, 123, 255, 0.1); /* Light blue background */
   transition: background 0.3s ease-in-out;
 }
+
+
+
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // gap: 10px;
+  // margin-bottom: 15px;
+}
+
+#slider {
+  width: 60px;
+  height: 25px;
+  background: #ddd;
+  border-radius: 50px;
+  position: relative;
+  cursor: pointer;
+}
+
+#slider-thumb {
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  transition: 0.3s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.slider-active {
+  background: #f58355 !important;
+}
+
+.slider-active #slider-thumb {
+  left: 0px !important; /* Flash Sales default */
+}
+
+#slider-thumb {
+  left: 35px; /* All Crates when slider is inactive */
+}
+
+
+
+
+
+.price-container {
+  display: flex; /* Align price and flash sale text in a row */
+  align-items: center; /* Ensure vertical alignment */
+  gap: 8px; /* Space between price and Flash Sale text */
+}
