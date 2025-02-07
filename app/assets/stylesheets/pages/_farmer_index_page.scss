@@ -1,0 +1,67 @@
+// Farmers Grid Container (3 per row)
+.farmer-index-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); // 3 per row when space allows
+  gap: 20px;
+  justify-content: center;
+}
+
+// Farmer Card Styling
+.farmers-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Farmer Image (Rounded Borders)
+.farmer-photo {
+  width: 100%;
+  max-width: 120px;
+  margin-bottom: 10px;
+}
+
+.farmer-img {
+  width: 100%;
+  border-radius: 10px; // Rounded borders for images
+  object-fit: cover;
+  height:140px;
+
+}
+
+// Farmer Details
+.farmer-details {
+  text-align: center;
+}
+
+// Smaller & Outlined Button
+.view-profile-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px; // Smaller padding
+  font-size: 14px;
+  border-radius: 8px;
+  width:100px;
+  margin:  5px auto;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: #4CAF50;
+    color: white;
+    transform: scale(1.05);
+  }
+
+  i {
+    font-size: 16px;
+  }
+}
