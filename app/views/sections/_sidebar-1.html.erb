@@ -42,16 +42,8 @@
                 <i class="fas fa-user me-2"></i> Profile
               <% end %>
           </li>
-          <li class="nav-item <%= 'active' if current_page?(dashboard_path) %>">
-              <%= link_to dashboard_path, class: "nav-link" do %>
-                <i class="fa-solid fa-table-columns"></i> Dashboard
-              <% end %>
-          </li>
-          <li class="nav-item <%= 'active' if current_page?(analytics_path) %>">
-              <%= link_to analytics_path, class: "nav-link" do %>
-                <i class="fa-solid fa-chart-line"></i> Analytics
-              <% end %>
-          </li>
+
+
       </ul>
   </div>
   <div class="bottom-section-sidebar">
