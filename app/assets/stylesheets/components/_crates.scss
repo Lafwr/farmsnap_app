@@ -43,6 +43,21 @@
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
 }
 
+
+// .card-body:hover > * {
+//   filter: blur(0.5px); /* Blur everything inside */
+//   opacity: 0.6;
+// }
+
+/* Exclude the button from the blur */
+.card-body:hover .crates-price-button {
+  filter: none;
+  // opacity: 1;
+  display: flex; /* Ensure it still appears */
+  justify-content: center;
+  align-items: center;
+}
+
 .selected-crate {
   border: 2px solid #007bff; /* Blue outline */
   background-color: rgba(0, 123, 255, 0.1); /* Light blue background */
@@ -100,4 +115,14 @@
   display: flex; /* Align price and flash sale text in a row */
   align-items: center; /* Ensure vertical alignment */
   gap: 8px; /* Space between price and Flash Sale text */
+}
+
+.crates-price-button {
+  display: none; /* Hide the button initially */
+}
+
+.card-body:hover .crates-price-button {
+  display: flex; /* Show the button on hover */
+  justify-content: center;
+  align-items: center;
 }
