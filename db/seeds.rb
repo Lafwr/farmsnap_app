@@ -4,6 +4,7 @@ require "faker"
 puts "Seeding database..."
 
 # Destroy existing records in the correct order
+Follow.destroy_all
 Like.destroy_all
 Comment.destroy_all
 Post.destroy_all
@@ -14,7 +15,7 @@ Review.destroy_all
 Farmer.destroy_all
 User.destroy_all
 Category.destroy_all
-Follow.destroy_all
+
 
 # Create categories for events
 categories = [
@@ -181,12 +182,21 @@ farmers.each do |farmer|
 end
 
 # POSTS COMMENTS AND LIKES
+posts_content = ["🌱 Fresh from our farm to your table! Visit us for organic veggies, fruits & dairy. 🥕🥛 #FarmFresh #SupportLocal",
+
+"🚜 Pure, homegrown goodness—straight from our fields to you. 🌾🍏 #FarmToTable",
+
+"🌿 Healthy, fresh, and local! Stop by our farm store for the best seasonal produce. 🍓🥬 #FreshFromTheFarm",
+
+"🐓 Farm-fresh eggs, raw honey, and more! Swing by & taste the difference. 🍯🥚 #SupportFarmers",
+
+"🚜 Just harvested! Come get the freshest produce & meats—straight from our farm. 🍎🥩 #EatLocal"]
 
 farmers.each do |farmer|
   3.times do
     post = Post.create!(
       farmer: farmer,
-      caption: "Check out my farm's latest updates! 🌾"
+      caption: posts_content.sample
     )
 
     # Add likes from random users
@@ -205,11 +215,12 @@ end
 
 # Create 30 follow relationships with user_id and farmer_id between 1 and 6
 30.times do
-  user_id = rand(1..6)   # Random user_id between 1 and 6
-  farmer_id = rand(1..6) # Random farmer_id between 1 and 6
+  # user_id = rand(1..6)   # Random user_id between 1 and 6
+  # farmer_id = rand(1..6) # Random farmer_id between 1 and 6
+
 
   # Ensure no user follows the same farmer more than once (optional)
-  Follow.create!(user_id: user_id, farmer_id: farmer_id)
+  Follow.create!(user_id: User.all.sample.id, farmer_id: Farmer.all.sample.id)
 end
 
 puts "Seeded 30 follows data"
