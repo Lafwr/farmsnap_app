@@ -50,7 +50,9 @@
               <!-- Caption -->
               <p class="card-text"><%= post.caption %></p>
               <!-- Post Image -->
-              <%= image_tag "warmFood.jpg", alt: "super warm soup", class: "img-fluid" %>
+              <% post_images = ["https://media.istockphoto.com/id/471212366/photo/large-fresh-food-market-with-employee.jpg?s=612x612&w=0&k=20&c=PLBCY56iAFzPw0Yd55ZwYqd8fm7ObdoOcYRzRSqh5aI=",
+              "https://cdn.hswstatic.com/gif/farmers-market-1.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4oNJBi1ko7dPXDaxzUu4OOt85RUxrKMeFjA&s", "https://i.ytimg.com/vi/Sw94R0P2dOs/maxresdefault.jpg"] %>
+              <%= image_tag post_images.sample, alt: "img", class: "img-fluid" ,width: 600, height: 300 %>
 
               <div class="mt-2 d-flex align-items-center">
                     <% if user_signed_in? %>

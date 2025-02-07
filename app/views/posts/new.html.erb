@@ -3,7 +3,7 @@
 
   <div class="form-group">
     <%= simple_form_for @post, url: my_posts_path, local: true do |f| %>
-      <%= f.input :photo, as: :file, label: "Upload Your Photo" %>
+      <%#= f.input :photo, as: :file, label: "Upload Your Photo" %>
       <%= f.input :caption, label: "Post Caption", input_html: { class: "form-control", rows: 5 } %>
       <%= f.submit "Create Post", class: "btn btn-primary" %>
     <% end %>
