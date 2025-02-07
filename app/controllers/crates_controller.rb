@@ -84,7 +84,6 @@ class CratesController < ApplicationController
   def show
     # @name = @farmer.user.first_name
     @products = Product.where(crate: @crate)
-    
   end
 
   # Not needed: This would create the redundant /farmers/1/crate/new url
