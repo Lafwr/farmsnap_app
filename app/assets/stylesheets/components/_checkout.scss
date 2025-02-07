@@ -1,4 +1,4 @@
-#confirmation-page {
+
   .checkout-container{
     display: flex;
   }
@@ -23,15 +23,6 @@
     box-sizing: border-box;
   }
 
-  checkout-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
 
   .confirmation-container {
     background-color: #fff;
@@ -98,4 +89,3 @@
     height: auto;
     margin-bottom: 10px;
   }
-}
