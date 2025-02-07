@@ -28,8 +28,9 @@
     </div>
 
        <div class="container-review">
-
-        <hr>
+        <div class="mt-5">
+          <hr>
+        </div>
 
         <div class="reviews-all">
           <p><strong>All reviews:</strong></p>
@@ -55,10 +56,12 @@
               <%= month_calendar(events: @event_attendance, end_attribute: :end_time) do |date, event_attendances| %>
               <%= date %>
                 <% event_attendances.each do |event_attendance| %>
-                 <%= link_to event_path(event_attendance.event) do%>
+                 <%= link_to event_path(event_attendance.event), class: "text-decoration-none" do%>
+                 <div class="meeting">
                   <i class="fa-solid fa-carrot calendar-icon"></i>
-                  <div class="calendar-event-time"><%= event_attendance.start_time.strftime(("%d-%B %H:%M")) %></div>
+                  <div class="calendar-event-time"><%= event_attendance.start_time.strftime(("%d-%b %H:%M")) %></div>
                   <div class="calendar-event-time"><%= event_attendance.end_time.strftime(("%H:%M")) %></div>
+                  </div>
                   <% end %>
                 <% end %>
             <% end %>
