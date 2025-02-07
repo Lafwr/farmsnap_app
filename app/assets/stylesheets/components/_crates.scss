@@ -28,7 +28,7 @@
   gap: 15px; /* Space between cards */
 }
 
-.card-body {
+.contents-card-body {
   border: 2px solid #ccc; /* Add a border to each card */
   border-radius: 10px; /* Rounded corners for a softer look */
   padding: 15px; /* Inner spacing */
@@ -38,7 +38,7 @@
 }
 
 /* Optional: Add hover effect */
-.card-body:hover {
+.contents-card-body:hover {
   transform: translateY(-3px); /* Slight lift effect */
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
 }
@@ -50,7 +50,7 @@
 // }
 
 /* Exclude the button from the blur */
-.card-body:hover .crates-price-button {
+.contents-card-body:hover .crates-price-button {
   filter: none;
   // opacity: 1;
   display: flex; /* Ensure it still appears */
