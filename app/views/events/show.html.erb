@@ -2,7 +2,7 @@
   <div class="row" id="event-show-page">
 
       <%# LEFT COL (IMAGE WITH ATTENDANCE PILL) %>
-    <div class="col-6 p-0 position-relative show-event-img-col">
+    <div class="col-6 p-0 position-relative show-event-img-col col-lg-5">
       <%# Attendance pill in the top-left corner %>
       <span class="attendance-pill position-absolute">
         <%= EventAttendance.where(event_id: @event.id).count %> Verified Farmers Attending
@@ -12,7 +12,7 @@
     </div>
 
     <%# RIGHT COL (TEXT + MAP) %>
-    <div class="col-6 d-flex flex-column">
+    <div class="col-6 d-flex flex-column col-lg-7">
 
       <%# TOP ROW - EVENT DETAILS %>
       <div class="row flex-grow-1 p-4 text-start event-details d-flex flex-column justify-content-center row-top shadow-sm">
