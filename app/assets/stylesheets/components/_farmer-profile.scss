@@ -146,10 +146,12 @@ img{
 
 .left-half{
   margin-top: 45px;
+
 }
 
 .right-half{
   margin-top: 45px;
+  width: 582px;
 }
 
 // Carousel design
@@ -219,7 +221,7 @@ button {
   font-family: inherit;
   font-size: 10px;
   background: rgb(17, 17, 17);
-  color: white;
+  color: rgb(247, 247, 247);
   padding: 0.35em 0.5em;
   padding-left: 0.45em;
   display: flex;
@@ -229,6 +231,9 @@ button {
   overflow: hidden;
   transition: all 0.2s;
   cursor: pointer;
+  a{
+    text-decoration: none;
+  }
 }
 
 button span {
@@ -269,6 +274,14 @@ button:active {
   }
 }
 
+// .carousel-control-prev-icon{
+//   filter: invert(52%) sepia(17%) saturate(676%) hue-rotate(72deg);
+// }
+
+// .carousel-control-next-icon{
+//   filter: invert(52%) sepia(17%) saturate(676%) hue-rotate(72deg);
+// }
+
 // Carousel design
 
 
@@ -287,7 +300,7 @@ button:active {
 }
 
 .today {
-  background-color: #51a555 !important;
+  background-color: #c1f1c3 !important;
 }
 .ugly-header{
 background-color: white !important;
@@ -308,14 +321,14 @@ border: none !important;
 
 .meeting {
   color: white;
-  padding: 8px 24px;
+  padding: 7px;
   border-radius: 4px;
-  background: #1EDD88;
+  background: #3ab54a;
   transition: background 0.3s ease;
 }
 
 .meeting:hover {
-  background: #1BCB7F;
+  background: #204625;
   color: white;
 }
 
@@ -326,3 +339,8 @@ border: none !important;
 .calendar-event-time{
   color:#fafafa;
 }
+
+// .calendar-card-container{
+//   // width: 582px;
+//   // display: block;
+// }
