@@ -37,7 +37,8 @@ class FarmersController < ApplicationController
   def update
     @farmer = Farmer.find(params[:id])
     if @farmer.update(farmer_params)
-      redirect_to profile_path, notice: "Your Farmer Profile Has Been Updated."
+      redirect_to profile_path
+      # , notice: "Your Farmer Profile Has Been Updated."
     else
       render :edit, status: unprocessable_entity, alert: "ERROR: Farmer Profile Not Updated"
     end

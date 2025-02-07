@@ -10,7 +10,11 @@
         <%= cl_image_tag farmer.photo.key, height: 150, width: 150, crop: :fill %>
        <% end %>
        <div>
+       <% if farmer.name != nil %>
         <h4><%= farmer.name %></h4>
+        <% else %>
+        <h4><%= farmer.user.first_name %> <%= farmer.user.last_name %></h4>
+        <% end %>
 
         <p> <strong>Location:</strong> <%= farmer.location %></p>
         <%= link_to farmer_path(farmer) do %>

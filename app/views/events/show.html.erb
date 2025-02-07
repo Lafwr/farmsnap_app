@@ -44,8 +44,8 @@
 
 
 <%# ATTENDANCE FORM %>
-<div class="attendance-form-v2 card p-4 shadow-sm col-8">
   <% if user_signed_in? && current_user.farmer? %>
+<div class="attendance-form-v2 card p-4 shadow-sm col-8">
     <% if @event.event_attendances.exists?(farmer: current_user.farmer) %>
       <p class="text-muted text-center">✅ You are already attending this event.</p>
     <% else %>
@@ -74,33 +74,11 @@
         <%= f.submit "Confirm Attendance", class: "btn btn-primary rounded-btn" %>
       <% end %>
     <% end %>
-  <% end %>
 </div>
+  <% end %>
 
 
 <div class="event-show-farmers">
-
-  <div class="attendance-form">
-    <% if user_signed_in? && current_user.farmer? %>
-      <% if @event.event_attendances.exists?(farmer: current_user.farmer) %>
-        <p>You are already attending this event.</p>
-      <% else %>
-        <%= simple_form_for [@event, EventAttendance.new] do |f| %>
-          <div class="form-row">
-            <div class="form-group">
-              <%= f.input :start_time, include_seconds: false, class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <%= f.input :end_time, include_seconds: false, class: "form-control" %>
-            </div>
-          </div>
-          <%= f.submit "Confirm Attendance", class: "btn btn-primary" %>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
-
-
 <h2 class="my-4">Farmers Attending</h2>
 <div class="main-farmer-index">
  <div class="farmer-index-container">
@@ -111,7 +89,12 @@
         <%= cl_image_tag attendance.farmer.photo.key, height: 150, width: 150, crop: :fill %>
        <% end %>
        <div>
+       <% if attendance.farmer.name != nil %>
         <h4><%= attendance.farmer.name %></h4>
+        <% else %>
+        <h4><%= attendance.farmer.user.first_name %> <%= attendance.farmer.user.last_name %></h4>
+        <% end %>
+
         <p> <strong>Location:</strong> <%= attendance.farmer.location %></p>
         <span class="attendance-time">
         (<%= attendance.start_time.strftime("%H:%M") %> - <%= attendance.end_time.strftime("%H:%M") %>)
