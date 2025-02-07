@@ -1,0 +1,118 @@
+#event-show-page {
+
+  height: 56vh;
+
+  .col-6 {
+    padding: 0px 16px; /* To remove default padding from the columns */
+  }
+  .img-fluid {
+    width: 100%; /* Ensure the image spans the full width */
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+  .row {
+    display: flex;
+    flex-grow: 1;
+    margin: 0;
+    border-radius: 16px;
+    max-height: 50%;
+
+    text-align: center;
+    min-height: fit-content;
+  }
+  .row-top {
+    background-color: white;
+  }
+
+  .flex-grow-1 {
+    flex-grow: 1; /* This ensures that the rows in the right column grow equally */
+  }
+  .d-flex {
+    gap: 16px;
+  }
+  .map {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 900px !important;
+    max-height: 400px !important;
+
+  }
+
+  .show-event-img-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .attendance-pill {
+    top: 16px;
+    left: 16px;
+    background-color: rgba(46, 169, 44, 0.9);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 50px;
+    z-index: 10;
+  }
+
+}
+
+.attendance-form-v2 {
+  max-width: 100%;
+  margin: 64px auto;
+  background: #f8f9fa; /* Light gray background */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 80%;
+
+
+  h4 {
+    color: #333;
+    font-weight: 600;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 16px;
+    background: white;
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+  }
+
+  .rounded-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 25px;
+    background-color: rgba(46, 169, 44, 0.9);
+    color: white;
+    border: none;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: rgba(73, 201, 71, 0.9);
+    }
+  }
+
+  .text-muted {
+    font-size: 14px;
+    color: #6c757d;
+  }
+}

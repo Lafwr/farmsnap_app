@@ -23,24 +23,42 @@
     </div>
 
 
-    <div class="main-listing-container">
-      <h4>Available Crates</h4>
+<div class="main-listing-container" data-controller="crates">
+  <div class="slider-container">
+    <span id="flash-sales-label">🔥 Flash Sales</span>
+    <div id="slider">
+      <div id="slider-thumb"></div>
+    </div>
+    <span id="all-crates-label">📦 All Crates</span>
+  </div>
+
       <div class="contents-list">
         <% @crates.each do |crate| %>
-
-          <div class="card-body"
+          <div class="card-body crate"
               data-crate-id="<%= crate.id %>"
               data-lat="<%= crate.latitude %>"
-              data-lng="<%= crate.longitude %>">
-            <h4><%= crate.name %></h4>
-            <% if crate.flash_sale %>
-              <p class="text-danger">🔥 Flash Sale!</p>
-            <% end %>
+              data-lng="<%= crate.longitude %>"
+              data-flash-sale="<%= crate.flash_sale %>">
+            <h5><%= crate.name %></h5>
             <p><%= crate.description %></p>
-            <p><strong>💵</strong> £<%= crate.price %></p>
+
+            <div class="price-container">
+              <p class="price <%= 'text-danger' if crate.flash_sale %>"><strong>💵</strong> £<%= crate.price %></p>
+              <% if crate.flash_sale %>
+                <p class="text-danger flash-sale">🔥 Flash Sale!</p>
+              <% end %>
+            </div>
+
             <p><strong>📍</strong> <%= crate.current_location %></p>
+
+
           </div>
         <% end %>
       </div>
     </div>
 </div>
+
+<%# Began slider %>
+<%# second %>
+
+<%# checkpoint for hover %>

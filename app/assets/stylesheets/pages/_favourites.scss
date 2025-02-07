@@ -2,7 +2,7 @@
   /* Container styling */
 
 /* Card styling */
-.farmer-card {
+.fav-farmer-card {
   border-radius: 12px; /* Rounded borders */
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth hover effect */
   background: #fff; /* White background */
@@ -12,30 +12,30 @@
 }
 
 /* Hover effect for the card */
-.farmer-card:hover {
+.fav-farmer-card:hover {
   transform: translateY(-5px); /* Slightly raise the card */
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
 /* Card body styling */
-.card-body {
+.fav-card-body {
   padding: 1.25rem; /* Add some padding to the card */
 }
 
 /* Title & Farmer Info */
-.card-title {
+.fav-card-title {
   font-size: 1.2rem;
   font-weight: 600;
   color: #333; /* Dark color for the title */
 }
 
-.card p {
+.fav-card p {
   font-size: 0.9rem;
   color: #777; /* Lighter color for other text */
 }
 
 /* Farmer Avatar */
-.farmer-avatar {
+.fav-farmer-avatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -43,7 +43,7 @@
 }
 
 /* Styling for the post cards inside each farmer's card */
-.post-card {
+.fav-post-card {
   background-color: #f9f9f9; /* Light gray background for post cards */
   border-radius: 8px; /* Rounded corners */
   padding: 1rem;
@@ -53,7 +53,7 @@
 }
 
 /* Hover effect for post cards */
-.post-card:hover {
+.fav-post-card:hover {
   transform: translateY(-3px); /* Slightly lift the post card */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
 }

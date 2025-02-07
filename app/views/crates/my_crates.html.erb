@@ -1,20 +1,39 @@
-<h1>My Crates</h1>
-<h2>Hey <%= current_user.username %> 👋</h2>
-<hr>
-<%= link_to "Browse All Crates", all_crates_path %>
-<hr>
-<%= link_to "New Crate", new_my_crate_path(current_user.farmer) %>
-<hr>
-<% if @my_crates.any? %>
-  <ul>
-    <% @my_crates.each do |crate| %>
-      <li><h4><%= crate.name %></h4></li>
-      <%= link_to "Details", farmer_crate_path(crate.farmer, crate) %>
-      <%= link_to "Edit", edit_farmer_crate_path(crate.farmer, crate) %>
-      <hr>
-    <% end %>
-  </ul>
-<% else %>
-  <p>You have no crates yet.</p>
-<% end %>
-<%= link_to "<< Dashboard", dashboard_path %>
+<div class="container mt-4" id="my-crates-container>
+  <h1 class="mb-3">My Crates</h1>
+  <h2 class="text-muted">Hey <%= current_user.username %> 👋</h2>
+
+  <hr>
+
+  <div class="d-flex gap-2">
+    <%= link_to "Browse All Crates", all_crates_path, class: "btn btn-outline-green" %>
+    <%= link_to "New Crate", new_my_crate_path(current_user.farmer), class: "btn btn-green" %>
+  </div>
+
+  <hr>
+
+  <% if @my_crates.any? %>
+    <div class="row">
+      <% @my_crates.each do |crate| %>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card shadow-sm border-0 crate-card">
+            <div class="card-body">
+              <h4 class="card-title"><%= crate.name %></h4>
+              <div class="d-flex gap-2 mt-3">
+                <%= link_to "Details", farmer_crate_path(crate.farmer, crate), class: "btn btn-outline-green btn-sm" %>
+                <%= link_to "Edit", edit_farmer_crate_path(crate.farmer, crate), class: "btn btn-green btn-sm" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-muted text-center">You have no crates yet.</p>
+  <% end %>
+
+  <hr>
+
+  <div class="text-center">
+    <%= link_to "Dashboard", dashboard_path, class: "btn btn-outline-green" %>
+  </div>
+</div>

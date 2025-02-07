@@ -14,6 +14,7 @@ Review.destroy_all
 Farmer.destroy_all
 User.destroy_all
 Category.destroy_all
+Follow.destroy_all
 
 # Create categories for events
 categories = [
@@ -200,6 +201,18 @@ farmers.each do |farmer|
   end
 end
 
+
+
+# Create 30 follow relationships with user_id and farmer_id between 1 and 6
+30.times do
+  user_id = rand(1..6)   # Random user_id between 1 and 6
+  farmer_id = rand(1..6) # Random farmer_id between 1 and 6
+
+  # Ensure no user follows the same farmer more than once (optional)
+  Follow.create!(user_id: user_id, farmer_id: farmer_id)
+end
+
+puts "Seeded 30 follows data"
 
 reviews = [
   { rating: 5, content: "Excellent service and top-quality produce!" },

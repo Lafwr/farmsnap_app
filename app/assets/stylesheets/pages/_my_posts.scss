@@ -1,0 +1,94 @@
+#my-posts-row {
+  /* Posts Page Container */
+.row {
+  margin-top: 2rem;
+}
+
+/* Post Card Styling */
+.post-card {
+  background: #fff; /* White background for each post */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 1.5rem;
+  margin-bottom: 1.5rem; /* Space between posts */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the post card */
+.post-card:hover {
+  transform: translateY(-5px); /* Slightly raise the card */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Title and Caption Styling */
+.post-card h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333; /* Darker text for the title */
+  margin-bottom: 1rem;
+}
+
+/* Link Styling */
+a {
+  color: #007bff; /* Blue color for links */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Total Likes  */
+h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+
+h3 {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  color: #007bff;
+  font-weight: 500;
+}
+
+h3 a {
+  color: #007bff;
+}
+
+h3 a:hover {
+  text-decoration: none;
+}
+
+hr {
+  border: 1px solid #ddd;
+  margin-top: 1.5rem;
+}
+
+/* Green Button Styling */
+.btn-green {
+  background-color: #28a745; /* Green background */
+  color: white; /* White text */
+  border: 1px solid #28a745; /* Green border */
+}
+
+.btn-green:hover {
+  background-color: #218838; /* Darker green for hover effect */
+  border-color: #218838; /* Darker green border on hover */
+  color: white; /* Keep text white */
+}
+
+.btn-outline-green {
+  background-color: transparent;
+  color: #28a745; /* Green text */
+  border: 1px solid #28a745; /* Green border */
+}
+
+.btn-outline-green:hover {
+  background-color: #28a745; /* Green background on hover */
+  color: white; /* White text on hover */
+}
+
+
+}
