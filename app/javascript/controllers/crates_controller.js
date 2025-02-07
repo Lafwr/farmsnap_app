@@ -32,15 +32,13 @@ export default class extends Controller {
     }
 }
 
-  filterCrates() {
-    const crates = document.querySelectorAll(".crate");
-    crates.forEach((crate) => {
-      const isFlashSale = crate.dataset.flashSale === "true";
-      if (this.isFlashSale && !isFlashSale) {
-        crate.style.display = "none";
-      } else {
-        crate.style.display = "block";
-      }
-    });
-  }
+filterCrates() {
+  const crates = document.querySelectorAll(".contents-card-body"); // Ensure correct selection
+  crates.forEach((crate) => {
+    const isFlashSale = crate.dataset.flashSale === "true";
+
+    // Ensure only flash sale crates are shown when flash sale is active
+    crate.style.display = (this.isFlashSale && !isFlashSale) ? "none" : "block";
+  });
+}
 }
