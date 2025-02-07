@@ -27,7 +27,7 @@
     <h4>Upcoming Events</h4>
     <div class="contents-list">
       <% @events.each do |event| %>
-        <div class="card-body">
+        <div class="contents-card-body">
           <h5><%= event.name %></h5>
           <p>📍 <strong>:</strong> <%= event.location %></p>
           <p>🕒 <strong>:</strong> <%= event.start_time.strftime("%l:%M %p") %> - <%= event.end_time.strftime("%l:%M %p") %></p>
