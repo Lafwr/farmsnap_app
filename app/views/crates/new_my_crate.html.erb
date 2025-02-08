@@ -2,7 +2,7 @@
   <div class="crate-form card p-4 shadow-lg">
     <h1 class="text-center text-success">New Crate</h1>
     <hr>
-    <%= link_to "<< My Crates", my_crates_path, class: "btn btn-outline-secondary btn-sm mt-3" %>
+    <%= link_to "My Crates", my_crates_path, class: "btn btn-outline-secondary btn-sm mt-3" %>
     <hr>
 
     <%= form_with model: @crate, url: create_my_crate_path, local: true do |f| %>
